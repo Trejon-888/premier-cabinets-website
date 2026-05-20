@@ -5428,3 +5428,174 @@ html:not(.has-js) .numbered-list__item {
   color: var(--ink);
 }
 
+/* =================================================================
+   ITERATION 16 — Google Business Profile review screenshots
+   ================================================================= */
+.gbp-reviews {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+}
+.gbp-reviews__head {
+  max-width: 64rem;
+  margin: 0 auto clamp(3rem, 5vw, 4rem);
+  text-align: center;
+}
+.gbp-reviews__title {
+  font-family: var(--font-serif);
+  font-size: var(--type-h2);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 1rem 0;
+  text-wrap: balance;
+}
+.gbp-reviews__lede {
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  color: var(--ink);
+  opacity: 0.75;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+.gbp-reviews__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 3.5vw, 3rem);
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+@media (min-width: 720px) {
+  .gbp-reviews__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .gbp-reviews__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.gbp-review-card {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.gbp-review-card:hover {
+  transform: translateY(-4px);
+}
+.gbp-review-card .ornament-frame__inner {
+  aspect-ratio: 3/2;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-gilt);
+}
+.gbp-review-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gbp-reviews__more {
+  text-align: center;
+  margin: 0;
+}
+.gbp-reviews__more a {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+}
+.gbp-reviews__more a:hover { color: var(--gold-warm); }
+
+/* =================================================================
+   ITERATION 16 — Big project see-more CTA
+   ================================================================= */
+.project-see-more {
+  padding: clamp(5rem, 9vw, 8rem) 0;
+  background: var(--paper-gilt);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  text-align: center;
+}
+.project-see-more__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.project-see-more__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+  text-wrap: balance;
+}
+.project-see-more__lede {
+  font-size: clamp(1.1rem, 1.3vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--ink);
+  opacity: 0.78;
+  max-width: 52ch;
+  margin: 0 auto 2.5rem;
+}
+.project-see-more__btn {
+  padding: 1.2rem 2.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+}
+
+/* Project card that the user just came from — highlight subtly */
+.editorial-card.is-from-referrer {
+  position: relative;
+}
+.editorial-card.is-from-referrer::before {
+  content: 'You just viewed';
+  position: absolute;
+  top: -12px;
+  left: 12px;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* =================================================================
+   ITERATION 16 — Language toggle button (EN/ES)
+   ================================================================= */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.lang-toggle__en,
+.lang-toggle__es {
+  opacity: 0.45;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+.lang-toggle__en.is-active,
+.lang-toggle__es.is-active {
+  opacity: 1;
+  color: var(--gold);
+}
+.lang-toggle__sep {
+  opacity: 0.3;
+}
+
+

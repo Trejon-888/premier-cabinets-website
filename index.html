@@ -96,10 +96,15 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="nav" id="primary-nav" aria-label="Primary">
-      <a class="nav__link" href="projects.html">Our Work</a>
-      <a class="nav__link" href="about.html">About</a>
-      <a class="nav__link" href="contact.html">Contact</a>
-      <a class="header-cta" href="#contact">Start Your Project</a>
+      <a class="nav__link" href="projects.html" data-i18n="nav.work">Our Work</a>
+      <a class="nav__link" href="about.html" data-i18n="nav.about">About</a>
+      <a class="nav__link" href="contact.html" data-i18n="nav.contact">Contact</a>
+      <button class="lang-toggle" data-lang-toggle aria-label="Switch language" type="button">
+        <span class="lang-toggle__en is-active">EN</span>
+        <span class="lang-toggle__sep">·</span>
+        <span class="lang-toggle__es">ES</span>
+      </button>
+      <a class="header-cta" href="#contact" data-i18n="nav.cta">Start Your Project</a>
     </nav>
   </div>
 </header>
@@ -110,20 +115,20 @@
 <section class="hero hero--split" aria-labelledby="hero-headline">
   <div class="container hero--split__container">
     <div class="hero--split__copy">
-      <p class="eyebrow hero__eyebrow hero-eyebrow">Custom Cabinetry + Millwork · Since 1985</p>
-      <h1 id="hero-headline" class="display hero__headline">Built for the places you're <span class="gold-word">proud</span> of.</h1>
-      <p class="lede hero__sub">Custom cabinetry and millwork for residential and commercial spaces across Sacramento, the Bay Area, and Northern California.</p>
+      <p class="eyebrow hero__eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Custom Cabinetry + Millwork · Since 1985</p>
+      <h1 id="hero-headline" class="display hero__headline" data-i18n="hero.headline" data-i18n-html>Built for the places you're <span class="gold-word">proud</span> of.</h1>
+      <p class="lede hero__sub" data-i18n="hero.sub">Custom cabinetry and millwork for residential and commercial spaces across Sacramento, the Bay Area, and Northern California.</p>
       <div class="hero__ctas">
         <a class="btn btn--gold" href="#contact">
-          <span>Start Your Project</span>
+          <span data-i18n="hero.cta.primary">Start Your Project</span>
           <span class="btn__arrow" aria-hidden="true">→</span>
         </a>
         <a class="btn btn--ghost" href="projects.html">
-          <span>See Our Work</span>
+          <span data-i18n="hero.cta.secondary">See Our Work</span>
           <span class="btn__arrow" aria-hidden="true">→</span>
         </a>
       </div>
-      <p class="hero__trust">Citrus Heights · Sacramento · Bay Area · Northern California</p>
+      <p class="hero__trust" data-i18n="hero.trust">Citrus Heights · Sacramento · Bay Area · Northern California</p>
     </div>
     <div class="hero--split__media ornament-frame" data-hero-carousel>
       <span class="ornament-frame__corner ornament-frame__corner--tl"></span>
@@ -332,6 +337,61 @@
   </div>
 </section>
 
+<!-- =================== GOOGLE BUSINESS PROFILE REVIEW SCREENSHOTS =================== -->
+<!-- GOOGLE REVIEWS: Drop review screenshots at images/reviews/review-google-{1-4}.png. Sized 600x400. Will replace placeholders automatically once files exist. -->
+<section class="gbp-reviews">
+  <div class="container">
+    <div class="gbp-reviews__head reveal">
+      <span class="editorial-label" data-i18n="gbp.eyebrow">03 — Trusted on Google</span>
+      <h2 class="gbp-reviews__title" data-i18n="gbp.title" data-i18n-html>From our <span class="gold-word">Google Business Profile</span>.</h2>
+      <p class="gbp-reviews__lede" data-i18n="gbp.lede">Real reviews from clients across Sacramento and the Bay Area.</p>
+    </div>
+
+    <div class="gbp-reviews__grid">
+      <a href="#" class="gbp-review-card ornament-frame ornament-frame--sm" data-pending-link="google-reviews">
+        <span class="ornament-frame__corner ornament-frame__corner--tl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--tr"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--bl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--br"></span>
+        <div class="ornament-frame__inner">
+          <img src="images/reviews/review-google-1.png" alt="Google review for Premier Cabinets Innovations" loading="lazy" width="600" height="400">
+        </div>
+      </a>
+      <a href="#" class="gbp-review-card ornament-frame ornament-frame--sm" data-pending-link="google-reviews">
+        <span class="ornament-frame__corner ornament-frame__corner--tl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--tr"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--bl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--br"></span>
+        <div class="ornament-frame__inner">
+          <img src="images/reviews/review-google-2.png" alt="Google review for Premier Cabinets Innovations" loading="lazy" width="600" height="400">
+        </div>
+      </a>
+      <a href="#" class="gbp-review-card ornament-frame ornament-frame--sm" data-pending-link="google-reviews">
+        <span class="ornament-frame__corner ornament-frame__corner--tl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--tr"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--bl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--br"></span>
+        <div class="ornament-frame__inner">
+          <img src="images/reviews/review-google-3.png" alt="Google review for Premier Cabinets Innovations" loading="lazy" width="600" height="400">
+        </div>
+      </a>
+      <a href="#" class="gbp-review-card ornament-frame ornament-frame--sm" data-pending-link="google-reviews">
+        <span class="ornament-frame__corner ornament-frame__corner--tl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--tr"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--bl"></span>
+        <span class="ornament-frame__corner ornament-frame__corner--br"></span>
+        <div class="ornament-frame__inner">
+          <img src="images/reviews/review-google-4.png" alt="Google review for Premier Cabinets Innovations" loading="lazy" width="600" height="400">
+        </div>
+      </a>
+    </div>
+
+    <p class="gbp-reviews__more">
+      <a href="#" data-pending-link="google-reviews" data-i18n="gbp.more">See all reviews on Google →</a>
+    </p>
+  </div>
+</section>
+
 <!-- =================== PROCESS — 4 steps (tightened copy) =================== -->
 <section class="process-strip">
   <div class="container">
@@ -374,25 +434,25 @@
     <div class="contact-section__inner">
 
       <div class="contact-section__left reveal">
-        <span class="contact-section__eyebrow">04 — Start Your Project</span>
-        <h2 class="contact-section__headline contact-section__headline--xl">Ready to start your next <span class="gold-word">project</span>?</h2>
-        <p class="contact-section__body">We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California.</p>
+        <span class="contact-section__eyebrow" data-i18n="contact.eyebrow">04 — Start Your Project</span>
+        <h2 class="contact-section__headline contact-section__headline--xl" data-i18n="contact.headline" data-i18n-html>Ready to start your next <span class="gold-word">project</span>?</h2>
+        <p class="contact-section__body" data-i18n="contact.body">We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California.</p>
 
         <div class="contact-section__meta">
           <div class="contact-section__meta-block">
-            <h4>Give us a call</h4>
+            <h4 data-i18n="contact.call">Give us a call</h4>
             <a href="tel:+19165502228">(916) 550-2228</a>
           </div>
           <div class="contact-section__meta-block">
-            <h4>Send us an email</h4>
+            <h4 data-i18n="contact.email">Send us an email</h4>
             <a href="mailto:felix@premiercabinetsinnovations.com">felix@<wbr/>premiercabinetsinnovations.com</a>
           </div>
           <div class="contact-section__meta-block">
-            <h4>Workshop</h4>
+            <h4 data-i18n="contact.workshop">Workshop</h4>
             <span class="value" style="border: 0; padding: 0;">5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621</span>
           </div>
           <div class="contact-section__meta-block">
-            <h4>Hours</h4>
+            <h4 data-i18n="contact.hours">Hours</h4>
             <span class="value" style="border: 0; padding: 0;">Mon–Fri, 8a–5p<br />Saturday by appointment</span>
           </div>
         </div>
@@ -481,7 +541,7 @@
     <div class="site-footer__grid">
       <div class="site-footer__brand">
         <img class="site-footer__logo" src="images/brand/pc-horizontal-dark.png" alt="Premier Cabinets Innovations" width="1200" height="500" />
-        <p>Custom Cabinetry + Millwork. Since 1985.</p>
+        <p data-i18n="footer.tagline">Custom Cabinetry + Millwork. Since 1985.</p>
         <span class="site-footer__care">Built in our Citrus Heights workshop.</span>
         <div class="site-footer__socials">
           <a href="#" aria-label="Instagram">Instagram</a>
@@ -491,17 +551,17 @@
       </div>
 
       <div>
-        <h4>Navigation</h4>
+        <h4 data-i18n="footer.navHeading">Navigation</h4>
         <ul class="site-footer__list">
-          <li><a href="services.html">What We Build</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="services.html" data-i18n="nav.services">What We Build</a></li>
+          <li><a href="projects.html" data-i18n="nav.work">Projects</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
         </ul>
       </div>
 
       <div>
-        <h4>Workshop</h4>
+        <h4 data-i18n="contact.workshop">Workshop</h4>
         <address class="site-footer__contact">
           <a href="tel:+19165502228">(916) 550-2228</a>
           <a href="mailto:felix@premiercabinetsinnovations.com">felix@premiercabinetsinnovations.com</a>
@@ -526,19 +586,19 @@
 <div class="mobile-drawer-backdrop" data-drawer-backdrop aria-hidden="true"></div>
 <aside class="mobile-drawer" data-drawer aria-hidden="true">
   <a href="index.html">Home</a>
-  <a href="services.html">What We Build</a>
-  <a href="projects.html">Projects</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
+  <a href="services.html" data-i18n="nav.services">What We Build</a>
+  <a href="projects.html" data-i18n="nav.work">Projects</a>
+  <a href="about.html" data-i18n="nav.about">About</a>
+  <a href="contact.html" data-i18n="nav.contact">Contact</a>
   <a class="mobile-drawer__contact" href="tel:+19165502228">(916) 550-2228</a>
   <a class="mobile-drawer__contact" href="mailto:felix@premiercabinetsinnovations.com">felix@premiercabinetsinnovations.com</a>
-  <a class="mobile-drawer__cta" href="#contact">Start Your Project</a>
+  <a class="mobile-drawer__cta" href="#contact" data-i18n="nav.cta">Start Your Project</a>
 </aside>
 
 <!-- =================== FLOATING STICKY CTA =================== -->
 <a class="sticky-cta" data-sticky-cta href="#contact" aria-label="Start your project">
   <span class="sticky-cta__label">Talk to us</span>
-  <span class="sticky-cta__full">Start Your Project</span>
+  <span class="sticky-cta__full" data-i18n="sticky.cta">Start Your Project</span>
   <span class="sticky-cta__short">Start</span>
   <span class="sticky-cta__arrow" aria-hidden="true">→</span>
 </a>

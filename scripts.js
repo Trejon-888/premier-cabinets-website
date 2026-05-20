@@ -1098,19 +1098,11 @@
       });
     }
 
-    // Every h2 section headline — reveal on scroll
-    document.querySelectorAll('section h2, .built-and-work__title, .built-and-work__sub-title, .about-hero h1, .about-story__title, .reviews-strip__label, .process-strip__title, .contact-section__headline').forEach((el) => {
-      gsap.from(el, {
-        y: 40,
-        opacity: 0.001,
-        duration: 1.0,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          once: true,
-        },
-      });
+    // Every section h2 + key headline — use the robust .reveal class pattern
+    // (IntersectionObserver + safety net) instead of GSAP gsap.from which can
+    // trap content at opacity 0 if ScrollTrigger races with Lenis.
+    document.querySelectorAll('section h2, .built-and-work__title, .built-and-work__sub-title, .about-hero h1, .about-story__title, .reviews-strip__label, .process-strip__title, .contact-section__headline, .project-detail__title').forEach((el) => {
+      el.classList.add('reveal');
     });
 
     // Project gallery photos — subtle scale-in on enter
@@ -1209,4 +1201,159 @@
     animateServiceIcons();
     initExtendedMotion();  // iteration 15 — extended scroll motion
   });
+
+  // FINAL SAFETY: 2 seconds after window load, force any element still at
+  // opacity < 0.5 to fully visible. Catches any GSAP/IO escape paths.
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.contact-section__headline, .contact-section__body, .contact-section__meta, .enquiry-form, .reviews-strip, .review-card, .process-strip__step, .editorial-card, .service-card, section h2, .built-and-work__title, .built-and-work__sub-title, .reveal').forEach((el) => {
+        const op = parseFloat(getComputedStyle(el).opacity);
+        if (op < 0.5) {
+          el.style.setProperty('opacity', '1', 'important');
+          el.style.setProperty('transform', 'none', 'important');
+        }
+      });
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }, 2000);
+  });
+
+  // ============================================================
+  // ITERATION 16 — LANGUAGE TOGGLE (EN/ES) with localStorage persistence
+  // ============================================================
+  const I18N = {
+    en: {
+      'nav.work': 'Our Work',
+      'nav.about': 'About',
+      'nav.contact': 'Contact',
+      'nav.cta': 'Start Your Project',
+      'nav.services': 'What We Build',
+      'hero.eyebrow': 'Custom Cabinetry + Millwork · Since 1985',
+      'hero.headline': 'Built for the places you\'re <span class="gold-word">proud</span> of.',
+      'hero.sub': 'Custom cabinetry and millwork for residential and commercial spaces across Sacramento, the Bay Area, and Northern California.',
+      'hero.cta.primary': 'Start Your Project',
+      'hero.cta.secondary': 'See Our Work',
+      'hero.trust': 'Citrus Heights · Sacramento · Bay Area · Northern California',
+      'workshop.eyebrow': '01 — What we build',
+      'workshop.title': 'Custom cabinetry and millwork, <span class="gold-word">made in our workshop</span>.',
+      'workshop.lede': 'We measure, draw, build, and install every piece from our Citrus Heights workshop. Here is what we build, and a sample of how it lives in our clients\' homes.',
+      'recentwork.eyebrow': '02 — See it in action',
+      'recentwork.title': 'What we built. <span class="gold-word">Recently</span>.',
+      'recentwork.lede': 'Examples of the work above, drawn and built in our Citrus Heights workshop.',
+      'gbp.eyebrow': '03 — Trusted on Google',
+      'gbp.title': 'From our <span class="gold-word">Google Business Profile</span>.',
+      'gbp.lede': 'Real reviews from clients across Sacramento and the Bay Area.',
+      'gbp.more': 'See all reviews on Google →',
+      'contact.eyebrow': '04 — Start Your Project',
+      'contact.eyebrow.project': 'Start Your Project',
+      'contact.headline': 'Ready to start your next <span class="gold-word">project</span>?',
+      'contact.headline.project': 'Build something like this <span class="gold-word">together</span>?',
+      'contact.body': 'We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California. We\'d love to help build yours.',
+      'contact.call': 'Give us a call',
+      'contact.email': 'Send us an email',
+      'contact.workshop': 'Workshop',
+      'contact.hours': 'Hours',
+      'footer.nav.work': 'Our Work',
+      'footer.nav.about': 'About',
+      'footer.nav.contact': 'Contact',
+      'footer.nav.services': 'What We Build',
+      'footer.tagline': 'Custom Cabinetry + Millwork. Since 1985.',
+      'footer.copy': 'Built with care in California.',
+      'footer.navHeading': 'Navigation',
+      'footer.workshopHeading': 'Workshop',
+      'see-more.title': 'See <span class="gold-word">more of our work</span>.',
+      'see-more.lede': 'From Sacramento kitchens to Bay Area paneled rooms. Browse the full portfolio.',
+      'see-more.btn': 'Browse All Projects',
+      'project.back': '← Back to Our Work',
+      'sticky.cta': 'Start Your Project',
+    },
+    es: {
+      'nav.work': 'Nuestro Trabajo',
+      'nav.about': 'Nosotros',
+      'nav.contact': 'Contacto',
+      'nav.cta': 'Iniciar Proyecto',
+      'nav.services': 'Lo Que Construimos',
+      'hero.eyebrow': 'Gabinetería Personalizada + Carpintería · Desde 1985',
+      'hero.headline': 'Construido para los lugares de los que te sientes <span class="gold-word">orgulloso</span>.',
+      'hero.sub': 'Gabinetería personalizada y carpintería fina para espacios residenciales y comerciales en Sacramento, el Área de la Bahía y el norte de California.',
+      'hero.cta.primary': 'Iniciar Proyecto',
+      'hero.cta.secondary': 'Ver Nuestro Trabajo',
+      'hero.trust': 'Citrus Heights · Sacramento · Área de la Bahía · Norte de California',
+      'workshop.eyebrow': '01 — Lo que construimos',
+      'workshop.title': 'Gabinetería personalizada y carpintería, <span class="gold-word">hecha en nuestro taller</span>.',
+      'workshop.lede': 'Medimos, diseñamos, construimos e instalamos cada pieza desde nuestro taller en Citrus Heights. Esto es lo que construimos, y una muestra de cómo vive en los hogares de nuestros clientes.',
+      'recentwork.eyebrow': '02 — Véalo en acción',
+      'recentwork.title': 'Lo que construimos. <span class="gold-word">Recientemente</span>.',
+      'recentwork.lede': 'Ejemplos del trabajo de arriba, diseñado y construido en nuestro taller en Citrus Heights.',
+      'gbp.eyebrow': '03 — Verificado en Google',
+      'gbp.title': 'De nuestro <span class="gold-word">Perfil de Empresa en Google</span>.',
+      'gbp.lede': 'Reseñas reales de clientes en Sacramento y el Área de la Bahía.',
+      'gbp.more': 'Ver todas las reseñas en Google →',
+      'contact.eyebrow': '04 — Iniciar Proyecto',
+      'contact.eyebrow.project': 'Iniciar Proyecto',
+      'contact.headline': '¿Listo para comenzar tu próximo <span class="gold-word">proyecto</span>?',
+      'contact.headline.project': '¿Construimos algo así <span class="gold-word">juntos</span>?',
+      'contact.body': 'Construimos gabinetería y carpintería fina para hogares en Sacramento, el Área de la Bahía y el norte de California. Nos encantaría ayudarte a construir el tuyo.',
+      'contact.call': 'Llámanos',
+      'contact.email': 'Envíanos un correo',
+      'contact.workshop': 'Taller',
+      'contact.hours': 'Horario',
+      'footer.nav.work': 'Nuestro Trabajo',
+      'footer.nav.about': 'Nosotros',
+      'footer.nav.contact': 'Contacto',
+      'footer.nav.services': 'Lo Que Construimos',
+      'footer.tagline': 'Gabinetería Personalizada + Carpintería. Desde 1985.',
+      'footer.copy': 'Construido con cuidado en California.',
+      'footer.navHeading': 'Navegación',
+      'footer.workshopHeading': 'Taller',
+      'see-more.title': 'Ver <span class="gold-word">más de nuestro trabajo</span>.',
+      'see-more.lede': 'De cocinas en Sacramento a salones con paneles en el Área de la Bahía. Explora todo el portafolio.',
+      'see-more.btn': 'Ver Todos los Proyectos',
+      'project.back': '← Volver a Nuestro Trabajo',
+      'sticky.cta': 'Iniciar Proyecto',
+    }
+  };
+
+  function applyLanguage(lang) {
+    if (!I18N[lang]) lang = 'en';
+    const dict = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.dataset.i18n;
+      if (!dict[key]) return;
+      if (el.hasAttribute('data-i18n-html')) {
+        el.innerHTML = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
+    });
+    document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
+      const en = btn.querySelector('.lang-toggle__en');
+      const es = btn.querySelector('.lang-toggle__es');
+      if (en) en.classList.toggle('is-active', lang === 'en');
+      if (es) es.classList.toggle('is-active', lang === 'es');
+    });
+    document.documentElement.setAttribute('lang', lang);
+    try { localStorage.setItem('pci-lang', lang); } catch (e) {}
+  }
+
+  function initLangToggle() {
+    let lang = 'en';
+    try {
+      const saved = localStorage.getItem('pci-lang');
+      if (saved && I18N[saved]) lang = saved;
+    } catch (e) {}
+    applyLanguage(lang);
+    document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        let current = 'en';
+        try { current = localStorage.getItem('pci-lang') || 'en'; } catch (e) {}
+        applyLanguage(current === 'en' ? 'es' : 'en');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLangToggle);
+  } else {
+    initLangToggle();
+  }
 })();

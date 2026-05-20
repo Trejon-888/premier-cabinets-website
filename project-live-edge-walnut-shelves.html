@@ -53,10 +53,15 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="nav" id="primary-nav" aria-label="Primary">
-      <a class="nav__link" href="projects.html">Our Work</a>
-      <a class="nav__link" href="about.html">About</a>
-      <a class="nav__link" href="contact.html">Contact</a>
-      <a class="header-cta" href="#contact">Start Your Project</a>
+      <a class="nav__link" href="projects.html" data-i18n="nav.work">Our Work</a>
+      <a class="nav__link" href="about.html" data-i18n="nav.about">About</a>
+      <a class="nav__link" href="contact.html" data-i18n="nav.contact">Contact</a>
+      <button class="lang-toggle" data-lang-toggle aria-label="Switch language" type="button">
+        <span class="lang-toggle__en is-active">EN</span>
+        <span class="lang-toggle__sep">·</span>
+        <span class="lang-toggle__es">ES</span>
+      </button>
+      <a class="header-cta" href="#contact" data-i18n="nav.cta">Start Your Project</a>
     </nav>
   </div>
 </header>
@@ -66,9 +71,7 @@
   <!-- =================== PROJECT HERO =================== -->
   <section class="project-detail__hero">
     <div class="container">
-      <a class="project-detail__back" href="projects.html">
-        <span aria-hidden="true">←</span> Back to Our Work
-      </a>
+      <a class="project-detail__back" href="projects.html" data-i18n="project.back" data-i18n-html><span aria-hidden="true">←</span> Back to Our Work</a>
       <p class="project-detail__eyebrow">05 · Specialty Millwork · Northern California</p>
       <h1 class="project-detail__title">Live-edge walnut shelves and reclaimed-fir <span class="gold-word">bench</span></h1>
     </div>
@@ -103,7 +106,21 @@
         </ul>
       </aside>
     </div>
+  </section>  <!-- =================== BIG SEE-MORE-WORK CTA =================== -->
+  <section class="project-see-more">
+    <div class="container">
+      <div class="project-see-more__inner reveal">
+        <h2 class="project-see-more__title" data-i18n="see-more.title" data-i18n-html>See <span class="gold-word">more of our work</span>.</h2>
+        <p class="project-see-more__lede" data-i18n="see-more.lede">From Sacramento kitchens to Bay Area paneled rooms. Browse the full portfolio.</p>
+        <a class="btn btn--gold project-see-more__btn" href="projects.html?from=live-edge-walnut-shelves">
+          <span data-i18n="see-more.btn">Browse All Projects</span>
+          <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
   </section>
+
+
 
   <!-- =================== PREV / NEXT NAV =================== -->
   <section class="project-nav">
@@ -125,25 +142,25 @@
       <div class="contact-section__inner">
 
         <div class="contact-section__left reveal">
-          <span class="contact-section__eyebrow">Start Your Project</span>
-          <h2 class="contact-section__headline contact-section__headline--xl">Build something like this <span class="gold-word">together</span>?</h2>
-          <p class="contact-section__body">We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California. We'd love to help build yours.</p>
+          <span class="contact-section__eyebrow" data-i18n="contact.eyebrow.project">Start Your Project</span>
+          <h2 class="contact-section__headline contact-section__headline--xl" data-i18n="contact.headline.project" data-i18n-html>Build something like this <span class="gold-word">together</span>?</h2>
+          <p class="contact-section__body" data-i18n="contact.body">We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California. We'd love to help build yours.</p>
 
           <div class="contact-section__meta">
             <div class="contact-section__meta-block">
-              <h4>Give us a call</h4>
+              <h4 data-i18n="contact.call">Give us a call</h4>
               <a href="tel:+19165502228">(916) 550-2228</a>
             </div>
             <div class="contact-section__meta-block">
-              <h4>Send us an email</h4>
+              <h4 data-i18n="contact.email">Send us an email</h4>
               <a href="mailto:felix@premiercabinetsinnovations.com">felix@<wbr/>premiercabinetsinnovations.com</a>
             </div>
             <div class="contact-section__meta-block">
-              <h4>Workshop</h4>
+              <h4 data-i18n="contact.workshop">Workshop</h4>
               <span class="value" style="border: 0; padding: 0;">5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621</span>
             </div>
             <div class="contact-section__meta-block">
-              <h4>Hours</h4>
+              <h4 data-i18n="contact.hours">Hours</h4>
               <span class="value" style="border: 0; padding: 0;">Mon–Fri, 8a–5p<br />Saturday by appointment</span>
             </div>
           </div>
@@ -233,7 +250,7 @@
     <div class="site-footer__grid">
       <div class="site-footer__brand">
         <img class="site-footer__logo" src="images/brand/pc-horizontal-dark.png" alt="Premier Cabinets Innovations" width="1200" height="500" />
-        <p>Custom Cabinetry + Millwork. Since 1985.</p>
+        <p data-i18n="footer.tagline">Custom Cabinetry + Millwork. Since 1985.</p>
         <span class="site-footer__care">Built in our Citrus Heights workshop.</span>
         <div class="site-footer__socials">
           <a href="#" aria-label="Instagram">Instagram</a>
@@ -243,17 +260,17 @@
       </div>
 
       <div>
-        <h4>Navigation</h4>
+        <h4 data-i18n="footer.navHeading">Navigation</h4>
         <ul class="site-footer__list">
-          <li><a href="services.html">What We Build</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="services.html" data-i18n="nav.services">What We Build</a></li>
+          <li><a href="projects.html" data-i18n="nav.work">Projects</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
         </ul>
       </div>
 
       <div>
-        <h4>Workshop</h4>
+        <h4 data-i18n="contact.workshop">Workshop</h4>
         <address class="site-footer__contact">
           <a href="tel:+19165502228">(916) 550-2228</a>
           <a href="mailto:felix@premiercabinetsinnovations.com">felix@premiercabinetsinnovations.com</a>
@@ -278,19 +295,19 @@
 <div class="mobile-drawer-backdrop" data-drawer-backdrop aria-hidden="true"></div>
 <aside class="mobile-drawer" data-drawer aria-hidden="true">
   <a href="index.html">Home</a>
-  <a href="services.html">What We Build</a>
-  <a href="projects.html">Projects</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
+  <a href="services.html" data-i18n="nav.services">What We Build</a>
+  <a href="projects.html" data-i18n="nav.work">Projects</a>
+  <a href="about.html" data-i18n="nav.about">About</a>
+  <a href="contact.html" data-i18n="nav.contact">Contact</a>
   <a class="mobile-drawer__contact" href="tel:+19165502228">(916) 550-2228</a>
   <a class="mobile-drawer__contact" href="mailto:felix@premiercabinetsinnovations.com">felix@premiercabinetsinnovations.com</a>
-  <a class="mobile-drawer__cta" href="#contact">Start Your Project</a>
+  <a class="mobile-drawer__cta" href="#contact" data-i18n="nav.cta">Start Your Project</a>
 </aside>
 
 <!-- =================== FLOATING STICKY CTA =================== -->
 <a class="sticky-cta" data-sticky-cta href="#contact" aria-label="Start your project">
   <span class="sticky-cta__label">Talk to us</span>
-  <span class="sticky-cta__full">Start Your Project</span>
+  <span class="sticky-cta__full" data-i18n="sticky.cta">Start Your Project</span>
   <span class="sticky-cta__short">Start</span>
   <span class="sticky-cta__arrow" aria-hidden="true">→</span>
 </a>
