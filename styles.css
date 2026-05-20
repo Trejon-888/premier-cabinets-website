@@ -241,29 +241,24 @@ section {
 /* ===== Header / Nav ===== */
 
 .site-header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 100;
-  padding: clamp(0.8rem, 1.5vw, 1.2rem) 0;
-  background: rgba(248, 244, 233, 0.94);
+  padding: clamp(0.4rem, 0.9vw, 0.65rem) 0;
+  background: rgba(248, 244, 233, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
   transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  /* Always-visible "sticky" header per iteration 11 client feedback.
-     position: fixed is more reliable than position: sticky when GSAP/Lenis
-     is pinning sections. Body padding-top compensates for the fixed bar. */
+  /* Iteration 12: position: sticky lets content flow naturally below without
+     overlap. Reduced padding so the bar reads as compact. */
 }
 
 .site-header.is-scrolled {
   background: rgba(248, 244, 233, 0.98);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom-color: rgba(218, 165, 32, 0.28);
-  box-shadow: 0 6px 24px rgba(10, 10, 10, 0.06);
-  padding: clamp(0.5rem, 1vw, 0.85rem) 0;
+  border-bottom-color: rgba(218, 165, 32, 0.25);
+  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.05);
+  padding: clamp(0.3rem, 0.7vw, 0.5rem) 0;
 }
 
 .site-header--solid {
@@ -308,12 +303,14 @@ section {
 }
 .site-header__logo {
   display: block;
-  height: clamp(36px, 4.5vw, 56px);
+  height: clamp(34px, 3vw, 44px);
   width: auto;
+  max-width: 220px;
+  object-fit: contain;
   transition: height 0.3s ease;
 }
 .site-header.is-scrolled .site-header__logo {
-  height: clamp(32px, 4vw, 48px);
+  height: clamp(30px, 2.6vw, 38px);
 }
 
 .brand-lockup__text {
@@ -344,8 +341,10 @@ section {
 
 .nav {
   display: flex;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
   align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .nav__link {
@@ -356,6 +355,7 @@ section {
   position: relative;
   padding: 0.25rem 0;
   color: inherit;
+  white-space: nowrap;
 }
 
 /* Header always ivory — nav links stay dark on paper. */
@@ -383,15 +383,17 @@ section {
 }
 
 .header-cta {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.75rem;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   font-weight: 500;
-  padding: 0.625rem 1.25rem;
+  padding: 0.55rem 1.1rem;
   border: 1px solid var(--ink);
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
