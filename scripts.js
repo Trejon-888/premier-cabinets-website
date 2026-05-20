@@ -14,21 +14,35 @@
   // ============================================================
   // ORNAMENT FRAME — inject SVG corners + GSAP draw-in animation
   // ============================================================
+  // Iteration 11 — richer corner ornament. Three L-brackets layered for depth,
+  // a more elaborate acanthus curl with an inset leaf, tick-mark rhythm along
+  // the bracket, and a denser dot pattern. Animation still works because every
+  // <path>/<line> participates in stroke-dashoffset draw-in and every <circle>
+  // fades in afterward.
   const ORNAMENT_SVG = `
 <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin meet" aria-hidden="true">
   <!-- Outer L-bracket -->
-  <path d="M 4 100 L 4 4 L 100 4" stroke-width="1.5" fill="none" stroke-linecap="square" />
+  <path d="M 4 100 L 4 4 L 100 4" stroke-width="1.6" fill="none" stroke-linecap="square" />
   <!-- Inner parallel L -->
-  <path d="M 12 100 L 12 12 L 100 12" stroke-width="0.8" fill="none" stroke-linecap="square" />
-  <!-- Acanthus curl -->
-  <path d="M 18 18 Q 32 18 38 24 Q 44 30 38 38 Q 32 44 26 38 Q 22 34 26 28" stroke-width="1" fill="none" stroke-linecap="round" />
-  <!-- Accent dots -->
-  <circle class="ornament-dot" cx="30" cy="12" r="1.2" />
-  <circle class="ornament-dot" cx="12" cy="30" r="1.2" />
-  <circle class="ornament-dot" cx="60" cy="4" r="0.7" />
-  <circle class="ornament-dot" cx="4" cy="60" r="0.7" />
-  <!-- Tiny diagonal accent -->
+  <path d="M 12 100 L 12 12 L 100 12" stroke-width="0.7" fill="none" stroke-linecap="square" />
+  <!-- Third even-thinner inner L for extra refinement -->
+  <path d="M 16 100 L 16 16 L 100 16" stroke-width="0.4" fill="none" stroke-linecap="square" opacity="0.55" />
+  <!-- Acanthus curl (refined scroll with return curl) -->
+  <path d="M 20 20 Q 34 20 40 26 Q 46 32 40 40 Q 34 46 26 40 Q 21 35 26 30 Q 30 26 34 30" stroke-width="1" fill="none" stroke-linecap="round" />
+  <!-- Diagonal accent stroke from the corner outward -->
   <line x1="4" y1="4" x2="14" y2="14" stroke-width="0.6" />
+  <!-- Tick marks along the L for decorative rhythm -->
+  <line x1="30" y1="4" x2="30" y2="8" stroke-width="0.5" />
+  <line x1="50" y1="4" x2="50" y2="7" stroke-width="0.4" />
+  <line x1="4" y1="30" x2="8" y2="30" stroke-width="0.5" />
+  <line x1="4" y1="50" x2="7" y2="50" stroke-width="0.4" />
+  <!-- Accent dots -->
+  <circle class="ornament-dot" cx="34" cy="12" r="1.3" />
+  <circle class="ornament-dot" cx="12" cy="34" r="1.3" />
+  <circle class="ornament-dot" cx="64" cy="4" r="0.7" />
+  <circle class="ornament-dot" cx="4" cy="64" r="0.7" />
+  <circle class="ornament-dot" cx="80" cy="4" r="0.5" />
+  <circle class="ornament-dot" cx="4" cy="80" r="0.5" />
 </svg>
 `;
 
@@ -223,12 +237,11 @@
     const dots = Array.from(document.querySelectorAll('.hero-carousel__dot'));
     if (slides.length < 2) return;
 
-    const SLIDE_DURATION = 9000;   // ms — slower, more elegant pacing
-    const FADE_DURATION = 1.8;     // seconds — slightly longer crossfade
+    const SLIDE_DURATION = 2000;   // ms — Iteration 11: client requested 2s cadence
+    const FADE_DURATION = 0.5;     // seconds — tight crossfade to match faster pace
     const KB_START = 1.0;          // Ken Burns starting scale
-    const KB_END = 1.04;           // Ken Burns ending scale — reduced from 1.08
-                                    // to minimize blur amplification on the
-                                    // source photos (now upscaled to 2400px).
+    const KB_END = 1.02;           // Ken Burns ending scale — reduced to 1.02 at
+                                    // 2s cadence so scale-zoom doesn't feel jittery.
 
     const hasGSAP = typeof gsap !== 'undefined';
     let activeIdx = 0;
@@ -453,15 +466,27 @@
 
   // -----------------------------------------------------
   // STICKY HEADER scroll state
+  // Iteration 11: header is position:fixed and always visible.
+  // The .is-scrolled class adds extra polish (shadow + tighter padding +
+  // stronger backdrop) once the user scrolls past 80px. Lenis intercepts
+  // scroll events on some pages, so we listen on BOTH window + Lenis.
   // -----------------------------------------------------
   const siteHeader = document.querySelector('.site-header');
-  if (siteHeader && !siteHeader.classList.contains('site-header--solid')) {
+  if (siteHeader) {
+    let lastY = -1;
     const onHeaderScroll = () => {
-      if (window.scrollY > 80) siteHeader.classList.add('is-scrolled');
-      else siteHeader.classList.remove('is-scrolled');
+      const y = window.scrollY;
+      if (y === lastY) return;
+      lastY = y;
+      siteHeader.classList.toggle('is-scrolled', y > 80);
     };
     onHeaderScroll();
     window.addEventListener('scroll', onHeaderScroll, { passive: true });
+    // If Lenis is active, it emits its own scroll event with a scroll value —
+    // also use that path so the state updates during smooth-scroll frames.
+    if (lenis && typeof lenis.on === 'function') {
+      lenis.on('scroll', onHeaderScroll);
+    }
   }
 
   // -----------------------------------------------------

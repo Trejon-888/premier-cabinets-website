@@ -7,8 +7,9 @@
   <meta name="description" content="Two design directions for Felix's business cards. Print-ready 300dpi files." />
   <meta name="robots" content="noindex, nofollow" />
 
-  <link rel="icon" type="image/png" href="images/favicon.png" />
-  <link rel="apple-touch-icon" href="images/favicon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/brand/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="images/brand/favicon-64.png" />
+  <link rel="apple-touch-icon" href="images/brand/favicon-256.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,12 +22,8 @@
 <!-- =================== HEADER =================== -->
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="brand-mark" href="index.html" aria-label="Premier Cabinets Innovations — Home">
-      <img src="images/logo-monogram.png" alt="" />
-      <span class="brand-mark__text">
-        <span class="brand-mark__name">Premier Cabinets <strong>Innovations</strong></span>
-        <span class="brand-mark__sub">Since 1985 · Citrus Heights</span>
-      </span>
+    <a class="site-header__brand" href="index.html" aria-label="Premier Cabinets Innovations — home">
+      <img class="site-header__logo" src="images/brand/pc-horizontal-light.png" alt="Premier Cabinets Innovations" width="1200" height="500" />
     </a>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -66,18 +63,18 @@
         <h2 class="bc-section__title">Logo-Forward <span class="bc-badge">Recommended</span></h2>
       </div>
 
-      <div class="bc-card-frame">
-        <img src="images/business-cards/front-design-A-logo-forward-trim.png" alt="Front Design A — centered wordmark business card" />
+      <div class="bc-card-frame" style="background: #F8F4E9; padding: clamp(2rem, 5vw, 3.5rem); display: flex; align-items: center; justify-content: center; aspect-ratio: 1050 / 600;">
+        <img src="images/brand/pc-horizontal-light.png" alt="PC horizontal logo lockup on cream — Design A" style="max-width: 78%; height: auto;" />
       </div>
 
       <div class="bc-card-meta">
-        <p>The wordmark sits dead-center on cream paper with generous whitespace on every side. Felix's name and title hold the lower band. This is the Somerville-direct expression of the brand. Quiet, confident, hero treatment for the mark. Hand it to a designer or architect and the brand reads in a single glance.</p>
+        <p>The horizontal PC lockup sits dead-center on cream paper with generous whitespace on every side. Felix's name and title hold the lower band. This is the Somerville-direct expression of the brand — quiet, confident, hero treatment for the mark. Print mockup pending; this preview shows the real logo art at scale.</p>
         <ul class="bc-specs">
           <li><span class="label">Trim</span><span class="value">1050 × 600 px</span></li>
           <li><span class="label">With bleed</span><span class="value">1087 × 625 px</span></li>
           <li><span class="label">DPI</span><span class="value">300</span></li>
-          <li><span class="label">Palette</span><span class="value">Paper + Ink + Walnut</span></li>
-          <li><span class="label">Upload file</span><span class="value">front-design-A-logo-forward.png</span></li>
+          <li><span class="label">Palette</span><span class="value">Paper + Ink + Gold</span></li>
+          <li><span class="label">Logo file</span><span class="value">pc-horizontal-light.png</span></li>
         </ul>
       </div>
     </section>
@@ -89,18 +86,19 @@
         <h2 class="bc-section__title">Monogram-Forward</h2>
       </div>
 
-      <div class="bc-card-frame">
-        <img src="images/business-cards/front-design-B-monogram-forward-trim.png" alt="Front Design B — monogram-forward editorial layout" />
+      <div class="bc-card-frame" style="background: #F8F4E9; padding: clamp(2rem, 4vw, 3rem); display: flex; align-items: center; justify-content: space-between; aspect-ratio: 1050 / 600;">
+        <img src="images/brand/pc-monogram-256.png" alt="PC monogram top-left anchor" style="width: clamp(80px, 14%, 120px); height: auto;" />
+        <img src="images/brand/pc-horizontal-light.png" alt="PC horizontal lockup right-aligned" style="max-width: 60%; height: auto;" />
       </div>
 
       <div class="bc-card-meta">
-        <p>Editorial structured layout. PCI monogram anchors the top-left corner, the wordmark spans the top, Felix's name sits bottom-right, service area bottom-left. More information density, more layout work to read. The right secondary card to hand out after the brand is established, or for designer-association events where the structured layout signals craft.</p>
+        <p>Editorial structured layout. PC monogram anchors the top-left corner, the horizontal lockup spans the right, Felix's name sits bottom-right, service area bottom-left. More information density, more layout work to read. The right secondary card to hand out after the brand is established, or for designer-association events where the structured layout signals craft.</p>
         <ul class="bc-specs">
           <li><span class="label">Trim</span><span class="value">1050 × 600 px</span></li>
           <li><span class="label">With bleed</span><span class="value">1087 × 625 px</span></li>
           <li><span class="label">DPI</span><span class="value">300</span></li>
-          <li><span class="label">Palette</span><span class="value">Paper + Ink + Walnut</span></li>
-          <li><span class="label">Upload file</span><span class="value">front-design-B-monogram-forward.png</span></li>
+          <li><span class="label">Palette</span><span class="value">Paper + Ink + Gold</span></li>
+          <li><span class="label">Logo files</span><span class="value">pc-monogram-256.png + pc-horizontal-light.png</span></li>
         </ul>
       </div>
     </section>
@@ -112,18 +110,23 @@
         <h2 class="bc-section__title">Card Back (shared)</h2>
       </div>
 
-      <div class="bc-card-frame">
-        <img src="images/business-cards/back-trim.png" alt="Card back — contact info with PCI watermark and service area footer" />
+      <div class="bc-card-frame" style="background: #F8F4E9; padding: clamp(2rem, 5vw, 3rem); display: flex; align-items: center; justify-content: center; aspect-ratio: 1050 / 600; position: relative;">
+        <img src="images/brand/pc-monogram-transparent.png" alt="PC monogram watermark on card back" style="position: absolute; right: 8%; top: 50%; transform: translateY(-50%); width: 28%; height: auto; opacity: 0.14;" />
+        <div style="position: relative; z-index: 1; font-family: Inter, sans-serif; color: #0A0A0A; max-width: 60%; line-height: 1.6;">
+          <div style="font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: #DAA520; margin-bottom: 0.5rem;">Felix · Founder</div>
+          <div style="font-size: 0.95rem;">(916) 550-2228<br />felix@premiercabinetsinnovations.com<br />5910 Auburn Blvd Suite 21, Citrus Heights, CA 95621</div>
+          <div style="margin-top: 0.85rem; padding-top: 0.6rem; border-top: 1px solid #DAA520; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: #0A0A0A; opacity: 0.65;">premiercabinetsinnovations.com · Sacramento · Bay Area</div>
+        </div>
       </div>
 
       <div class="bc-card-meta">
-        <p>One back for both fronts. Faint P · C · I watermark sets the field. Phone, email, and shop address stack in the working area in Inter Regular with tabular numerals. A walnut hairline separates the contact block from the footer line that carries the website and service area. No icons, no QR code. The card stays an object, not a brochure.</p>
+        <p>One back for both fronts. Faint PC monogram watermark sets the field on the right. Phone, email, and shop address stack in the working area in Inter Regular with tabular numerals. A gold hairline separates the contact block from the footer line that carries the website and service area. No icons, no QR code. The card stays an object, not a brochure.</p>
         <ul class="bc-specs">
           <li><span class="label">Trim</span><span class="value">1050 × 600 px</span></li>
           <li><span class="label">With bleed</span><span class="value">1087 × 625 px</span></li>
           <li><span class="label">DPI</span><span class="value">300</span></li>
-          <li><span class="label">Watermark</span><span class="value">P · C · I (Mist tint)</span></li>
-          <li><span class="label">Upload file</span><span class="value">back.png</span></li>
+          <li><span class="label">Watermark</span><span class="value">PC monogram (14% opacity, gold tint)</span></li>
+          <li><span class="label">Logo file</span><span class="value">pc-monogram-transparent.png</span></li>
         </ul>
       </div>
     </section>
@@ -191,8 +194,7 @@
   <div class="container">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
-        <img class="site-footer__brand-logo" src="images/logo-monogram.png" alt="Premier Cabinets Innovations monogram" width="64" height="64" />
-        <h4>Premier Cabinets Innovations</h4>
+        <img class="site-footer__logo" src="images/brand/pc-horizontal-dark.png" alt="Premier Cabinets Innovations" width="1200" height="500" />
         <p>Custom cabinetry and architectural millwork. Built in Citrus Heights, serving Sacramento and the Bay Area since 1985.</p>
         <div class="site-footer__socials">
           <a href="#" aria-label="Instagram">Instagram</a>

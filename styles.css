@@ -246,24 +246,30 @@ section {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1.25rem 0;
-  background: transparent;
-  transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+  padding: clamp(0.8rem, 1.5vw, 1.2rem) 0;
+  background: rgba(248, 244, 233, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Always-visible "sticky" header per iteration 11 client feedback.
+     position: fixed is more reliable than position: sticky when GSAP/Lenis
+     is pinning sections. Body padding-top compensates for the fixed bar. */
 }
 
 .site-header.is-scrolled {
-  background: rgba(248, 244, 233, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom-color: rgba(123, 94, 60, 0.15);
-  padding: 0.85rem 0;
+  background: rgba(248, 244, 233, 0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: rgba(218, 165, 32, 0.28);
+  box-shadow: 0 6px 24px rgba(10, 10, 10, 0.06);
+  padding: clamp(0.5rem, 1vw, 0.85rem) 0;
 }
 
 .site-header--solid {
-  background: rgba(248, 244, 233, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(248, 244, 233, 0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--hairline);
 }
 
@@ -283,14 +289,7 @@ section {
   transition: color 0.3s ease;
 }
 
-.site-header:not(.is-scrolled):not(.site-header--solid) .brand-lockup {
-  color: var(--paper);
-}
-
-.site-header:not(.is-scrolled):not(.site-header--solid) .brand-lockup .brand-lockup__name strong,
-.site-header:not(.is-scrolled):not(.site-header--solid) .brand-lockup .brand-lockup__sub {
-  color: rgba(248, 244, 233, 0.8);
-}
+/* Header is always ivory now; no transparent/dark variant override needed. */
 
 .brand-mark {
   height: 36px;
@@ -298,6 +297,23 @@ section {
   display: block;
   flex-shrink: 0;
   object-fit: contain;
+}
+
+/* Iteration 11 — Horizontal PC logo lockup in header */
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.site-header__logo {
+  display: block;
+  height: clamp(36px, 4.5vw, 56px);
+  width: auto;
+  transition: height 0.3s ease;
+}
+.site-header.is-scrolled .site-header__logo {
+  height: clamp(32px, 4vw, 48px);
 }
 
 .brand-lockup__text {
@@ -342,9 +358,7 @@ section {
   color: inherit;
 }
 
-.site-header:not(.is-scrolled):not(.site-header--solid) .nav__link {
-  color: rgba(248, 244, 233, 0.92);
-}
+/* Header always ivory — nav links stay dark on paper. */
 
 .nav__link::after {
   content: '';
@@ -381,10 +395,7 @@ section {
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
-.site-header:not(.is-scrolled):not(.site-header--solid) .header-cta {
-  border-color: rgba(248, 244, 233, 0.5);
-  color: var(--paper);
-}
+/* Header always ivory — header-cta inherits dark ink border by default. */
 
 .header-cta:hover {
   background: var(--champagne);
@@ -410,9 +421,7 @@ section {
   transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
 }
 
-.site-header:not(.is-scrolled):not(.site-header--solid) .nav-toggle span {
-  background: var(--paper);
-}
+/* Header always ivory — nav-toggle bars stay dark. */
 
 .nav-toggle.is-open span:nth-child(1) {
   transform: translateY(5px) rotate(45deg);
@@ -459,39 +468,77 @@ section {
 
 /* ===== Floating Sticky CTA ===== */
 
+/* Iteration 11 — floating sticky CTA. Same gold-gradient + shimmer treatment
+   as .btn--gold, but slightly larger and with a heavier outer glow to read as
+   the primary site CTA from any scroll position. */
 .sticky-cta {
   position: fixed;
-  right: 32px;
-  bottom: 32px;
+  right: clamp(1.25rem, 3vw, 2.25rem);
+  bottom: clamp(1.25rem, 3vw, 2.25rem);
   z-index: 90;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  padding: 0.95rem 1.6rem;
-  background: var(--champagne);
+  padding: 1.1rem 1.85rem;
   color: var(--ink);
-  border: 1px solid var(--champagne);
+  background: linear-gradient(135deg, #DAA520 0%, #F5C842 50%, #DAA520 100%);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  border: none;
   border-radius: 999px;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   font-weight: 500;
-  box-shadow: 0 12px 32px rgba(10, 10, 10, 0.18), 0 2px 6px rgba(10, 10, 10, 0.08);
-  transform: translateY(100%);
-  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 10px 28px rgba(218, 165, 32, 0.42),
+    0 2px 8px rgba(10, 10, 10, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(184, 134, 11, 0.3);
+  transform: translateY(150%);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, background-position 0.6s ease;
   will-change: transform;
 }
+
+.sticky-cta::after {
+  /* Same gold shimmer sweep as .btn--gold */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -55%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  z-index: 1;
+  animation: btn-gold-shimmer 4.5s ease-in-out infinite;
+}
+
+.sticky-cta > * { position: relative; z-index: 2; }
 
 .sticky-cta.is-ready {
   transform: translateY(0);
 }
 
 .sticky-cta:hover {
-  background: var(--champagne-deep);
-  border-color: var(--champagne-deep);
+  background-position: 100% 100%;
   color: var(--ink);
-  transform: translateY(0) scale(1.03);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 16px 38px rgba(218, 165, 32, 0.58),
+    0 4px 12px rgba(10, 10, 10, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 2px rgba(184, 134, 11, 0.35);
+}
+
+.sticky-cta:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
 }
 
 .sticky-cta__arrow {
@@ -538,6 +585,8 @@ section {
     transition: none;
     animation: none;
   }
+  .sticky-cta::after { animation: none; opacity: 0; }
+  .sticky-cta:hover { transform: translateY(0); }
 }
 
 /* ===== Hero ===== */
@@ -665,18 +714,91 @@ section {
   transform: translateX(4px);
 }
 
+/* Iteration 11 — colorful CTA with gold gradient, animated shimmer,
+   inner highlight rim, soft glow on hover. Applies to .btn--gold and
+   (via shared rules below) the floating .sticky-cta. */
 .btn--gold {
-  background: var(--champagne);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.85rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
   color: var(--ink);
-  border-color: var(--champagne);
+  background: linear-gradient(135deg, #DAA520 0%, #F5C842 50%, #DAA520 100%);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  border: none;
   border-radius: 999px;
-  padding: 1.05rem 2rem;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 4px 14px rgba(218, 165, 32, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px rgba(184, 134, 11, 0.3);
+  transition: background-position 0.6s ease, box-shadow 0.4s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.btn--gold::after {
+  /* Animated shimmer sweep */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -55%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  z-index: 1;
+  animation: btn-gold-shimmer 4.5s ease-in-out infinite;
+}
+
+@keyframes btn-gold-shimmer {
+  0%, 100% { left: -55%; }
+  55%      { left: 120%; }
 }
 
 .btn--gold:hover {
-  background: var(--champagne-deep);
-  border-color: var(--champagne-deep);
+  background-position: 100% 100%;
+  transform: translateY(-2px);
   color: var(--ink);
+  box-shadow:
+    0 10px 26px rgba(218, 165, 32, 0.48),
+    0 2px 6px rgba(10, 10, 10, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    inset 0 -1px 2px rgba(184, 134, 11, 0.35);
+}
+
+.btn--gold:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.btn--gold .btn__arrow {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.btn--gold:hover .btn__arrow {
+  transform: translateX(5px);
+}
+
+.btn--gold > span:not(.btn__arrow) {
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--gold::after { animation: none; opacity: 0; }
+  .btn--gold:hover { transform: none; }
 }
 
 .btn--primary {
@@ -1533,6 +1655,14 @@ section {
   width: 48px;
   height: 48px;
   filter: brightness(1.4);
+}
+
+/* Iteration 11 — horizontal PC logo in footer (dark-variant artwork on ink bg) */
+.site-footer__logo {
+  display: block;
+  height: clamp(56px, 6vw, 76px);
+  width: auto;
+  margin-bottom: 1.25rem;
 }
 
 .site-footer__brand-wordmark {
@@ -4206,14 +4336,9 @@ html.lenis body {
   background: var(--gold);
   border-color: var(--gold);
 }
-.section--dark .btn--gold {
-  background: var(--gold);
-  color: var(--ink);
-}
-.section--dark .btn--gold:hover {
-  background: var(--gold-warm);
-  color: var(--ink);
-}
+/* Iteration 11 — let .btn--gold gradient + shimmer flow through on dark sections too.
+   No background override here — the gradient and shimmer give it presence on
+   dark bg without needing a separate treatment. */
 .section--dark .btn--ghost {
   color: var(--paper);
   border-color: var(--paper);
@@ -4858,12 +4983,16 @@ html:not(.has-js) .numbered-list__item {
   filter: saturate(1.05);
 }
 
-/* ===== Iteration 9: 3-card reviews strip ===== */
+/* ===== Iteration 9: 3-card reviews strip =====
+   Iteration 11: now lives inside the ivory unified WWB section,
+   so the strip itself carries its own dark backdrop to read as
+   a self-contained accent. */
 .reviews-strip {
   margin-top: clamp(4rem, 7vw, 6rem);
   padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
-  background: rgba(245, 200, 66, 0.04);
-  border: 1px solid rgba(245, 200, 66, 0.18);
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid rgba(245, 200, 66, 0.22);
   position: relative;
 }
 /* When reviews-strip also carries .ornament-frame, keep its own padding
@@ -4871,6 +5000,7 @@ html:not(.has-js) .numbered-list__item {
 .reviews-strip.ornament-frame {
   padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
   margin: clamp(4rem, 7vw, 6rem) 0 0;
+  --ornament-color: #F5C842;
 }
 .reviews-strip__label {
   display: block;
@@ -4978,12 +5108,17 @@ html:not(.has-js) .numbered-list__item {
   text-align: center;
 }
 
-/* Examples block (formerly Recent Work) — sits within .built-and-work, bg flips to dark */
+/* Iteration 11 — Unified ivory WWB section.
+   Client feedback: "I don't want to have two sections." The Recent Work
+   examples now share the same ivory background as the rest of the block,
+   so the entire merged section reads as one. The dark visual moment is
+   preserved only in the small .reviews-strip callout that follows. */
 .built-and-work__examples {
-  background: var(--ink);
-  color: var(--paper);
-  margin-top: clamp(4rem, 7vw, 6rem);
-  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: var(--paper);
+  color: var(--ink);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  border-top: 1px solid var(--hairline);
   position: relative;
 }
 .built-and-work__sub-head {
@@ -4995,13 +5130,13 @@ html:not(.has-js) .numbered-list__item {
   font-weight: 300;
   letter-spacing: -0.02em;
   margin: 1rem 0 0;
-  color: var(--paper);
+  color: var(--ink);
   text-wrap: balance;
 }
 .built-and-work__examples .editorial-label {
-  color: var(--gold-warm);
+  color: var(--gold);
 }
-.built-and-work__examples .editorial-card__title { color: var(--paper); }
-.built-and-work__examples .editorial-card__meta { color: var(--paper); opacity: 0.7; }
-.built-and-work__examples .ornament-frame { --ornament-color: #F5C842; }
+.built-and-work__examples .editorial-card__title { color: var(--ink); }
+.built-and-work__examples .editorial-card__meta { color: var(--ink); opacity: 0.7; }
+.built-and-work__examples .ornament-frame { --ornament-color: var(--gold); }
 
