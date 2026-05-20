@@ -11,6 +11,97 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) document.documentElement.classList.add('no-anim');
 
+  // ============================================================
+  // ORNAMENT FRAME — inject SVG corners + GSAP draw-in animation
+  // ============================================================
+  const ORNAMENT_SVG = `
+<svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin meet" aria-hidden="true">
+  <!-- Outer L-bracket -->
+  <path d="M 4 100 L 4 4 L 100 4" stroke-width="1.5" fill="none" stroke-linecap="square" />
+  <!-- Inner parallel L -->
+  <path d="M 12 100 L 12 12 L 100 12" stroke-width="0.8" fill="none" stroke-linecap="square" />
+  <!-- Acanthus curl -->
+  <path d="M 18 18 Q 32 18 38 24 Q 44 30 38 38 Q 32 44 26 38 Q 22 34 26 28" stroke-width="1" fill="none" stroke-linecap="round" />
+  <!-- Accent dots -->
+  <circle class="ornament-dot" cx="30" cy="12" r="1.2" />
+  <circle class="ornament-dot" cx="12" cy="30" r="1.2" />
+  <circle class="ornament-dot" cx="60" cy="4" r="0.7" />
+  <circle class="ornament-dot" cx="4" cy="60" r="0.7" />
+  <!-- Tiny diagonal accent -->
+  <line x1="4" y1="4" x2="14" y2="14" stroke-width="0.6" />
+</svg>
+`;
+
+  function injectOrnaments() {
+    document.querySelectorAll('.ornament-frame__corner').forEach((el) => {
+      if (!el.querySelector('svg')) el.innerHTML = ORNAMENT_SVG;
+    });
+  }
+
+  function animateOrnaments() {
+    if (reduced || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      // Reduced motion / no GSAP: just make ornaments fully visible
+      document.querySelectorAll('.ornament-frame__corner svg').forEach((svg) => {
+        svg.style.opacity = '1';
+      });
+      return;
+    }
+    document.querySelectorAll('.ornament-frame').forEach((frame) => {
+      const corners = frame.querySelectorAll('.ornament-frame__corner');
+      if (corners.length === 0) return;
+      // Prime each path/line to be invisible by dash offset
+      corners.forEach((corner) => {
+        corner.querySelectorAll('svg path, svg line').forEach((p) => {
+          const len = (typeof p.getTotalLength === 'function') ? p.getTotalLength() : 200;
+          p.style.strokeDasharray = len;
+          p.style.strokeDashoffset = len;
+        });
+        corner.querySelectorAll('svg circle').forEach((c) => {
+          c.style.opacity = '0';
+        });
+      });
+      // SAFETY: after 2.5s force all corners visible even if scroll trigger fails
+      const safetyTimer = setTimeout(() => {
+        corners.forEach((corner) => {
+          corner.querySelectorAll('svg path, svg line').forEach((p) => { p.style.strokeDashoffset = '0'; });
+          corner.querySelectorAll('svg circle').forEach((c) => { c.style.opacity = '1'; });
+        });
+      }, 2500);
+      // Draw-in on scroll trigger
+      ScrollTrigger.create({
+        trigger: frame,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          clearTimeout(safetyTimer);
+          corners.forEach((corner, idx) => {
+            const paths = corner.querySelectorAll('svg path, svg line');
+            const dots = corner.querySelectorAll('svg circle');
+            gsap.to(paths, {
+              strokeDashoffset: 0,
+              duration: 1.4,
+              ease: 'power2.inOut',
+              delay: idx * 0.15,
+            });
+            gsap.to(dots, {
+              opacity: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+              delay: idx * 0.15 + 0.9,
+            });
+          });
+        },
+      });
+    });
+  }
+
+  // Inject ornaments early so the hero corners exist before paint
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectOrnaments);
+  } else {
+    injectOrnaments();
+  }
+
   // -----------------------------------------------------
   // LENIS SMOOTH SCROLL (init early so scrollTo works)
   // -----------------------------------------------------
@@ -132,8 +223,8 @@
     const dots = Array.from(document.querySelectorAll('.hero-carousel__dot'));
     if (slides.length < 2) return;
 
-    const SLIDE_DURATION = 6500;   // ms each slide stays before next swap
-    const FADE_DURATION = 1.4;     // seconds for crossfade
+    const SLIDE_DURATION = 9000;   // ms — slower, more elegant pacing
+    const FADE_DURATION = 1.8;     // seconds — slightly longer crossfade
     const KB_START = 1.0;          // Ken Burns starting scale
     const KB_END = 1.04;           // Ken Burns ending scale — reduced from 1.08
                                     // to minimize blur amplification on the
@@ -728,5 +819,7 @@
     initGsap();
     initSplitText();
     initCounters();
+    injectOrnaments();   // safety re-inject in case any frames were missed
+    animateOrnaments();  // wire GSAP draw-in for ornament corners
   });
 })();

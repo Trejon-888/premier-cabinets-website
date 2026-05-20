@@ -4663,60 +4663,99 @@ html:not(.has-js) .numbered-list__item {
    Iteration 9 — Elegance pass
    ============================================================ */
 
-/* ===== Gold corner ornaments (Cartier-style brackets) ===== */
-.gold-corners {
+/* ===== Ornament frame (corners OUTSIDE the photo, GSAP draw-in) ===== */
+.ornament-frame {
   position: relative;
+  padding: clamp(20px, 3vw, 36px);
+  margin: clamp(-20px, -3vw, -36px); /* compensate so layout doesn't shift visibly */
+  display: block;
+  --ornament-color: #DAA520;
 }
-.gold-corners::before,
-.gold-corners::after,
-.gold-corners .gold-corners__br,
-.gold-corners .gold-corners__bl {
-  content: '';
+.ornament-frame__corner {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: clamp(50px, 6vw, 80px);
+  height: clamp(50px, 6vw, 80px);
   pointer-events: none;
-  z-index: 5;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'><path d='M 6 70 L 6 6 L 70 6' stroke='%23DAA520' stroke-width='1.6' fill='none'/><path d='M 11 70 L 11 11 L 70 11' stroke='%23DAA520' stroke-width='0.8' fill='none'/><circle cx='11' cy='11' r='2.8' stroke='%23DAA520' stroke-width='0.9' fill='none'/><path d='M 11 7 L 11 4 M 11 15 L 11 18 M 7 11 L 4 11 M 15 11 L 18 11' stroke='%23DAA520' stroke-width='0.9'/></svg>");
-  background-size: contain;
-  background-repeat: no-repeat;
+  z-index: 3;
+  overflow: visible;
 }
-.gold-corners::before { top: 0; left: 0; }
-.gold-corners::after  { top: 0; right: 0; transform: scaleX(-1); }
-.gold-corners .gold-corners__bl { bottom: 0; left: 0; transform: scaleY(-1); }
-.gold-corners .gold-corners__br { bottom: 0; right: 0; transform: scale(-1, -1); }
+.ornament-frame__corner svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ornament-frame__corner--tl { top: 0; left: 0; }
+.ornament-frame__corner--tr { top: 0; right: 0; transform: scaleX(-1); }
+.ornament-frame__corner--bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.ornament-frame__corner--br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+.ornament-frame__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* clip the photo, but corners sit OUTSIDE this */
+}
 
 /* Smaller variant for cards */
-.gold-corners--sm::before,
-.gold-corners--sm::after,
-.gold-corners--sm .gold-corners__br,
-.gold-corners--sm .gold-corners__bl {
-  width: 40px;
-  height: 40px;
+.ornament-frame--sm {
+  padding: clamp(12px, 2vw, 22px);
+  margin: clamp(-12px, -2vw, -22px);
+}
+.ornament-frame--sm .ornament-frame__corner {
+  width: clamp(30px, 3.5vw, 50px);
+  height: clamp(30px, 3.5vw, 50px);
 }
 
-/* Dark-section variant: ornaments use warm gold (#F5C842) for contrast on black */
-.section--dark .gold-corners::before,
-.section--dark .gold-corners::after,
-.section--dark .gold-corners .gold-corners__br,
-.section--dark .gold-corners .gold-corners__bl {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'><path d='M 6 70 L 6 6 L 70 6' stroke='%23F5C842' stroke-width='1.6' fill='none'/><path d='M 11 70 L 11 11 L 70 11' stroke='%23F5C842' stroke-width='0.8' fill='none'/><circle cx='11' cy='11' r='2.8' stroke='%23F5C842' stroke-width='0.9' fill='none'/><path d='M 11 7 L 11 4 M 11 15 L 11 18 M 7 11 L 4 11 M 15 11 L 18 11' stroke='%23F5C842' stroke-width='0.9'/></svg>");
+/* Section variant — for full-bleed <section> blocks: no negative margin,
+   corners sit inside the section's natural padding. */
+.ornament-frame--section {
+  padding: 0;
+  margin: 0;
+}
+.ornament-frame--section .ornament-frame__corner {
+  width: clamp(40px, 5vw, 70px);
+  height: clamp(40px, 5vw, 70px);
 }
 
-@media (max-width: 768px) {
-  .gold-corners::before,
-  .gold-corners::after,
-  .gold-corners .gold-corners__br,
-  .gold-corners .gold-corners__bl {
-    width: 42px;
-    height: 42px;
-  }
-  .gold-corners--sm::before,
-  .gold-corners--sm::after,
-  .gold-corners--sm .gold-corners__br,
-  .gold-corners--sm .gold-corners__bl {
-    width: 28px;
-    height: 28px;
+/* Dark-section override: warmer gold for contrast */
+.section--dark .ornament-frame,
+.ornament-frame.is-on-dark {
+  --ornament-color: #F5C842;
+}
+
+/* SVG stroke + fill color via CSS variable */
+.ornament-frame__corner svg path,
+.ornament-frame__corner svg line {
+  stroke: var(--ornament-color);
+  fill: none;
+}
+.ornament-frame__corner svg circle {
+  stroke: var(--ornament-color);
+  fill: none;
+}
+.ornament-frame__corner svg circle.ornament-dot,
+.ornament-frame__corner svg path.ornament-leaf {
+  fill: var(--ornament-color);
+  stroke: none;
+}
+
+/* Hero carousel: inner takes the aspect-ratio + slide positioning context */
+.hero--split__media.ornament-frame {
+  /* clear the old aspect-ratio so it lives on the inner */
+  aspect-ratio: auto;
+  max-height: none;
+  overflow: visible;
+  background: transparent;
+}
+.hero--split__media .ornament-frame__inner {
+  aspect-ratio: 4 / 5;
+  max-height: 720px;
+  background: var(--ink);
+}
+@media (max-width: 960px) {
+  .hero--split__media .ornament-frame__inner {
+    aspect-ratio: 4 / 3;
   }
 }
 
@@ -4827,6 +4866,12 @@ html:not(.has-js) .numbered-list__item {
   border: 1px solid rgba(245, 200, 66, 0.18);
   position: relative;
 }
+/* When reviews-strip also carries .ornament-frame, keep its own padding
+   (ornament corners are positioned relative to the strip box, not pushed out). */
+.reviews-strip.ornament-frame {
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+  margin: clamp(4rem, 7vw, 6rem) 0 0;
+}
 .reviews-strip__label {
   display: block;
   font-size: 0.7rem;
@@ -4896,3 +4941,67 @@ html:not(.has-js) .numbered-list__item {
   border-bottom: 1px solid currentColor;
   padding-bottom: 2px;
 }
+
+/* ============================================================
+   Iteration 10 — Merged "Built & Recent Work" section
+   ============================================================ */
+.built-and-work {
+  background: var(--paper);
+  padding: clamp(4rem, 8vw, 7rem) 0 0;
+  position: relative;
+}
+.built-and-work__head {
+  max-width: 64rem;
+  margin: 0 auto clamp(3rem, 6vw, 5rem);
+  text-align: left;
+}
+.built-and-work__title {
+  font-size: var(--type-h2);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin: 1rem 0;
+  text-wrap: balance;
+}
+.built-and-work__lede {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--ink);
+  opacity: 0.78;
+  max-width: 60ch;
+}
+.built-and-work__caveat {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.6;
+  text-align: center;
+}
+
+/* Examples block (formerly Recent Work) — sits within .built-and-work, bg flips to dark */
+.built-and-work__examples {
+  background: var(--ink);
+  color: var(--paper);
+  margin-top: clamp(4rem, 7vw, 6rem);
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  position: relative;
+}
+.built-and-work__sub-head {
+  max-width: 64rem;
+  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+}
+.built-and-work__sub-title {
+  font-size: var(--type-h2);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin: 1rem 0 0;
+  color: var(--paper);
+  text-wrap: balance;
+}
+.built-and-work__examples .editorial-label {
+  color: var(--gold-warm);
+}
+.built-and-work__examples .editorial-card__title { color: var(--paper); }
+.built-and-work__examples .editorial-card__meta { color: var(--paper); opacity: 0.7; }
+.built-and-work__examples .ornament-frame { --ornament-color: #F5C842; }
+
