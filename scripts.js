@@ -238,7 +238,7 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+      { threshold: 0, rootMargin: '0px 0px -5% 0px' }
     );
     revealEls.forEach((el) => io.observe(el));
 
@@ -281,6 +281,33 @@
     document.querySelectorAll('.reveal-hairline').forEach((el) => el.classList.add('is-visible'));
     document.querySelectorAll('.numbered-list__item').forEach((el) => el.classList.add('is-revealed'));
   }
+
+  // -----------------------------------------------------
+  // SAFETY: ensure any .reveal element gets is-visible within 1.5s of page load.
+  // Prevents content from being permanently hidden if the IntersectionObserver
+  // fails to fire (e.g., section is already in viewport, Lenis races, etc.).
+  // -----------------------------------------------------
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
+        // Check if element is already visible in viewport — show it immediately
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('is-visible');
+        }
+      });
+      // After another 1.5s, force-show all remaining (even off-screen) so future
+      // scroll always reveals them
+      setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
+          el.classList.add('is-visible');
+        });
+        document.querySelectorAll('.reveal-hairline:not(.is-visible)').forEach((el) => {
+          el.classList.add('is-visible');
+        });
+      }, 1500);
+    }, 1500);
+  });
 
   // -----------------------------------------------------
   // STICKY CTA enter + pulse
