@@ -119,125 +119,55 @@
   });
 
   // -----------------------------------------------------
-  // HERO CAROUSEL
+  // HERO CAROUSEL — simplified, no GSAP dependency for transitions
+  // (Iteration 4: pure CSS opacity transition driven by .is-active class.
+  //  Crossfade timing lives in styles.css on .hero-slide. Image swap is
+  //  the primary effect; no Ken Burns scale tween to compete with the rhythm.)
   // -----------------------------------------------------
-  const carousel = document.querySelector('[data-hero-carousel]');
-  if (carousel) {
+  (function initHeroCarousel() {
+    const carousel = document.querySelector('[data-hero-carousel]');
+    if (!carousel) return;
     const slides = Array.from(carousel.querySelectorAll('.hero-slide'));
     const dots = Array.from(document.querySelectorAll('.hero-carousel__dot'));
+    if (slides.length < 2) return;
+    const DURATION = 6000;
     let activeIdx = 0;
     let timer = null;
     let isPaused = false;
-    const DURATION = 6000; // ms per slide
-    const FADE = 1200;
 
-    function setActive(idx) {
-      activeIdx = (idx + slides.length) % slides.length;
-      slides.forEach((s, i) => {
-        if (i === activeIdx) s.classList.add('is-active');
-        else s.classList.remove('is-active');
-      });
-      dots.forEach((d, i) => {
-        if (i === activeIdx) d.classList.add('is-active');
-        else d.classList.remove('is-active');
-      });
-      applyKenBurns();
-    }
-
-    function applyKenBurns() {
-      if (reduced || typeof gsap === 'undefined') return;
-      const active = slides[activeIdx];
-      if (!active) return;
-      gsap.killTweensOf(active);
-      gsap.fromTo(active, { scale: 1.05 }, {
-        scale: 1.12,
-        duration: DURATION / 1000,
-        ease: 'none',
-      });
-    }
-
-    function next() {
-      if (isPaused) return;
-      const nextIdx = (activeIdx + 1) % slides.length;
-      crossfade(nextIdx);
-    }
-
-    function crossfade(toIdx) {
-      const from = slides[activeIdx];
-      const to = slides[toIdx];
-      if (!from || !to) return;
-      if (reduced || typeof gsap === 'undefined') {
-        setActive(toIdx);
-        return;
-      }
-      // Bring "to" up while keeping "from" visible
-      gsap.set(to, { opacity: 0 });
-      to.classList.add('is-active');
-      gsap.to(to, { opacity: 1, duration: FADE / 1000, ease: 'power2.inOut' });
-      gsap.to(from, {
-        opacity: 0, duration: FADE / 1000, ease: 'power2.inOut',
-        onComplete: () => {
-          from.classList.remove('is-active');
-          gsap.set(from, { opacity: '' });
-        },
-      });
-      activeIdx = toIdx;
-      dots.forEach((d, i) => {
-        if (i === activeIdx) d.classList.add('is-active');
-        else d.classList.remove('is-active');
-      });
-      applyKenBurns();
+    function go(idx) {
+      activeIdx = ((idx % slides.length) + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === activeIdx));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === activeIdx));
     }
 
     function start() {
       stop();
-      timer = setInterval(next, DURATION);
+      if (isPaused) return;
+      timer = setInterval(() => go(activeIdx + 1), DURATION);
     }
-    function stop() {
-      if (timer) { clearInterval(timer); timer = null; }
-    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function pause() { isPaused = true; stop(); }
     function resume() { isPaused = false; start(); }
 
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const idx = Number(dot.dataset.dot || 0);
-        if (idx === activeIdx) return;
-        crossfade(idx);
-        // Reset timer cadence
+    dots.forEach((d) => {
+      d.addEventListener('click', () => {
+        const idx = Number(d.dataset.dot || 0);
+        go(idx);
         start();
       });
     });
-
     carousel.addEventListener('mouseenter', pause);
     carousel.addEventListener('mouseleave', resume);
-
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) pause();
-      else resume();
+      if (document.hidden) pause(); else resume();
     });
 
-    // Boot
-    setActive(0);
-    if (reduced) {
-      // Still rotate every 8 seconds with no animation
-      timer = setInterval(() => {
-        const nextIdx = (activeIdx + 1) % slides.length;
-        setActive(nextIdx);
-      }, 8000);
-    } else {
-      // Defer to gsap available
-      const startWhenReady = () => {
-        if (typeof gsap === 'undefined') {
-          setTimeout(startWhenReady, 100);
-          return;
-        }
-        applyKenBurns();
-        start();
-      };
-      startWhenReady();
-    }
-  }
+    // First paint
+    go(0);
+    // Kick off rotation
+    start();
+  })();
 
   // -----------------------------------------------------
   // SCROLL-TRIGGERED REVEALS (IntersectionObserver fallback)
