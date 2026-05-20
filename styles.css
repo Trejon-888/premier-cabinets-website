@@ -4658,3 +4658,241 @@ html:not(.has-js) .numbered-list__item {
 .section--dark .numbered-list__footnote {
   color: rgba(248, 244, 233, 0.6);
 }
+
+/* ============================================================
+   Iteration 9 — Elegance pass
+   ============================================================ */
+
+/* ===== Gold corner ornaments (Cartier-style brackets) ===== */
+.gold-corners {
+  position: relative;
+}
+.gold-corners::before,
+.gold-corners::after,
+.gold-corners .gold-corners__br,
+.gold-corners .gold-corners__bl {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  z-index: 5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'><path d='M 6 70 L 6 6 L 70 6' stroke='%23DAA520' stroke-width='1.6' fill='none'/><path d='M 11 70 L 11 11 L 70 11' stroke='%23DAA520' stroke-width='0.8' fill='none'/><circle cx='11' cy='11' r='2.8' stroke='%23DAA520' stroke-width='0.9' fill='none'/><path d='M 11 7 L 11 4 M 11 15 L 11 18 M 7 11 L 4 11 M 15 11 L 18 11' stroke='%23DAA520' stroke-width='0.9'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.gold-corners::before { top: 0; left: 0; }
+.gold-corners::after  { top: 0; right: 0; transform: scaleX(-1); }
+.gold-corners .gold-corners__bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.gold-corners .gold-corners__br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+/* Smaller variant for cards */
+.gold-corners--sm::before,
+.gold-corners--sm::after,
+.gold-corners--sm .gold-corners__br,
+.gold-corners--sm .gold-corners__bl {
+  width: 40px;
+  height: 40px;
+}
+
+/* Dark-section variant: ornaments use warm gold (#F5C842) for contrast on black */
+.section--dark .gold-corners::before,
+.section--dark .gold-corners::after,
+.section--dark .gold-corners .gold-corners__br,
+.section--dark .gold-corners .gold-corners__bl {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 70'><path d='M 6 70 L 6 6 L 70 6' stroke='%23F5C842' stroke-width='1.6' fill='none'/><path d='M 11 70 L 11 11 L 70 11' stroke='%23F5C842' stroke-width='0.8' fill='none'/><circle cx='11' cy='11' r='2.8' stroke='%23F5C842' stroke-width='0.9' fill='none'/><path d='M 11 7 L 11 4 M 11 15 L 11 18 M 7 11 L 4 11 M 15 11 L 18 11' stroke='%23F5C842' stroke-width='0.9'/></svg>");
+}
+
+@media (max-width: 768px) {
+  .gold-corners::before,
+  .gold-corners::after,
+  .gold-corners .gold-corners__br,
+  .gold-corners .gold-corners__bl {
+    width: 42px;
+    height: 42px;
+  }
+  .gold-corners--sm::before,
+  .gold-corners--sm::after,
+  .gold-corners--sm .gold-corners__br,
+  .gold-corners--sm .gold-corners__bl {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ===== Iteration 9: numbered list with descriptions ===== */
+/* Override iteration 6/8 numbered-list to a single-column editorial table */
+.numbered-list {
+  list-style: none;
+  display: block;
+  grid-template-columns: none;
+  margin: 0;
+  padding: 0;
+  border-top: none;
+}
+
+.numbered-list .numbered-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: baseline;
+  padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: none;
+  border-right: none !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+.numbered-list .numbered-list__item:first-child {
+  border-top: none;
+}
+
+.numbered-list__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.numbered-list__desc {
+  display: block;
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  color: var(--ink);
+  opacity: 0.75;
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+.section--dark .numbered-list__desc {
+  color: var(--paper);
+  opacity: 0.85;
+}
+
+.section--dark .numbered-list .numbered-list__item {
+  border-top-color: rgba(245, 200, 66, 0.18);
+}
+
+/* ===== Iteration 9: editorial card category labels ===== */
+.editorial-card__category {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0.75rem 0 0.5rem;
+}
+.section--dark .editorial-card__category {
+  color: var(--gold-warm);
+}
+
+/* ===== Iteration 9: extravagant editorial-card hover ===== */
+.editorial-card {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.editorial-card:hover {
+  transform: translateY(-4px);
+}
+.editorial-card .editorial-card__photo {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--paper-warm);
+  position: relative;
+  border: 1px solid transparent;
+  transition: border-color 0.5s ease;
+}
+.editorial-card:hover .editorial-card__photo {
+  border-color: rgba(218, 165, 32, 0.45);
+}
+.editorial-card .editorial-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.6s ease;
+}
+.editorial-card:hover .editorial-card__photo img {
+  transform: scale(1.04);
+  filter: saturate(1.05);
+}
+
+/* ===== Iteration 9: 3-card reviews strip ===== */
+.reviews-strip {
+  margin-top: clamp(4rem, 7vw, 6rem);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+  background: rgba(245, 200, 66, 0.04);
+  border: 1px solid rgba(245, 200, 66, 0.18);
+  position: relative;
+}
+.reviews-strip__label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-warm);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.reviews-strip__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+@media (min-width: 768px) {
+  .reviews-strip__grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+}
+.review-card__quote {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--paper);
+  padding: 0;
+  border: none;
+  position: relative;
+}
+.review-card__quote::before {
+  content: '\201C';
+  font-size: 2.5rem;
+  line-height: 0;
+  color: var(--gold-warm);
+  font-family: Georgia, serif;
+  margin-right: 0.25rem;
+  vertical-align: -0.45em;
+}
+.review-card__attr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+.review-card__name {
+  font-weight: 500;
+  color: var(--gold-warm);
+  letter-spacing: 0.04em;
+}
+.review-card__role {
+  color: var(--paper);
+  opacity: 0.7;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.reviews-strip__more {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+.reviews-strip__more a {
+  color: var(--gold-warm);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
