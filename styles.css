@@ -1,6 +1,6 @@
 /* =================================================================
    Premier Cabinets Innovations — Atelier
-   Somerville-grade luxury rebuild. Champagne + warm-black + cream.
+   Iteration 3: gilt-leaf gold (DarkGoldenrod) + Somerville editorial DNA.
    Reference: somervilles.co.uk patterns adapted for cabinetry brand.
    ================================================================= */
 
@@ -10,29 +10,52 @@
   --paper: #FAF8F2;
   --paper-warm: #F4EFE4;
   --paper-warm-deep: #ECE5D3;
+  /* Iteration 3 — warm gilt-paper cream for alternating sections */
+  --paper-gilt: #F4E8D0;
   --walnut: #6B4F2A;
   --walnut-deep: #4A361C;
-  --gold: #8B6914;
-  --gold-deep: #6F540F;
-  --gold-soft: #C49A3E;
-  /* Legacy aliases — point to new antique gold tokens so nothing breaks */
-  --champagne: #8B6914;
-  --champagne-deep: #6F540F;
-  --champagne-soft: #C49A3E;
+  /* Iteration 3 gilt palette — DarkGoldenrod replaces muddy olive */
+  --gold: #B8860B;
+  --gold-deep: #8E6708;
+  --gold-soft: #C9A55C;
+  --gold-warm: #C9A55C;
+  /* Legacy aliases — all point to the new gilt-gold tokens */
+  --champagne: #B8860B;
+  --champagne-deep: #8E6708;
+  --champagne-soft: #C9A55C;
   --stone: #9C9A95;
   --hairline: rgba(26, 22, 20, 0.12);
   --hairline-strong: rgba(26, 22, 20, 0.22);
-  --hairline-gold: rgba(139, 105, 20, 0.55);
+  --hairline-gold: rgba(184, 134, 11, 0.55);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --tracking-wide: 0.18em;
   --tracking-loose: 0.32em;
 
+  /* Iteration 3 typography tokens */
+  --type-display: clamp(56px, 11vw, 168px);
+  --type-h1: clamp(48px, 8vw, 120px);
+  --type-h2: clamp(40px, 6vw, 88px);
+  --type-h3: clamp(28px, 3.5vw, 56px);
+  --type-eyebrow: 11px;
+  --type-body: clamp(16px, 1.1vw, 19px);
+  --type-meta: 13px;
+  --track-display: -0.025em;
+  --track-eyebrow: 0.22em;
+  --track-meta: 0.14em;
+
   --container: 1440px;
   --gutter: clamp(1.5rem, 4vw, 4rem);
 
   --section-pad-y: clamp(5rem, 12vw, 10rem);
+}
+
+/* Iteration 3 — editorial line-break balance on all headlines */
+h1, h2, h3, .hero__headline, .page-hero__title, .contact-section__headline,
+.featured-project__title, .case-study__title, .about-block__title,
+.what-we-build__title, .testimonial-block__quote, .process-strip__title {
+  text-wrap: balance;
 }
 
 /* ===== Antique gold word accent (one-word headline emphasis) ===== */
@@ -3274,4 +3297,744 @@ html.lenis body {
   html.lenis.lenis-smooth {
     scroll-behavior: smooth !important;
   }
+}
+
+/* =================================================================
+   ITERATION 3 — Somerville editorial DNA additions
+   - Numbered "What We Build" list (gold numerals)
+   - Editorial testimonial blockquote
+   - "Talk to us" hover label on sticky CTA
+   - Link underline draw, photo gold-tint hover
+   - 4-step Process strip
+   - Workshop alternating bg
+   - Recent Work editorial grid
+   - About service-area lists
+   ================================================================= */
+
+/* Reusable gilt-paper section background */
+.bg-gilt {
+  background: var(--paper-gilt);
+}
+
+/* Editorial label (small caps, gold) */
+.editorial-label {
+  font-size: var(--type-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-block;
+}
+
+/* ===== Hero eyebrow (iteration 3) — gold-warm small caps ===== */
+.hero-eyebrow,
+.hero__eyebrow--gilt {
+  color: var(--gold-warm) !important;
+  letter-spacing: 0.25em;
+}
+
+/* ===== "What We Build" 01-10 numbered list ===== */
+
+.what-we-build {
+  padding: var(--section-pad-y) 0;
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.what-we-build--gilt {
+  background: var(--paper-gilt);
+}
+
+.what-we-build__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: end;
+}
+
+.what-we-build__label {
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.what-we-build__title {
+  font-size: var(--type-h2);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  max-width: 14ch;
+}
+
+.what-we-build__lede {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(26, 22, 20, 0.82);
+  max-width: 48ch;
+  margin-bottom: 0;
+}
+
+@media (max-width: 880px) {
+  .what-we-build__head {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.numbered-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.numbered-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--hairline);
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.numbered-list__item.is-revealed,
+.no-anim .numbered-list__item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.numbered-list__item:nth-child(odd) {
+  padding-right: clamp(1rem, 3vw, 3rem);
+  border-right: 1px solid var(--hairline);
+}
+
+.numbered-list__item:nth-child(even) {
+  padding-left: clamp(1rem, 3vw, 3rem);
+}
+
+.numbered-list__num {
+  font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2.1rem);
+  font-weight: 300;
+  color: var(--gold);
+  font-variant-numeric: lining-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: inline-block;
+  min-width: 2.2em;
+}
+
+.numbered-list__label {
+  font-size: clamp(1.0625rem, 0.95rem + 0.45vw, 1.375rem);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+
+.numbered-list__cta-row {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.numbered-list__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 4px;
+  transition: gap 0.3s ease, color 0.25s ease;
+}
+
+.numbered-list__cta:hover {
+  color: var(--gold-warm);
+  gap: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .numbered-list {
+    grid-template-columns: 1fr;
+  }
+  .numbered-list__item:nth-child(odd),
+  .numbered-list__item:nth-child(even) {
+    padding-right: 0;
+    padding-left: 0;
+    border-right: 0;
+  }
+}
+
+/* ===== Editorial testimonial (H2-scale quote) ===== */
+
+.testimonial-block {
+  padding: var(--section-pad-y) 0;
+  background: var(--paper-gilt);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.testimonial-block__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.testimonial-block__label {
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.testimonial-block__quote {
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 300;
+  letter-spacing: -0.018em;
+  line-height: 1.12;
+  color: var(--ink);
+  margin: 0 0 2.5rem;
+  max-width: 24ch;
+  position: relative;
+}
+
+.testimonial-block__quote::after {
+  content: '\201D';
+  color: var(--gold);
+  font-weight: 300;
+  margin-left: 0.05em;
+}
+
+.testimonial-block__attribution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.testimonial-block__name {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.testimonial-block__role {
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* ===== Recent Work editorial grid (home) ===== */
+
+.recent-work {
+  padding: var(--section-pad-y) 0;
+  background: var(--paper);
+}
+
+.recent-work__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: end;
+}
+
+.recent-work__title {
+  font-size: var(--type-h2);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  max-width: 14ch;
+}
+
+.recent-work__title .gold-word {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.recent-work__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+}
+
+.recent-work__cta-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (max-width: 880px) {
+  .recent-work__head,
+  .recent-work__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editorial-card {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.editorial-card__photo {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--paper-warm);
+  position: relative;
+}
+
+.editorial-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.6s ease;
+}
+
+.editorial-card__photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(184, 134, 11, 0.06);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.editorial-card:hover .editorial-card__photo img {
+  transform: scale(1.025);
+  filter: saturate(0.94);
+}
+
+.editorial-card:hover .editorial-card__photo::after {
+  opacity: 1;
+}
+
+.editorial-card__title {
+  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
+  max-width: 24ch;
+}
+
+.editorial-card__meta {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.editorial-card__meta li {
+  font-size: 0.875rem;
+  color: rgba(26, 22, 20, 0.7);
+  line-height: 1.55;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.editorial-card__meta li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold);
+  font-size: 0.9em;
+}
+
+/* ===== 4-step Process strip ===== */
+
+.process-strip {
+  padding: var(--section-pad-y) 0;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.process-strip__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: end;
+}
+
+.process-strip__label {
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.process-strip__title {
+  font-size: var(--type-h2);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--paper);
+  max-width: 14ch;
+}
+
+.process-strip__title .gold-word {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.process-strip__lede {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(250, 248, 242, 0.7);
+  max-width: 48ch;
+}
+
+.process-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.process-strip__step {
+  border-top: 1px solid var(--gold);
+  padding-top: 1.5rem;
+}
+
+.process-strip__num {
+  display: block;
+  font-size: clamp(2.5rem, 2rem + 1.8vw, 3.75rem);
+  font-weight: 200;
+  color: var(--gold);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  font-variant-numeric: lining-nums;
+}
+
+.process-strip__step h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--paper);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.005em;
+}
+
+.process-strip__step p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(250, 248, 242, 0.7);
+  margin: 0;
+  max-width: 36ch;
+}
+
+@media (max-width: 880px) {
+  .process-strip__head {
+    grid-template-columns: 1fr;
+  }
+  .process-strip__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .process-strip__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Workshop intro section (home) — alternating gilt bg ===== */
+
+.workshop-intro {
+  padding: var(--section-pad-y) 0;
+  background: var(--paper-gilt);
+}
+
+.workshop-intro__grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.workshop-intro__label {
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.workshop-intro__title {
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  max-width: 18ch;
+}
+
+.workshop-intro__title .gold-word {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.workshop-intro__body p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(26, 22, 20, 0.82);
+  margin: 0 0 1.25rem;
+  max-width: 56ch;
+}
+
+.workshop-intro__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.25rem;
+}
+
+.workshop-intro__gallery img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 880px) {
+  .workshop-intro__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Service-area list (about page) ===== */
+
+.service-area-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.service-area-list li {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 1.25rem;
+  align-items: baseline;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.service-area-list li:last-child {
+  border-bottom: 0;
+}
+
+.service-area-list__label {
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.service-area-list__cities {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(26, 22, 20, 0.82);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .service-area-list li {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* ===== Footer "Built with care" tagline ===== */
+
+.site-footer__care {
+  font-size: 0.6875rem;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.85rem;
+  display: block;
+}
+
+/* ===== "Talk to us" hover label on sticky CTA ===== */
+
+.sticky-cta__label {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sticky-cta:hover .sticky-cta__label,
+.sticky-cta:focus-visible .sticky-cta__label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 640px) {
+  .sticky-cta__label {
+    display: none;
+  }
+}
+
+/* ===== Editorial-card meta override on dark sections ===== */
+.process-strip .editorial-card__meta li {
+  color: rgba(250, 248, 242, 0.7);
+}
+
+/* ===== Link underline draw on hover (anchors inside prose/main) ===== */
+.prose-link,
+.body-prose a,
+.contact-section__body a,
+.workshop-intro__body a {
+  position: relative;
+  color: var(--gold);
+  display: inline-block;
+}
+
+.prose-link::after,
+.body-prose a::after,
+.contact-section__body a::after,
+.workshop-intro__body a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prose-link:hover::after,
+.body-prose a:hover::after,
+.contact-section__body a:hover::after,
+.workshop-intro__body a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ===== Hero accent gold word — punchier ===== */
+.gold-accent {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* ===== Felix note in contact form (italic small note) ===== */
+.felix-note {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--stone);
+  margin-top: 1rem;
+  line-height: 1.55;
+}
+
+/* ===== Material spec list (services page) ===== */
+.material-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.material-list__label {
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+  font-weight: 500;
+}
+
+.material-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
+}
+
+.material-list li {
+  font-size: 0.9375rem;
+  color: var(--ink);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.55;
+}
+
+.material-list li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold);
+}
+
+@media (max-width: 640px) {
+  .material-list ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== About stats restyle (iteration 3) — gold numbers ===== */
+.about-stat__num {
+  color: var(--gold);
+  font-weight: 200;
+}
+
+/* ===== Reveal helper for numbered list (handled by JS) ===== */
+.numbered-list__item {
+  opacity: 0;
+}
+
+/* fallback: when JS isn't running, reveal everything */
+.no-anim .numbered-list__item,
+html:not(.has-js) .numbered-list__item {
+  opacity: 1;
+  transform: none;
 }

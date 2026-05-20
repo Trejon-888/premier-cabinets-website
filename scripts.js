@@ -270,9 +270,31 @@
       { threshold: 0.4 }
     );
     hairlineEls.forEach((el) => hio.observe(el));
+
+    // Iteration 3 — numbered list stagger fallback (works even without GSAP)
+    const numberedItems = document.querySelectorAll('.numbered-list__item');
+    if (numberedItems.length > 0) {
+      const nio = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const items = entry.target.parentElement.querySelectorAll('.numbered-list__item');
+              items.forEach((el, i) => {
+                setTimeout(() => el.classList.add('is-revealed'), i * 60);
+              });
+              nio.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      // Observe just the first item of each list
+      document.querySelectorAll('[data-numbered-list] .numbered-list__item:first-child').forEach((el) => nio.observe(el));
+    }
   } else {
     document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
     document.querySelectorAll('.reveal-hairline').forEach((el) => el.classList.add('is-visible'));
+    document.querySelectorAll('.numbered-list__item').forEach((el) => el.classList.add('is-revealed'));
   }
 
   // -----------------------------------------------------
@@ -455,6 +477,7 @@
     if (reduced) {
       // Ensure cards still appear without animation
       document.querySelectorAll('.proj-card, .svc-card').forEach((el) => el.classList.add('is-visible'));
+      document.querySelectorAll('.numbered-list__item').forEach((el) => el.classList.add('is-revealed'));
       return;
     }
 
@@ -581,6 +604,47 @@
         scrollTrigger: { trigger: '.services__grid', start: 'top 80%', once: true },
       });
     }
+
+    // Iteration 3 — Numbered "What We Build" list stagger
+    document.querySelectorAll('[data-numbered-list]').forEach((list) => {
+      const items = list.querySelectorAll('.numbered-list__item');
+      if (items.length === 0) return;
+      gsap.to(items, {
+        opacity: 1,
+        x: 0,
+        duration: 0.55,
+        stagger: 0.06,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: list, start: 'top 85%', once: true },
+        onStart: () => items.forEach((el) => el.classList.add('is-revealed')),
+      });
+    });
+
+    // Iteration 3 — Editorial card reveal stagger (Recent Work + Projects editorial grid)
+    document.querySelectorAll('[data-editorial-grid]').forEach((grid) => {
+      const cards = grid.querySelectorAll('.editorial-card');
+      if (cards.length === 0) return;
+      gsap.from(cards, {
+        opacity: 0,
+        y: 28,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: grid, start: 'top 82%', once: true },
+      });
+    });
+
+    // Iteration 3 — Process strip step reveals
+    document.querySelectorAll('.process-strip__step').forEach((step, i) => {
+      gsap.from(step, {
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+        delay: i * 0.1,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: step.closest('.process-strip__grid') || step, start: 'top 85%', once: true },
+      });
+    });
 
     // ScrollTrigger.create — a tiny passive trigger for any extension hooks
     ScrollTrigger.create({
