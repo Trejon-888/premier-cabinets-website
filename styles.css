@@ -2598,17 +2598,21 @@ section {
 }
 
 .hero-slide {
+  /* Note: opacity + transform are GSAP-controlled (iteration 5). No CSS transition
+     to avoid fighting GSAP tweens. The .is-active class is a CSS hook for the
+     dark gradient overlay and any other classed selectors; GSAP owns opacity. */
   position: absolute;
   inset: 0;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 1.2s cubic-bezier(.4, 0, .2, 1);
-  will-change: opacity;
+  transform-origin: center center;
+  will-change: opacity, transform;
 }
 
 .hero-slide.is-active {
+  /* Fallback for no-JS / no-GSAP environments. Inline opacity from GSAP wins. */
   opacity: 1;
 }
 

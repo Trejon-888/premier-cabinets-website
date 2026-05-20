@@ -119,10 +119,11 @@
   });
 
   // -----------------------------------------------------
-  // HERO CAROUSEL — simplified, no GSAP dependency for transitions
-  // (Iteration 4: pure CSS opacity transition driven by .is-active class.
-  //  Crossfade timing lives in styles.css on .hero-slide. Image swap is
-  //  the primary effect; no Ken Burns scale tween to compete with the rhythm.)
+  // HERO CAROUSEL — GSAP-driven crossfade + Ken Burns (Iteration 5)
+  // Cadence runs on setInterval (reliable, decoupled from GSAP ticker so
+  // Lenis/ScrollTrigger can't stomp it). GSAP only handles the visual
+  // transitions (opacity crossfade + slow scale-zoom on the active slide).
+  // Tweens are killed on slides before new ones start to prevent races.
   // -----------------------------------------------------
   (function initHeroCarousel() {
     const carousel = document.querySelector('[data-hero-carousel]');
@@ -130,21 +131,78 @@
     const slides = Array.from(carousel.querySelectorAll('.hero-slide'));
     const dots = Array.from(document.querySelectorAll('.hero-carousel__dot'));
     if (slides.length < 2) return;
-    const DURATION = 6000;
+
+    const SLIDE_DURATION = 6500;   // ms each slide stays before next swap
+    const FADE_DURATION = 1.4;     // seconds for crossfade
+    const KB_START = 1.0;          // Ken Burns starting scale
+    const KB_END = 1.08;           // Ken Burns ending scale
+
+    const hasGSAP = typeof gsap !== 'undefined';
     let activeIdx = 0;
     let timer = null;
     let isPaused = false;
 
-    function go(idx) {
-      activeIdx = ((idx % slides.length) + slides.length) % slides.length;
-      slides.forEach((s, i) => s.classList.toggle('is-active', i === activeIdx));
-      dots.forEach((d, i) => d.classList.toggle('is-active', i === activeIdx));
+    // Prime initial state — first slide visible at base scale, rest hidden
+    slides.forEach((s, i) => {
+      if (hasGSAP) gsap.set(s, { opacity: i === 0 ? 1 : 0, scale: KB_START, transformOrigin: 'center center' });
+      else s.style.opacity = i === 0 ? '1' : '0';
+      s.classList.toggle('is-active', i === 0);
+    });
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === 0));
+
+    // Start Ken Burns on the first slide right away
+    if (hasGSAP && !reduced) {
+      gsap.to(slides[0], { scale: KB_END, duration: SLIDE_DURATION / 1000, ease: 'none' });
     }
 
+    function go(nextIdx) {
+      nextIdx = ((nextIdx % slides.length) + slides.length) % slides.length;
+      if (nextIdx === activeIdx) return;
+
+      const fromSlide = slides[activeIdx];
+      const toSlide = slides[nextIdx];
+
+      if (reduced || !hasGSAP) {
+        // Simple swap — no animation
+        fromSlide.classList.remove('is-active');
+        fromSlide.style.opacity = '0';
+        toSlide.classList.add('is-active');
+        toSlide.style.opacity = '1';
+      } else {
+        // Kill any in-flight tweens on these two slides
+        gsap.killTweensOf([fromSlide, toSlide]);
+
+        // Reset incoming slide to base scale + invisible, then add active class
+        gsap.set(toSlide, { scale: KB_START, opacity: 0 });
+        toSlide.classList.add('is-active');
+
+        // Crossfade in
+        gsap.to(toSlide, { opacity: 1, duration: FADE_DURATION, ease: 'power2.inOut' });
+        // Crossfade out the previous
+        gsap.to(fromSlide, {
+          opacity: 0,
+          duration: FADE_DURATION,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            fromSlide.classList.remove('is-active');
+          },
+        });
+        // Ken Burns on the incoming slide for the full slide duration
+        gsap.to(toSlide, { scale: KB_END, duration: SLIDE_DURATION / 1000, ease: 'none' });
+      }
+
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === nextIdx));
+      activeIdx = nextIdx;
+    }
+
+    function next() {
+      if (isPaused) return;
+      go(activeIdx + 1);
+    }
     function start() {
       stop();
       if (isPaused) return;
-      timer = setInterval(() => go(activeIdx + 1), DURATION);
+      timer = setInterval(next, SLIDE_DURATION);
     }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function pause() { isPaused = true; stop(); }
@@ -163,9 +221,6 @@
       if (document.hidden) pause(); else resume();
     });
 
-    // First paint
-    go(0);
-    // Kick off rotation
     start();
   })();
 
