@@ -45,7 +45,7 @@
   <div class="container">
     <div class="thank-you__inner">
       <span class="thank-you__eyebrow">Message Received</span>
-      <h1 class="thank-you__title">Thank you.</h1>
+      <h1 class="thank-you__title">Thank <span class="gold-word">you</span>.</h1>
       <p class="thank-you__body">Your message is in the workshop. We will respond within one business day. If your timeline is shorter than that, give Felix a call at <a href="tel:+19165502228" style="border-bottom: 1px solid currentColor; padding-bottom: 1px;">(916) 550-2228</a>.</p>
       <div class="thank-you__hairline" aria-hidden="true"></div>
       <div class="thank-you__links">
@@ -92,16 +92,32 @@
         </address>
       </div>
     </div>
-    <div class="site-footer__bottom">
+    <div class="site-footer__bottom site-footer__bottom-row-hairline">
       <span>© <span data-year>2026</span> Premier Cabinets Innovation LLC · CSLB License # TBC</span>
       <span class="site-footer__bottom-links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
+        <button type="button" class="site-footer__top" data-back-to-top>Back to top <span aria-hidden="true">↑</span></button>
       </span>
     </div>
   </div>
 </footer>
 
+<div class="mobile-drawer-backdrop" data-drawer-backdrop aria-hidden="true"></div>
+<aside class="mobile-drawer" data-drawer aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="projects.html">Projects</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a class="mobile-drawer__contact" href="tel:+19165502228">(916) 550-2228</a>
+  <a class="mobile-drawer__contact" href="mailto:felix@premiercabinetsinnovations.com">felix@premiercabinetsinnovations.com</a>
+  <a class="mobile-drawer__cta" href="index.html">Back to home</a>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="scripts.js" defer></script>
 </body>
 </html>

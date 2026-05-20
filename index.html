@@ -111,14 +111,23 @@
 
 <main>
 
-<!-- =================== HERO =================== -->
+<!-- =================== HERO (carousel) =================== -->
 <section class="hero" aria-labelledby="hero-headline">
-  <div class="hero__bg">
-    <img src="images/projects/kitchen-matte-black-walnut.jpg" alt="" fetchpriority="high" width="2400" height="1600" />
+  <div class="hero__carousel" data-hero-carousel aria-hidden="true">
+    <div class="hero-slide is-active" data-slide="0" style="background-image: url('images/projects/kitchen-matte-black-walnut.jpg');"></div>
+    <div class="hero-slide" data-slide="1" style="background-image: url('images/projects/paneled-game-room.jpg');"></div>
+    <div class="hero-slide" data-slide="2" style="background-image: url('images/projects/kitchen-gothic-arch-marble.jpg');"></div>
+    <div class="hero-slide" data-slide="3" style="background-image: url('images/projects/kitchen-white-transitional-island.jpg');"></div>
+  </div>
+  <div class="hero-carousel__dots" role="tablist" aria-label="Hero photo selector">
+    <button class="hero-carousel__dot is-active" data-dot="0" aria-label="Show photo 1"></button>
+    <button class="hero-carousel__dot" data-dot="1" aria-label="Show photo 2"></button>
+    <button class="hero-carousel__dot" data-dot="2" aria-label="Show photo 3"></button>
+    <button class="hero-carousel__dot" data-dot="3" aria-label="Show photo 4"></button>
   </div>
   <div class="container hero__inner">
     <p class="eyebrow hero__eyebrow">Custom Cabinetry + Millwork · Since 1985</p>
-    <h1 id="hero-headline" class="display hero__headline">Built for the homes you're proud of.</h1>
+    <h1 id="hero-headline" class="display hero__headline">Built for the homes you're <span class="gold-word">proud</span> of.</h1>
     <p class="lede hero__sub">Premier Cabinets Innovations crafts custom kitchens, baths, and architectural millwork for homes across Sacramento and the Bay Area. Four decades of measured, finished work.</p>
     <div class="hero__ctas">
       <a class="btn btn--gold" href="#contact">
@@ -142,7 +151,7 @@
         <div class="section-head__label" style="margin-bottom: 2rem;">
           <span class="section-head__num">01 — The Workshop</span>
         </div>
-        <h2 class="display--md">Four decades of cabinet work.</h2>
+        <h2 class="display--md">Four decades of cabinet <span class="gold-word">craft</span>.</h2>
         <p style="margin-top: 2rem;">Premier Cabinets Innovations has been building custom cabinetry, millwork, and architectural woodwork from Citrus Heights since 1985.</p>
         <p>Felix and the workshop take on a small number of projects each year. Full kitchens, paneled rooms, bathrooms, built-ins. Each one finished to the standard the home deserves.</p>
         <p>We build for homeowners, designers, and contractors across Sacramento and the Bay Area. Most of our work comes from referrals.</p>
@@ -164,7 +173,7 @@
         <p class="eyebrow">Recent work</p>
       </div>
       <div>
-        <h2 class="display--md">A small selection from the portfolio.</h2>
+        <h2 class="display--md">Recent <span class="gold-word">work</span>.</h2>
         <p class="lede" style="margin-top: 1.25rem;">Kitchens, baths, paneled rooms and built-ins finished in the past several years. The full archive lives on the projects page.</p>
       </div>
     </div>
@@ -223,7 +232,7 @@
         <p class="eyebrow">Services</p>
       </div>
       <div>
-        <h2 class="display--md">Made to last decades.</h2>
+        <h2 class="display--md">Made to last <span class="gold-word">decades</span>.</h2>
         <p class="lede" style="margin-top: 1.25rem;">We work in four core service lines. Inside each one we go deep on materials, fit, and finish.</p>
       </div>
     </div>
@@ -314,7 +323,7 @@
 
       <div class="contact-section__left reveal">
         <span class="contact-section__eyebrow">05 — Start a Project</span>
-        <h2 class="contact-section__headline">Ready to start your next project?</h2>
+        <h2 class="contact-section__headline contact-section__headline--xl" data-split-text>Ready to start your next <span class="gold-word">project</span>?</h2>
         <p class="contact-section__body">We build custom cabinetry and millwork for homes across Sacramento and the Bay Area. Forty-one years of measured, finished work. Let's talk about yours.</p>
 
         <div class="contact-section__meta">
@@ -458,15 +467,29 @@
       </div>
     </div>
 
-    <div class="site-footer__bottom">
+    <div class="site-footer__bottom site-footer__bottom-row-hairline">
       <span>© <span data-year>2026</span> Premier Cabinets Innovation LLC · CSLB License # TBC</span>
       <span class="site-footer__bottom-links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
+        <button type="button" class="site-footer__top" data-back-to-top>Back to top <span aria-hidden="true">↑</span></button>
       </span>
     </div>
   </div>
 </footer>
+
+<!-- =================== MOBILE DRAWER =================== -->
+<div class="mobile-drawer-backdrop" data-drawer-backdrop aria-hidden="true"></div>
+<aside class="mobile-drawer" data-drawer aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="projects.html">Projects</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a class="mobile-drawer__contact" href="tel:+19165502228">(916) 550-2228</a>
+  <a class="mobile-drawer__contact" href="mailto:felix@premiercabinetsinnovations.com">felix@premiercabinetsinnovations.com</a>
+  <a class="mobile-drawer__cta" href="#contact">Start a Project</a>
+</aside>
 
 <!-- =================== FLOATING STICKY CTA =================== -->
 <a class="sticky-cta" data-sticky-cta href="#contact" aria-label="Start a project">
@@ -475,9 +498,10 @@
   <span class="sticky-cta__arrow" aria-hidden="true">→</span>
 </a>
 
-<!-- GSAP + ScrollTrigger -->
+<!-- GSAP + ScrollTrigger + Lenis -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="scripts.js" defer></script>
 
 </body>
