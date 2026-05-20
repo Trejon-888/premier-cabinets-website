@@ -1,10 +1,12 @@
 /* =====================================================
    Premier Cabinets Innovations — site behaviors
-   Vanilla JS. No build step. GSAP loaded via CDN for hero parallax.
+   Somerville-grade choreography. Vanilla JS + GSAP via CDN.
    ===================================================== */
 
 (function () {
   'use strict';
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---- Mobile nav toggle ----
   const toggle = document.querySelector('.nav-toggle');
@@ -15,7 +17,6 @@
       toggle.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
     });
-    // close on link click
     nav.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => {
         nav.classList.remove('is-open');
@@ -25,8 +26,7 @@
     });
   }
 
-  // ---- Scroll-triggered reveals (IntersectionObserver) ----
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ---- Scroll-triggered reveals (IntersectionObserver fallback for non-GSAP) ----
   if (!reduced && 'IntersectionObserver' in window) {
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver(
@@ -41,36 +41,166 @@
       { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
     );
     revealEls.forEach((el) => io.observe(el));
+
+    const hairlineEls = document.querySelectorAll('.reveal-hairline');
+    const hio = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            hio.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    hairlineEls.forEach((el) => hio.observe(el));
   } else {
     document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+    document.querySelectorAll('.reveal-hairline').forEach((el) => el.classList.add('is-visible'));
   }
 
-  // ---- Hero parallax (only on home, only if GSAP loaded) ----
-  function initHeroParallax() {
-    if (reduced) return;
-    const heroBg = document.querySelector('.hero__bg img');
-    if (!heroBg) return;
-    if (typeof gsap === 'undefined') return;
+  // ---- Sticky CTA: enter + pulse-once on hero scroll-past ----
+  const stickyCta = document.querySelector('[data-sticky-cta]');
+  if (stickyCta) {
+    // Enter from below
+    if (reduced) {
+      stickyCta.classList.add('is-ready');
+    } else {
+      // GSAP-driven entrance if available, else CSS class toggle
+      const enter = () => {
+        if (typeof gsap !== 'undefined') {
+          gsap.fromTo(
+            stickyCta,
+            { y: '110%', autoAlpha: 1 },
+            { y: '0%', duration: 0.6, ease: 'power2.out', delay: 0.3, onComplete: () => stickyCta.classList.add('is-ready') }
+          );
+        } else {
+          setTimeout(() => stickyCta.classList.add('is-ready'), 320);
+        }
+      };
+      if (document.readyState === 'complete') enter();
+      else window.addEventListener('load', enter, { once: true });
+    }
 
-    gsap.to(heroBg, {
-      yPercent: 12,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
+    // Pulse once when user scrolls past hero
+    let pulsed = false;
+    const hero = document.querySelector('.hero, .page-hero');
+    if (hero && !reduced) {
+      const onScroll = () => {
+        if (pulsed) return;
+        const rect = hero.getBoundingClientRect();
+        if (rect.bottom < 80) {
+          pulsed = true;
+          stickyCta.classList.add('is-pulsing');
+          setTimeout(() => stickyCta.classList.remove('is-pulsing'), 1000);
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    // Click handler: smooth scroll to #contact if on home/contact, else navigate
+    stickyCta.addEventListener('click', (e) => {
+      const onHome = /\/(index\.html)?$/.test(window.location.pathname) || window.location.pathname.endsWith('/');
+      const hasContact = document.querySelector('#contact');
+      if ((onHome || window.location.pathname.endsWith('contact.html')) && hasContact) {
+        e.preventDefault();
+        hasContact.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      }
+      // else default <a href="contact.html#form"> behavior runs
     });
   }
 
-  // GSAP may load async via CDN; defer until window load
-  window.addEventListener('load', () => {
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-      initHeroParallax();
+  // ---- Sticky header scroll state ----
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader && !siteHeader.classList.contains('site-header--solid')) {
+    const onHeaderScroll = () => {
+      if (window.scrollY > 80) {
+        siteHeader.classList.add('is-scrolled');
+      } else {
+        siteHeader.classList.remove('is-scrolled');
+      }
+    };
+    onHeaderScroll();
+    window.addEventListener('scroll', onHeaderScroll, { passive: true });
+  }
+
+  // ---- GSAP choreography (loaded on window load) ----
+  function initGsap() {
+    if (typeof gsap === 'undefined') return;
+    if (typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (reduced) return;
+
+    // Hero background parallax (home only)
+    const heroBg = document.querySelector('.hero__bg img');
+    if (heroBg) {
+      gsap.to(heroBg, {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
     }
-  });
+
+    // Case-study photo parallax
+    document.querySelectorAll('.case-study__photo img').forEach((img) => {
+      gsap.fromTo(
+        img,
+        { yPercent: -8 },
+        {
+          yPercent: 8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img.closest('.case-study'),
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    });
+
+    // Workshop photo subtle parallax
+    document.querySelectorAll('.workshop__photo img').forEach((img) => {
+      gsap.fromTo(
+        img,
+        { yPercent: -6 },
+        {
+          yPercent: 6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img.closest('.workshop__photo'),
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    });
+
+    // Service cards stagger
+    const serviceCards = document.querySelectorAll('.services__grid .service-card');
+    if (serviceCards.length > 0) {
+      gsap.from(serviceCards, {
+        opacity: 0,
+        y: 24,
+        duration: 0.9,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.services__grid',
+          start: 'top 80%',
+        },
+      });
+    }
+  }
 
   // ---- Projects filter (only on projects.html) ----
   const filterBar = document.querySelector('[data-filter-bar]');
@@ -93,23 +223,6 @@
     });
   }
 
-  // ---- Contact form (placeholder — no backend yet) ----
-  const form = document.querySelector('[data-contact-form]');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const name = encodeURIComponent(data.get('name') || '');
-      const contact = encodeURIComponent(data.get('contact') || '');
-      const type = encodeURIComponent(data.get('project-type') || '');
-      const desc = encodeURIComponent(data.get('description') || '');
-      const subject = encodeURIComponent('Project inquiry from premiercabinetsinnovations.com');
-      const body = `Name: ${name}%0D%0AContact: ${contact}%0D%0AProject type: ${type}%0D%0A%0D%0A${desc}`;
-      // Fallback to mailto — full form wiring (GHL / Formspree) added in Month 2
-      window.location.href = `mailto:felix@premiercabinetsinnovations.com?subject=${subject}&body=${body}`;
-    });
-  }
-
   // ---- Year in footer ----
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = new Date().getFullYear();
@@ -122,5 +235,10 @@
     if (href === path || (path === '' && href === 'index.html') || (path === 'index.html' && href === 'index.html')) {
       link.classList.add('is-active');
     }
+  });
+
+  // ---- GSAP defer until load ----
+  window.addEventListener('load', () => {
+    initGsap();
   });
 })();

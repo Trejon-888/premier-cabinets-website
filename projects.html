@@ -31,7 +31,7 @@
     "name": "Premier Cabinets Innovations",
     "url": "https://premiercabinetsinnovations.com/",
     "telephone": "+1-916-550-2228",
-    "email": "felix@premiercabinetsinnovations.com",
+    "email": "hello@premiercabinetsinnovations.com",
     "image": "https://premiercabinetsinnovations.com/images/projects/kitchen-matte-black-walnut.jpg",
     "logo": "https://premiercabinetsinnovations.com/images/logo-primary.png",
     "foundingDate": "1985",
@@ -50,13 +50,13 @@
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header site-header--solid">
   <div class="container site-header__inner">
-    <a class="brand-mark" href="index.html" aria-label="Premier Cabinets Innovations — Home">
-      <img src="images/logo-monogram.png" alt="" />
-      <span class="brand-mark__text">
-        <span class="brand-mark__name">Premier Cabinets <strong>Innovations</strong></span>
-        <span class="brand-mark__sub">Since 1985 · Citrus Heights</span>
+    <a class="brand-lockup" href="index.html" aria-label="Premier Cabinets Innovations — Home">
+      <img class="brand-mark" src="images/brand/mark-placeholder.png" alt="" aria-hidden="true" />
+      <span class="brand-lockup__text">
+        <span class="brand-lockup__name">Premier Cabinets <strong>Innovations</strong></span>
+        <span class="brand-lockup__sub">Since 1985 · Citrus Heights</span>
       </span>
     </a>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
@@ -79,193 +79,242 @@
   <div class="container">
     <div class="page-hero__inner">
       <div class="page-hero__label">
-        <span class="page-hero__num">Portfolio · 16 recent projects</span>
+        <span class="page-hero__num">Portfolio · Eight selected projects</span>
         <p class="eyebrow">Projects</p>
       </div>
       <div>
-        <h1 class="display page-hero__title">A selection of recent work.</h1>
-        <p class="lede page-hero__sub">Kitchens, baths, paneled rooms, built-ins, and specialty millwork from the Citrus Heights workshop. Project metadata is being finalized with each homeowner; locations and completion years carry "TBC" placeholders until confirmed.</p>
+        <h1 class="page-hero__title">A selection of recent work.</h1>
+        <p class="lede page-hero__sub">Kitchens, baths, paneled rooms, built-ins, and specialty millwork from the Citrus Heights workshop. Eight projects, presented at length. Locations and completion years carry "TBC" placeholders until confirmed with each homeowner.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="projects" style="padding-top: clamp(3rem, 6vw, 5rem);">
+<!-- ========== EDITORIAL CASE STUDIES ========== -->
+
+<!-- 01 -->
+<section class="case-study">
   <div class="container">
-
-    <div class="filter-bar" data-filter-bar role="tablist" aria-label="Filter projects by category">
-      <button class="filter-bar__btn is-active" data-filter="all" role="tab" aria-selected="true">All Work</button>
-      <button class="filter-bar__btn" data-filter="kitchen" role="tab">Kitchens</button>
-      <button class="filter-bar__btn" data-filter="bath" role="tab">Bathrooms</button>
-      <button class="filter-bar__btn" data-filter="millwork" role="tab">Paneled Rooms + Millwork</button>
-      <button class="filter-bar__btn" data-filter="built-in" role="tab">Built-Ins</button>
-      <button class="filter-bar__btn" data-filter="specialty" role="tab">Specialty</button>
-    </div>
-
-    <div class="projects__grid">
-
-      <article class="project-card project-card--tall reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-matte-black-walnut.jpg" alt="Modern matte-black and walnut kitchen with dark stone counter" loading="lazy" width="1200" height="1500" />
-        </div>
-        <p class="project-card__meta">Modern Kitchen · Bay Area · Year TBC</p>
-        <p class="project-card__title">Matte-black cabinetry with plain-sawn walnut accents and honed stone. Designed for a contemporary great room.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="millwork">
-        <div class="project-card__photo">
-          <img src="images/projects/paneled-game-room.jpg" alt="Dark walnut paneled game room with coffered ceiling and billiards" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Paneled Game Room · Sacramento · Year TBC</p>
-        <p class="project-card__title">Floor-to-ceiling walnut paneling, coffered ceiling, fluted columns, custom billiards alcove.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-gothic-arch-marble.jpg" alt="Large white kitchen with arched gothic glass display cabinets and marble island" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Kitchen · Sacramento · Year TBC</p>
-        <p class="project-card__title">Floor-to-ceiling arched glass cabinets framing a slab-marble island. One of the most distinctive cabinet runs in the portfolio.</p>
-      </article>
-
-      <article class="project-card project-card--tall reveal" data-project-cat="bath">
-        <div class="project-card__photo">
-          <img src="images/projects/bath-dual-vanity-regency.jpg" alt="Hollywood Regency dual vanity with arched mirrors and sconces" loading="lazy" width="1200" height="1500" />
-        </div>
-        <p class="project-card__meta">Dual Vanity · Sacramento · Year TBC</p>
-        <p class="project-card__title">Hollywood Regency dual vanity with arched mirrors and sconce-lit fluted columns.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-white-transitional-island.jpg" alt="White transitional kitchen with wrought-iron pendants, French window cabinets, marble island" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Kitchen · Sacramento · Year TBC</p>
-        <p class="project-card__title">Transitional white cabinetry, French-window display niches, marble waterfall island.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-shaker-brass.jpg" alt="White shaker kitchen with brass sink and integrated appliances" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Kitchen · Year TBC</p>
-        <p class="project-card__title">White shaker cabinetry, unlacquered brass sink, integrated appliances, plank hardwood floors.</p>
-      </article>
-
-      <article class="project-card project-card--tall reveal" data-project-cat="built-in">
-        <div class="project-card__photo">
-          <img src="images/projects/built-in-refrigerator-surround.jpg" alt="Built-in refrigerator surround with marble backsplash" loading="lazy" width="1200" height="1500" />
-        </div>
-        <p class="project-card__meta">Built-In · Year TBC</p>
-        <p class="project-card__title">Integrated refrigerator surround with veined slab marble backsplash and concealed-panel doors.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="bath">
-        <div class="project-card__photo">
-          <img src="images/projects/bath-white-vanity-wood-tile.jpg" alt="White vanity with marble counter, black hardware, wood-tile wall" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Vanity · Year TBC</p>
-        <p class="project-card__title">White vanity, marble counter, blackened hardware, wood-pattern tile wall.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-marble-chandelier.jpg" alt="White kitchen with marble island and black-shaded chandelier" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Kitchen · Bay Area · Year TBC</p>
-        <p class="project-card__title">Classic transitional kitchen, white marble island, black-shaded chandelier.</p>
-      </article>
-
-      <article class="project-card project-card--tall reveal" data-project-cat="bath">
-        <div class="project-card__photo">
-          <img src="images/projects/bath-floating-vanity.jpg" alt="Modern floating vanity with vessel sink and beveled mirror" loading="lazy" width="1200" height="1500" />
-        </div>
-        <p class="project-card__meta">Modern Bath · Year TBC</p>
-        <p class="project-card__title">Floating vanity, vessel sink, marble counter, beveled framed mirror.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="built-in">
-        <div class="project-card__photo">
-          <img src="images/projects/mudroom-shaker-storage.jpg" alt="Cream shaker pantry and mudroom storage wall" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Mudroom + Pantry · Year TBC</p>
-        <p class="project-card__title">Cream shaker mudroom wall, integrated bench seating, full-height pantry storage.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="specialty">
-        <div class="project-card__photo">
-          <img src="images/projects/specialty-live-edge-shelves.jpg" alt="Live-edge walnut floating shelves and reclaimed wood bench" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Specialty Millwork · Year TBC</p>
-        <p class="project-card__title">Live-edge walnut floating shelves and reclaimed-wood bench. One-off specialty commission.</p>
-      </article>
-
-      <article class="project-card project-card--tall reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-italianate-cream.jpg" alt="Ornate cream-glazed Italianate kitchen with carved corbels" loading="lazy" width="1200" height="1500" />
-        </div>
-        <p class="project-card__meta">Italianate Kitchen · Year TBC</p>
-        <p class="project-card__title">Cream-glazed Italianate cabinetry, carved corbels, marble checker floor. Earlier-era portfolio piece.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-white-upper-wood-base.jpg" alt="Kitchen with white upper cabinets and wood base, hardwood floors" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Kitchen · Year TBC</p>
-        <p class="project-card__title">Two-tone kitchen with white upper cabinets and wood-stained base. Plank hardwood floors.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="kitchen">
-        <div class="project-card__photo">
-          <img src="images/projects/kitchen-tuscan-two-tone.jpg" alt="Tuscan two-tone kitchen, cream and distressed black, under construction" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Kitchen · Year TBC</p>
-        <p class="project-card__title">Tuscan two-tone kitchen mid-install. Cream uppers with distressed black base cabinetry.</p>
-      </article>
-
-      <article class="project-card reveal" data-project-cat="millwork">
-        <div class="project-card__photo">
-          <img src="images/projects/millwork-in-progress.jpg" alt="Raw wood door casings and coffered ceiling under construction" loading="lazy" width="1200" height="900" />
-        </div>
-        <p class="project-card__meta">Architectural Millwork · Year TBC</p>
-        <p class="project-card__title">Raw-wood door casings and coffered ceiling at framing stage. Trim package for a full-house remodel.</p>
-      </article>
-
+    <div class="case-study__grid">
+      <div class="case-study__photo case-study--tall reveal">
+        <img src="images/projects/kitchen-matte-black-walnut.jpg" alt="Matte-black and plain-sawn walnut kitchen with honed stone counter" loading="lazy" width="1600" height="2000" />
+      </div>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Kitchen · Bay Area · Year TBC</span>
+        <h2 class="case-study__title">Plain-sawn walnut and matte black.</h2>
+        <p class="case-study__narrative">A full kitchen built around a single piece of honed stone. Matte-black perimeter cabinetry in painted MDF, walnut island in plain-sawn cuts taken from one log to keep the grain reading consistent.</p>
+        <p class="case-study__narrative">European concealed hinges, full-extension soft-close runners, paneled refrigerator surround, integrated dishwasher. The hood is custom millwork in walnut to match the island front.</p>
+        <span class="case-study__hairline" aria-hidden="true"></span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="cta-strip">
-  <div class="container cta-strip__inner">
-    <div class="cta-strip__copy reveal">
-      <span class="section-head__num">Next step</span>
-      <h2 class="display--md" style="margin-top: 0.75rem;">Have a room in mind?</h2>
-      <p class="lede" style="margin-top: 1.5rem;">Most projects start with a 20-minute call to scope materials, timeline, and budget range. Phone is the fastest way to reach Felix.</p>
-      <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a class="btn btn--ink" href="tel:+19165502228">
-          <span>Call (916) 550-2228</span>
-          <span class="btn__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="btn btn--outline" href="contact.html">
-          <span>Send a brief</span>
-          <span class="btn__arrow" aria-hidden="true">→</span>
-        </a>
+<!-- 02 -->
+<section class="case-study case-study--reverse">
+  <div class="container">
+    <div class="case-study__grid">
+      <div class="case-study__photo reveal">
+        <img src="images/projects/paneled-game-room.jpg" alt="Walnut paneled game room with coffered ceiling, fluted columns and billiards alcove" loading="lazy" width="1600" height="1200" />
+      </div>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Paneled Room · Sacramento · Year TBC</span>
+        <h2 class="case-study__title">Walnut game room with a coffered ceiling.</h2>
+        <p class="case-study__narrative">Floor-to-ceiling walnut paneling with raised panel insets, a coffered ceiling laid out to the room's geometry, fluted columns at the openings, and an alcove sized to the billiards table.</p>
+        <p class="case-study__narrative">Two months of shop time. Two weeks of install. Built and finished entirely in Citrus Heights, dry-fit on the floor before it traveled.</p>
+        <span class="case-study__hairline" aria-hidden="true"></span>
       </div>
     </div>
-    <div class="cta-strip__contact reveal">
-      <div class="cta-strip__line">
-        <span class="label">Workshop</span>
-        <span class="value">5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621</span>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="case-study">
+  <div class="container">
+    <div class="case-study__grid">
+      <div class="case-study__photo case-study--tall reveal">
+        <img src="images/projects/kitchen-gothic-arch-marble.jpg" alt="White kitchen with floor-to-ceiling arched glass cabinets and slab marble island" loading="lazy" width="1600" height="2000" />
       </div>
-      <div class="cta-strip__line">
-        <span class="label">Service Area</span>
-        <span class="value">Sacramento Metro + Bay Area</span>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Kitchen · Sacramento · Year TBC</span>
+        <h2 class="case-study__title">Arched glass and a slab-marble island.</h2>
+        <p class="case-study__narrative">Floor-to-ceiling arched glass display cabinets framing a slab-marble island. One of the most distinctive cabinet runs in the portfolio.</p>
+        <p class="case-study__narrative">The arches were drawn at full scale on the shop floor before any glass was cut. Painted maple frames, hand-rubbed lacquer finish, museum-clear glass set with brass beading.</p>
+        <span class="case-study__hairline" aria-hidden="true"></span>
       </div>
-      <div class="cta-strip__line">
-        <span class="label">Response time</span>
-        <span class="value">Within one business day</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="case-study case-study--reverse">
+  <div class="container">
+    <div class="case-study__grid">
+      <div class="case-study__photo reveal">
+        <img src="images/projects/bath-dual-vanity-regency.jpg" alt="Hollywood Regency dual vanity with arched mirrors and fluted columns" loading="lazy" width="1600" height="2000" />
       </div>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Bathroom · Sacramento · Year TBC</span>
+        <h2 class="case-study__title">Hollywood Regency dual vanity.</h2>
+        <p class="case-study__narrative">A primary bath built around a pair of arched mirrors, sconce-lit fluted columns, and a stone counter that returns into the wall on both ends. Marine-grade plywood carcass, solid wood face frames, conversion-varnish finish.</p>
+        <p class="case-study__narrative">Drawer banks run on integrated outlet trays. Linen tower to the right of the vanity carries the same column detail.</p>
+        <span class="case-study__hairline" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="case-study">
+  <div class="container">
+    <div class="case-study__grid">
+      <div class="case-study__photo case-study--tall reveal">
+        <img src="images/projects/built-in-refrigerator-surround.jpg" alt="Built-in refrigerator surround with slab marble backsplash and concealed-panel doors" loading="lazy" width="1600" height="2000" />
+      </div>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Built-In · Year TBC</span>
+        <h2 class="case-study__title">Integrated refrigerator surround.</h2>
+        <p class="case-study__narrative">A panel-ready refrigerator built into a wall of veined slab marble. Concealed-panel doors flank the unit. The whole assembly reads as a continuous architectural element rather than an appliance.</p>
+        <p class="case-study__narrative">Site tolerance was the hardest part. The framing was out by a quarter inch; the cabinetry was scribed to it on install day.</p>
+        <span class="case-study__hairline" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="case-study case-study--reverse">
+  <div class="container">
+    <div class="case-study__grid">
+      <div class="case-study__photo reveal">
+        <img src="images/projects/kitchen-white-transitional-island.jpg" alt="White transitional kitchen with French-window display niches and marble waterfall island" loading="lazy" width="1600" height="1200" />
+      </div>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Kitchen · Sacramento · Year TBC</span>
+        <h2 class="case-study__title">Transitional white and a waterfall island.</h2>
+        <p class="case-study__narrative">A transitional kitchen with painted shaker cabinetry, French-window display niches above the perimeter, and a waterfall marble island. Wrought-iron pendants over the island. Hardwood floors.</p>
+        <p class="case-study__narrative">Pantry wall conceals a coffee station behind tambour doors. Range alcove built into the run as a single architectural moment.</p>
+        <span class="case-study__hairline" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="case-study">
+  <div class="container">
+    <div class="case-study__grid">
+      <div class="case-study__photo case-study--tall reveal">
+        <img src="images/projects/specialty-live-edge-shelves.jpg" alt="Live-edge walnut floating shelves and reclaimed-wood bench" loading="lazy" width="1600" height="2000" />
+      </div>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Specialty Millwork · Year TBC</span>
+        <h2 class="case-study__title">Live-edge walnut, reclaimed bench.</h2>
+        <p class="case-study__narrative">A one-off commission. Live-edge walnut floating shelves hung from concealed steel brackets, paired with a reclaimed-wood bench fabricated from old-growth fir.</p>
+        <p class="case-study__narrative">The walnut was sourced as a single slab and resawn in the shop. Bookmatched joinery on the bench. Hand-rubbed oil finish on both pieces.</p>
+        <span class="case-study__hairline" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="case-study case-study--reverse">
+  <div class="container">
+    <div class="case-study__grid">
+      <div class="case-study__photo reveal">
+        <img src="images/projects/mudroom-shaker-storage.jpg" alt="Cream shaker mudroom with integrated bench and full-height pantry storage" loading="lazy" width="1600" height="1200" />
+      </div>
+      <div class="case-study__copy reveal">
+        <span class="case-study__meta">Mudroom + Pantry · Year TBC</span>
+        <h2 class="case-study__title">Mudroom built into the bones of the house.</h2>
+        <p class="case-study__narrative">A back-of-house cabinetry wall doing the work of three separate rooms: drop zone, pantry, laundry surround. Cream-painted shaker fronts on a full-height storage run, integrated bench seating with hidden boot storage below.</p>
+        <p class="case-study__narrative">Doors hang on solid brass butt hinges. Drawer fronts run on full-extension soft-close. Counter is solid maple, oiled, sanded back twice a year by the owner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CONTACT (Somerville-style) =================== -->
+<section class="contact-section contact-section--bordered" id="contact">
+  <div class="container">
+    <div class="contact-section__inner">
+
+      <div class="contact-section__left reveal">
+        <span class="contact-section__eyebrow">Next step</span>
+        <h2 class="contact-section__headline">Have a room in mind?</h2>
+        <p class="contact-section__body">Most projects start with a 20-minute call to scope materials, timeline, and budget range. Send a brief on the form, or call the workshop.</p>
+
+        <div class="contact-section__meta">
+          <div class="contact-section__meta-block">
+            <h4>Give us a call</h4>
+            <a href="tel:+19165502228">(916) 550-2228</a>
+          </div>
+          <div class="contact-section__meta-block">
+            <h4>Send us an email</h4>
+            <a href="mailto:hello@premiercabinetsinnovations.com">hello@<wbr/>premiercabinetsinnovations.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" id="form">
+        <form class="enquiry-form" action="https://formsubmit.co/enrique@aigrowthpartner.ai" method="POST" autocomplete="on">
+          <input type="hidden" name="_subject" value="New Premier Cabinets enquiry" />
+          <input type="hidden" name="_captcha" value="true" />
+          <input type="hidden" name="_next" value="https://trejon-888.github.io/premier-cabinets-website/thank-you.html" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" class="enquiry-form__honey" tabindex="-1" autocomplete="off" />
+
+          <div class="enquiry-form__row">
+            <div class="enquiry-form__field">
+              <label for="pf-first">First Name</label>
+              <input type="text" id="pf-first" name="First Name" required autocomplete="given-name" />
+            </div>
+            <div class="enquiry-form__field">
+              <label for="pf-last">Last Name</label>
+              <input type="text" id="pf-last" name="Last Name" required autocomplete="family-name" />
+            </div>
+          </div>
+
+          <div class="enquiry-form__row">
+            <div class="enquiry-form__field">
+              <label for="pf-phone">Phone Number <span style="text-transform: none; letter-spacing: 0; opacity: 0.6;">(optional)</span></label>
+              <input type="tel" id="pf-phone" name="Phone" autocomplete="tel" />
+            </div>
+            <div class="enquiry-form__field">
+              <label for="pf-email">Email</label>
+              <input type="email" id="pf-email" name="Email" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="enquiry-form__field">
+            <label for="pf-type">Enquiry Type</label>
+            <select id="pf-type" name="Enquiry Type" required>
+              <option value="" disabled selected>Please select</option>
+              <option value="Custom Kitchen">Custom Kitchen</option>
+              <option value="Bathroom Cabinetry">Bathroom Cabinetry</option>
+              <option value="Paneled Rooms + Millwork">Paneled Rooms + Millwork</option>
+              <option value="Built-ins + Specialty Work">Built-ins + Specialty Work</option>
+              <option value="Restoration">Restoration</option>
+              <option value="General Enquiry">General Enquiry</option>
+            </select>
+          </div>
+
+          <div class="enquiry-form__field">
+            <label for="pf-message">Message</label>
+            <textarea id="pf-message" name="Message" rows="5" required placeholder="What you have in mind, rough timeline, and the address or city if you can share it."></textarea>
+          </div>
+
+          <div class="enquiry-form__submit-row">
+            <button type="submit" class="enquiry-form__submit">
+              <span>Send Message</span>
+              <span class="btn__arrow" aria-hidden="true">→</span>
+            </button>
+            <span class="enquiry-form__submit-note">We respond within one business day.</span>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </section>
@@ -276,8 +325,10 @@
   <div class="container">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
-        <img class="site-footer__brand-logo" src="images/logo-monogram.png" alt="Premier Cabinets Innovations monogram" width="64" height="64" />
-        <h4>Premier Cabinets Innovations</h4>
+        <div class="site-footer__brand-lockup">
+          <img class="site-footer__brand-mark" src="images/brand/mark-placeholder.png" alt="" aria-hidden="true" width="48" height="48" />
+          <span class="site-footer__brand-wordmark">Premier Cabinets <strong>Innovations</strong></span>
+        </div>
         <p>Custom cabinetry and architectural millwork. Built in Citrus Heights, serving Sacramento and the Bay Area since 1985.</p>
         <div class="site-footer__socials">
           <a href="#" aria-label="Instagram">Instagram</a>
@@ -286,20 +337,19 @@
         </div>
       </div>
       <div>
-        <h4>Services</h4>
+        <h4>Navigation</h4>
         <ul class="site-footer__list">
-          <li><a href="services.html#kitchens">Custom Kitchens</a></li>
-          <li><a href="services.html#baths">Bathroom Cabinetry</a></li>
-          <li><a href="services.html#millwork">Paneled Rooms + Millwork</a></li>
-          <li><a href="services.html#built-ins">Built-Ins + Specialty Work</a></li>
-          <li><a href="services.html#restoration">Restoration + Refinishing</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h4>Workshop</h4>
         <address class="site-footer__contact">
           <a href="tel:+19165502228">(916) 550-2228</a>
-          <a href="mailto:felix@premiercabinetsinnovations.com">felix@premiercabinetsinnovations.com</a>
+          <a href="mailto:hello@premiercabinetsinnovations.com">hello@premiercabinetsinnovations.com</a>
           <span>5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621</span>
           <span>Mon–Fri, 8a–5p · Sat by appointment</span>
         </address>
@@ -307,11 +357,22 @@
     </div>
     <div class="site-footer__bottom">
       <span>© <span data-year>2026</span> Premier Cabinets Innovation LLC · CSLB License # TBC</span>
-      <span>Custom Cabinetry + Millwork · Sacramento + Bay Area</span>
+      <span class="site-footer__bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </span>
     </div>
   </div>
 </footer>
 
+<a class="sticky-cta" data-sticky-cta href="#contact" aria-label="Start a project">
+  <span class="sticky-cta__full">Start a Project</span>
+  <span class="sticky-cta__short">Start</span>
+  <span class="sticky-cta__arrow" aria-hidden="true">→</span>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="scripts.js" defer></script>
 </body>
 </html>
