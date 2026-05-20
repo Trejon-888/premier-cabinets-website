@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "matte-black-walnut-kitchen",
+    "title": "Matte-black slab and walnut kitchen for Bay Area residence",
+    "category": "Custom Kitchen",
+    "category_num": "01",
+    "location": "San Francisco Bay Area",
+    "photo": "kitchen-matte-black-walnut.jpg",
+    "url": "project-matte-black-walnut-kitchen.html"
+  },
+  {
+    "slug": "walnut-library-paneling",
+    "title": "Walnut library and study paneling",
+    "category": "Wall Paneling",
+    "category_num": "03",
+    "location": "Sacramento, CA",
+    "photo": "paneled-game-room.jpg",
+    "url": "project-walnut-library-paneling.html"
+  },
+  {
+    "slug": "arched-glass-display-marble-island",
+    "title": "Arched glass display cabinets and slab marble island",
+    "category": "Custom Kitchen",
+    "category_num": "01",
+    "location": "Citrus Heights, CA",
+    "photo": "kitchen-gothic-arch-marble.jpg",
+    "url": "project-arched-glass-display-marble-island.html"
+  },
+  {
+    "slug": "regency-dual-vanity-fluted-columns",
+    "title": "Hollywood Regency dual vanity with fluted columns",
+    "category": "Bathroom Vanity",
+    "category_num": "02",
+    "location": "Bay Area, CA",
+    "photo": "bath-dual-vanity-regency.jpg",
+    "url": "project-regency-dual-vanity-fluted-columns.html"
+  },
+  {
+    "slug": "white-inset-fridge-wall",
+    "title": "White inset cabinetry with full-height refrigerator wall",
+    "category": "Custom Kitchen",
+    "category_num": "01",
+    "location": "Bay Area, CA",
+    "photo": "built-in-refrigerator-surround.jpg",
+    "url": "project-white-inset-fridge-wall.html"
+  },
+  {
+    "slug": "painted-shaker-waterfall-island",
+    "title": "Painted shaker kitchen with marble island",
+    "category": "Custom Kitchen",
+    "category_num": "01",
+    "location": "Sacramento, CA",
+    "photo": "kitchen-white-transitional-island.jpg",
+    "url": "project-painted-shaker-waterfall-island.html"
+  },
+  {
+    "slug": "live-edge-walnut-shelves",
+    "title": "Live-edge walnut shelves and reclaimed-fir bench",
+    "category": "Specialty Millwork",
+    "category_num": "05",
+    "location": "Northern California",
+    "photo": "specialty-live-edge-shelves.jpg",
+    "url": "project-live-edge-walnut-shelves.html"
+  },
+  {
+    "slug": "cream-shaker-pantry",
+    "title": "Cream shaker walk-in pantry with full-height storage",
+    "category": "Built-In Storage",
+    "category_num": "05",
+    "location": "Sacramento, CA",
+    "photo": "mudroom-shaker-storage.jpg",
+    "url": "project-cream-shaker-pantry.html"
+  },
+  {
+    "slug": "marble-chandelier-kitchen",
+    "title": "White kitchen with veined marble island and crystal chandelier",
+    "category": "Custom Kitchen",
+    "category_num": "01",
+    "location": "Bay Area, CA",
+    "photo": "kitchen-marble-chandelier.jpg",
+    "url": "project-marble-chandelier-kitchen.html"
+  },
+  {
+    "slug": "white-shaker-vanity-wood-tile",
+    "title": "White shaker vanity with marble counter and wood-tile wall",
+    "category": "Bathroom Vanity",
+    "category_num": "02",
+    "location": "Citrus Heights, CA",
+    "photo": "bath-white-vanity-wood-tile.jpg",
+    "url": "project-white-shaker-vanity-wood-tile.html"
+  }
+]

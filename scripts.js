@@ -1059,6 +1059,142 @@
     });
   });
 
+  // ============================================================
+  // ITERATION 15 — Extended scroll motion
+  // ============================================================
+  function initExtendedMotion() {
+    if (reduced || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    // Hero subtitle/CTAs entrance on load
+    const heroEyebrow = document.querySelector('.hero__eyebrow');
+    const heroHeadline = document.querySelector('.hero__headline');
+    const heroSub = document.querySelector('.hero__sub');
+    const heroCTAs = document.querySelectorAll('.hero__ctas .btn');
+    const heroTrust = document.querySelector('.hero__trust');
+    const heroEls = [heroEyebrow, heroHeadline, heroSub, ...heroCTAs, heroTrust].filter(Boolean);
+    if (heroEls.length) {
+      gsap.from(heroEls, {
+        y: 30,
+        opacity: 0,
+        duration: 1.0,
+        stagger: 0.12,
+        ease: 'power3.out',
+        delay: 0.25,
+      });
+    }
+
+    // Hero photo carousel — subtle parallax on scroll (photo drifts up slightly)
+    const heroMedia = document.querySelector('.hero--split__media');
+    if (heroMedia) {
+      gsap.to(heroMedia, {
+        yPercent: -8,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.8,
+        },
+      });
+    }
+
+    // Every h2 section headline — reveal on scroll
+    document.querySelectorAll('section h2, .built-and-work__title, .built-and-work__sub-title, .about-hero h1, .about-story__title, .reviews-strip__label, .process-strip__title, .contact-section__headline').forEach((el) => {
+      gsap.from(el, {
+        y: 40,
+        opacity: 0.001,
+        duration: 1.0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // Project gallery photos — subtle scale-in on enter
+    document.querySelectorAll('.featured-project__photo img, .editorial-card__photo img').forEach((img) => {
+      gsap.from(img, {
+        scale: 1.06,
+        opacity: 0.85,
+        duration: 1.4,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: img.closest('.featured-project, .editorial-card'),
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // About story photo — extended parallax
+    const aboutPhoto = document.querySelector('.about-story__photo');
+    if (aboutPhoto) {
+      gsap.to(aboutPhoto, {
+        yPercent: -10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.about-story',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.8,
+        },
+      });
+    }
+
+    // Process strip steps — counter-style reveal
+    document.querySelectorAll('.process-strip__step').forEach((step, i) => {
+      gsap.from(step, {
+        y: 30,
+        opacity: 0.001,
+        duration: 0.7,
+        ease: 'power3.out',
+        delay: i * 0.08,
+        scrollTrigger: {
+          trigger: '.process-strip',
+          start: 'top 80%',
+          once: true,
+        },
+      });
+    });
+
+    // Review cards stagger
+    document.querySelectorAll('.review-card').forEach((card, i) => {
+      gsap.from(card, {
+        y: 30,
+        opacity: 0.001,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: i * 0.15,
+        scrollTrigger: {
+          trigger: '.reviews-strip',
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    });
+
+    // Refresh ScrollTrigger after icons + ornaments may have caused layout shifts
+    setTimeout(() => { ScrollTrigger.refresh(); }, 600);
+  }
+
+  // SAFETY: 3.5s after load, force all opacity-0 motion elements to visible
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('section h2, .review-card, .process-strip__step').forEach((el) => {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.5) {
+          if (typeof gsap !== 'undefined') {
+            gsap.set(el, { opacity: 1, y: 0 });
+          } else {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          }
+        }
+      });
+    }, 3500);
+  });
+
   // -----------------------------------------------------
   // BOOT
   // -----------------------------------------------------
@@ -1071,5 +1207,6 @@
     animateOrnaments();  // wire GSAP draw-in for ornament corners
     injectServiceIcons();
     animateServiceIcons();
+    initExtendedMotion();  // iteration 15 — extended scroll motion
   });
 })();
