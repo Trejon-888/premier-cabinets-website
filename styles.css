@@ -14,19 +14,19 @@
   --paper-gilt: #EFEAD7;
   --walnut: #6B4F2A;
   --walnut-deep: #4A361C;
-  /* Iteration 4 gilt palette — bright metallic gold centerpiece */
-  --gold: #D4AF37;
-  --gold-deep: #B8961F;
-  --gold-soft: #E8C547;
-  --gold-warm: #E8C547;
+  /* Iteration 8 gilt palette — brighter, more saturated gold (CSS Goldenrod) */
+  --gold: #DAA520;
+  --gold-deep: #B8860B;
+  --gold-soft: #F5C842;
+  --gold-warm: #F5C842;
   /* Legacy aliases — all point to the new bright-gold tokens */
-  --champagne: #D4AF37;
-  --champagne-deep: #B8961F;
-  --champagne-soft: #E8C547;
+  --champagne: #DAA520;
+  --champagne-deep: #B8860B;
+  --champagne-soft: #F5C842;
   --stone: #9C9A95;
   --hairline: rgba(10, 10, 10, 0.12);
   --hairline-strong: rgba(10, 10, 10, 0.22);
-  --hairline-gold: rgba(212, 175, 55, 0.55);
+  --hairline-gold: rgba(218, 165, 32, 0.55);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
@@ -467,12 +467,12 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  padding: 1rem 1.5rem;
+  padding: 0.95rem 1.6rem;
   background: var(--champagne);
   color: var(--ink);
   border: 1px solid var(--champagne);
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   font-weight: 500;
@@ -3559,7 +3559,7 @@ html.lenis body {
 }
 
 .numbered-list__num {
-  font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2.1rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
   color: var(--gold);
   font-variant-numeric: lining-nums;
@@ -3863,8 +3863,8 @@ html.lenis body {
 
 .process-strip__num {
   display: block;
-  font-size: clamp(2.5rem, 2rem + 1.8vw, 3.75rem);
-  font-weight: 200;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 300;
   color: var(--gold);
   letter-spacing: -0.03em;
   line-height: 1;
@@ -4359,4 +4359,302 @@ html.lenis body {
 html:not(.has-js) .numbered-list__item {
   opacity: 1;
   transform: none;
+}
+
+/* =================================================================
+   ITERATION 8 — additions
+   1. CSS safety net for animated cards
+   2. Hero split layout
+   3. About story page bits
+   ================================================================= */
+
+/* Final safety net — any element accidentally left at opacity 0 by JS becomes visible.
+   GSAP set() inline-styles will override during animation; this is the default. */
+.editorial-card,
+.process-strip__step {
+  opacity: 1;
+}
+
+/* ===== Hero — split layout (iteration 8) ===== */
+.hero--split {
+  background: var(--paper);
+  min-height: auto;
+  padding: clamp(7rem, 12vw, 10rem) 0 clamp(4rem, 7vw, 6rem);
+  display: block;
+  align-items: initial;
+  overflow: visible;
+}
+
+.hero--split__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .hero--split__container {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 5vw, 5rem);
+    align-items: stretch;
+  }
+}
+
+.hero--split__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--ink);
+}
+
+.hero--split__copy .hero__eyebrow {
+  color: var(--gold-deep);
+  margin-bottom: 0.5rem;
+}
+
+.hero--split__copy .hero__eyebrow::before {
+  background: var(--gold);
+}
+
+.hero--split__copy .hero__headline {
+  color: var(--ink);
+  margin: 0.25rem 0 1rem;
+  max-width: 16ch;
+}
+
+.hero--split__copy .hero__sub {
+  color: rgba(10, 10, 10, 0.78);
+  max-width: 38ch;
+  margin-bottom: 1.75rem;
+}
+
+.hero--split__copy .hero__ctas {
+  margin-bottom: 1.5rem;
+}
+
+.hero--split__copy .btn--ghost {
+  color: var(--ink);
+  border-color: var(--hairline-strong);
+}
+
+.hero--split__copy .btn--ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.hero--split__copy .hero__trust {
+  color: rgba(10, 10, 10, 0.55);
+  margin-top: 0.5rem;
+}
+
+.hero--split__copy .hero__trust::before {
+  background: rgba(10, 10, 10, 0.3);
+}
+
+.hero--split__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 720px;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+@media (max-width: 960px) {
+  .hero--split__media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.hero--split__media .hero-slide {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.hero--split__media .hero-slide.is-active {
+  opacity: 1;
+}
+
+.hero--split__media .hero-carousel__dots {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 3;
+}
+
+/* ===== About story page (iteration 8) ===== */
+.about-hero {
+  padding: clamp(6rem, 11vw, 9rem) 0 clamp(2.5rem, 5vw, 4rem);
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.about-hero .eyebrow {
+  color: var(--gold-deep);
+  font-size: var(--type-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: inline-block;
+}
+
+.about-hero h1 {
+  font-size: var(--type-h1);
+  font-weight: 300;
+  letter-spacing: var(--track-display);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  max-width: 22ch;
+}
+
+.about-hero .lede {
+  font-size: clamp(1.0625rem, 0.95rem + 0.6vw, 1.375rem);
+  line-height: 1.55;
+  color: rgba(10, 10, 10, 0.78);
+  max-width: 56ch;
+}
+
+.about-story {
+  padding: clamp(3rem, 7vw, 6rem) 0;
+  background: var(--paper);
+}
+
+.about-story__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 880px) {
+  .about-story__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+}
+
+.about-story__photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 780px;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.about-story__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-story__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.about-story__copy p {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(10, 10, 10, 0.82);
+  max-width: 52ch;
+}
+
+.about-story__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(3rem, 5vw, 4rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--hairline);
+}
+
+@media (max-width: 720px) {
+  .about-story__stats {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.about-story__stat-num {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.about-story__stat-label {
+  font-size: 0.75rem;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.6);
+  line-height: 1.3;
+}
+
+.about-cta {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: var(--paper-gilt);
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+}
+
+.about-cta h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-cta p {
+  font-size: 1.0625rem;
+  color: rgba(10, 10, 10, 0.7);
+  max-width: 44ch;
+  margin: 0 auto 2rem;
+}
+
+.about-cta__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.about-cta__links a {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--ink);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 4px;
+  transition: color 0.25s ease;
+}
+
+.about-cta__links a:hover {
+  color: var(--gold-deep);
+}
+
+/* Iteration 8 — small footnote under numbered list */
+.numbered-list__footnote {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: rgba(10, 10, 10, 0.6);
+  letter-spacing: -0.005em;
+}
+
+.section--dark .numbered-list__footnote {
+  color: rgba(248, 244, 233, 0.6);
 }

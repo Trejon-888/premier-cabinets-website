@@ -607,15 +607,21 @@
     });
 
     // Old-style .services__grid (still used on home as service-card grid) — keep its stagger
+    // Iteration 8: fromTo + safety pattern
     const oldServiceCards = document.querySelectorAll('.services__grid .service-card');
     if (oldServiceCards.length > 0) {
-      gsap.from(oldServiceCards, {
-        opacity: 0,
-        y: 24,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '.services__grid', start: 'top 80%', once: true },
+      gsap.set(oldServiceCards, { opacity: 0.001, y: 24 });
+      const oldSvcSafety = setTimeout(() => {
+        gsap.to(oldServiceCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08 });
+      }, 2000);
+      ScrollTrigger.create({
+        trigger: '.services__grid',
+        start: 'top 90%',
+        once: true,
+        onEnter: () => {
+          clearTimeout(oldSvcSafety);
+          gsap.to(oldServiceCards, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1, ease: 'power2.out' });
+        },
       });
     }
 
@@ -635,30 +641,48 @@
     });
 
     // Iteration 3 — Editorial card reveal stagger (Recent Work + Projects editorial grid)
+    // Iteration 8: use fromTo with safety fallback — cards are ALWAYS visible
+    // by default; the animation is enhancement only. If ScrollTrigger fails,
+    // cards stay visible (no opacity 0 trap).
     document.querySelectorAll('[data-editorial-grid]').forEach((grid) => {
       const cards = grid.querySelectorAll('.editorial-card');
       if (cards.length === 0) return;
-      gsap.from(cards, {
-        opacity: 0,
-        y: 28,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: grid, start: 'top 82%', once: true },
+      // Set initial state — barely-visible but in layout
+      gsap.set(cards, { opacity: 0.001, y: 28 });
+      // Safety: force visibility after 2s no matter what
+      const safetyTimer = setTimeout(() => {
+        gsap.to(cards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08 });
+      }, 2000);
+      // Normal scroll-triggered stagger reveal
+      ScrollTrigger.create({
+        trigger: grid,
+        start: 'top 90%',
+        once: true,
+        onEnter: () => {
+          clearTimeout(safetyTimer);
+          gsap.to(cards, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out' });
+        },
       });
     });
 
-    // Iteration 3 — Process strip step reveals
-    document.querySelectorAll('.process-strip__step').forEach((step, i) => {
-      gsap.from(step, {
-        opacity: 0,
-        y: 20,
-        duration: 0.7,
-        delay: i * 0.1,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: step.closest('.process-strip__grid') || step, start: 'top 85%', once: true },
+    // Iteration 3 — Process strip step reveals (Iteration 8: fromTo + safety pattern)
+    const processSteps = document.querySelectorAll('.process-strip__step');
+    if (processSteps.length > 0) {
+      gsap.set(processSteps, { opacity: 0.001, y: 20 });
+      const processSafety = setTimeout(() => {
+        gsap.to(processSteps, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08 });
+      }, 2000);
+      const firstStep = processSteps[0];
+      ScrollTrigger.create({
+        trigger: firstStep.closest('.process-strip__grid') || firstStep,
+        start: 'top 90%',
+        once: true,
+        onEnter: () => {
+          clearTimeout(processSafety);
+          gsap.to(processSteps, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out' });
+        },
       });
-    });
+    }
 
     // ScrollTrigger.create — a tiny passive trigger for any extension hooks
     ScrollTrigger.create({
