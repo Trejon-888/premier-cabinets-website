@@ -52,6 +52,225 @@
     });
   }
 
+  // ============================================================
+  // SERVICE ICONS — line illustrations for the "What we build" grid.
+  // Each SVG uses stroke-only paths/rects so GSAP can animate
+  // stroke-dashoffset on scroll-in for a draw-on effect.
+  // ============================================================
+  const SERVICE_ICONS = {
+    // 01 — Custom Kitchens (range hood + counter + island)
+    kitchens: `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 36 16 L 64 16 L 70 30 L 30 30 Z" stroke-width="1.4"/>
+        <line x1="34" y1="33" x2="66" y2="33" stroke-width="0.9"/>
+        <path d="M 14 36 L 14 56 L 86 56 L 86 36" stroke-width="1.4"/>
+        <line x1="14" y1="56" x2="86" y2="56" stroke-width="1.4"/>
+        <line x1="34" y1="39" x2="34" y2="55" stroke-width="0.7"/>
+        <line x1="50" y1="39" x2="50" y2="55" stroke-width="0.7"/>
+        <line x1="66" y1="39" x2="66" y2="55" stroke-width="0.7"/>
+        <rect x="28" y="66" width="44" height="24" stroke-width="1.4"/>
+        <line x1="46" y1="70" x2="46" y2="86" stroke-width="0.7"/>
+        <line x1="54" y1="70" x2="54" y2="86" stroke-width="0.7"/>
+        <circle cx="42" cy="78" r="0.9" fill="currentColor"/>
+        <circle cx="58" cy="78" r="0.9" fill="currentColor"/>
+      </g>
+    </svg>`,
+
+    // 02 — Bathroom Vanities (mirror + sink + cabinet)
+    baths: `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="36" y="12" width="28" height="24" rx="1" stroke-width="1.4"/>
+        <line x1="40" y1="16" x2="40" y2="32" stroke-width="0.5" opacity="0.6"/>
+        <rect x="14" y="48" width="72" height="6" stroke-width="1.4"/>
+        <ellipse cx="50" cy="57" rx="11" ry="3.5" stroke-width="1"/>
+        <path d="M 50 46 L 50 41 Q 50 39 52 39" stroke-width="1"/>
+        <rect x="14" y="54" width="72" height="32" stroke-width="1.4"/>
+        <line x1="50" y1="57" x2="50" y2="84" stroke-width="0.7"/>
+        <line x1="30" y1="68" x2="38" y2="68" stroke-width="1"/>
+        <line x1="62" y1="68" x2="70" y2="68" stroke-width="1"/>
+      </g>
+    </svg>`,
+
+    // 03 — Wall Paneling (5 raised panels)
+    paneling: `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="10" y="14" width="16" height="72" stroke-width="1.4"/>
+        <rect x="13" y="17" width="10" height="66" stroke-width="0.6" opacity="0.7"/>
+        <rect x="29" y="14" width="16" height="72" stroke-width="1.4"/>
+        <rect x="32" y="17" width="10" height="66" stroke-width="0.6" opacity="0.7"/>
+        <rect x="48" y="14" width="16" height="72" stroke-width="1.4"/>
+        <rect x="51" y="17" width="10" height="66" stroke-width="0.6" opacity="0.7"/>
+        <rect x="67" y="14" width="16" height="72" stroke-width="1.4"/>
+        <rect x="70" y="17" width="10" height="66" stroke-width="0.6" opacity="0.7"/>
+        <line x1="6" y1="12" x2="90" y2="12" stroke-width="0.7"/>
+        <line x1="6" y1="88" x2="90" y2="88" stroke-width="0.7"/>
+      </g>
+    </svg>`,
+
+    // 04 — Custom Moldings & Frames (three molding cross-sections stacked)
+    moldings: `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 18 18 L 82 18 L 82 24 Q 76 26 70 24 L 64 24 Q 58 28 52 24 L 48 24 L 48 32 L 18 32 Z" stroke-width="1.4"/>
+        <path d="M 18 42 L 82 42 L 82 47 Q 76 50 70 47 L 60 47 Q 50 54 40 47 L 30 47 L 22 52 L 18 52 Z" stroke-width="1.4"/>
+        <path d="M 18 64 L 82 64 L 82 70 Q 74 74 66 70 L 56 70 Q 46 77 36 70 L 26 70 L 22 76 L 18 76 Z" stroke-width="1.4"/>
+        <circle cx="14" cy="25" r="0.9" fill="currentColor"/>
+        <circle cx="14" cy="47" r="0.9" fill="currentColor"/>
+        <circle cx="14" cy="70" r="0.9" fill="currentColor"/>
+      </g>
+    </svg>`,
+
+    // 05 — Built-In Bookshelves (frame + shelves + books)
+    bookshelves: `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="14" y="12" width="72" height="76" stroke-width="1.4"/>
+        <line x1="14" y1="30" x2="86" y2="30" stroke-width="1"/>
+        <line x1="14" y1="50" x2="86" y2="50" stroke-width="1"/>
+        <line x1="14" y1="70" x2="86" y2="70" stroke-width="1"/>
+        <rect x="22" y="16" width="3" height="14" stroke-width="0.5"/>
+        <rect x="27" y="14" width="3" height="16" stroke-width="0.5"/>
+        <rect x="32" y="17" width="3" height="13" stroke-width="0.5"/>
+        <rect x="38" y="15" width="3" height="15" stroke-width="0.5"/>
+        <rect x="50" y="16" width="3" height="14" stroke-width="0.5"/>
+        <rect x="55" y="14" width="3" height="16" stroke-width="0.5"/>
+        <rect x="65" y="17" width="3" height="13" stroke-width="0.5"/>
+        <rect x="70" y="15" width="3" height="15" stroke-width="0.5"/>
+        <rect x="22" y="36" width="3" height="14" stroke-width="0.5"/>
+        <rect x="28" y="34" width="3" height="16" stroke-width="0.5"/>
+        <rect x="40" y="37" width="3" height="13" stroke-width="0.5"/>
+        <rect x="48" y="35" width="3" height="15" stroke-width="0.5"/>
+        <rect x="60" y="34" width="3" height="16" stroke-width="0.5"/>
+        <rect x="70" y="36" width="3" height="14" stroke-width="0.5"/>
+        <rect x="22" y="56" width="3" height="14" stroke-width="0.5"/>
+        <rect x="30" y="54" width="3" height="16" stroke-width="0.5"/>
+        <rect x="40" y="55" width="3" height="15" stroke-width="0.5"/>
+        <rect x="50" y="57" width="3" height="13" stroke-width="0.5"/>
+        <rect x="60" y="54" width="3" height="16" stroke-width="0.5"/>
+        <rect x="70" y="56" width="3" height="14" stroke-width="0.5"/>
+        <rect x="22" y="76" width="3" height="10" stroke-width="0.5"/>
+        <rect x="32" y="74" width="3" height="12" stroke-width="0.5"/>
+        <rect x="42" y="75" width="3" height="11" stroke-width="0.5"/>
+        <rect x="60" y="74" width="3" height="12" stroke-width="0.5"/>
+        <rect x="70" y="76" width="3" height="10" stroke-width="0.5"/>
+      </g>
+    </svg>`,
+
+    // 06 — Mantels & Fireplace (mantel + opening + flame)
+    mantels: `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="8" y="28" width="84" height="7" stroke-width="1.4"/>
+        <line x1="8" y1="33" x2="92" y2="33" stroke-width="0.5" opacity="0.7"/>
+        <path d="M 16 35 L 16 88 M 84 35 L 84 88" stroke-width="1.4"/>
+        <line x1="16" y1="88" x2="84" y2="88" stroke-width="1.4"/>
+        <rect x="34" y="46" width="32" height="36" stroke-width="1.2"/>
+        <path d="M 50 56 Q 47 64 50 70 Q 53 64 50 56" stroke-width="0.9"/>
+        <path d="M 48 60 Q 45 68 48 72" stroke-width="0.7"/>
+        <line x1="20" y1="37" x2="20" y2="86" stroke-width="0.5" opacity="0.7"/>
+        <line x1="80" y1="37" x2="80" y2="86" stroke-width="0.5" opacity="0.7"/>
+        <circle cx="50" cy="40" r="1" fill="currentColor"/>
+      </g>
+    </svg>`,
+
+    // 07 — Restoration & Refinishing (cabinet door + paintbrush diagonal)
+    restoration: `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="14" y="18" width="72" height="64" stroke-width="1.4"/>
+        <rect x="20" y="24" width="60" height="52" stroke-width="0.6" opacity="0.7"/>
+        <circle cx="76" cy="50" r="1" fill="currentColor"/>
+        <g transform="rotate(-32, 52, 52)">
+          <rect x="22" y="50" width="34" height="4" stroke-width="1.2"/>
+          <rect x="56" y="49" width="6" height="6" stroke-width="1.2"/>
+          <path d="M 62 49 L 76 47 L 76 57 L 62 55 Z" stroke-width="1.2"/>
+          <line x1="64" y1="49" x2="64" y2="55" stroke-width="0.5" opacity="0.8"/>
+          <line x1="68" y1="48" x2="68" y2="56" stroke-width="0.5" opacity="0.8"/>
+          <line x1="72" y1="48" x2="72" y2="56" stroke-width="0.5" opacity="0.8"/>
+        </g>
+      </g>
+    </svg>`
+  };
+
+  function injectServiceIcons() {
+    document.querySelectorAll('[data-service-icon]').forEach((el) => {
+      const key = el.dataset.serviceIcon;
+      if (SERVICE_ICONS[key] && !el.querySelector('svg')) {
+        el.innerHTML = SERVICE_ICONS[key];
+      }
+    });
+  }
+
+  function animateServiceIcons() {
+    if (reduced || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      // Reduced motion or no GSAP — just ensure visibility
+      document.querySelectorAll('.service-card').forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+    document.querySelectorAll('[data-services-grid]').forEach((grid) => {
+      const cards = Array.from(grid.querySelectorAll('.service-card'));
+      if (cards.length === 0) return;
+
+      // Prime the cards + paths
+      cards.forEach((card) => {
+        const paths = card.querySelectorAll('svg path, svg line, svg rect, svg circle, svg ellipse');
+        paths.forEach((p) => {
+          // For circles/ellipses, only fade them in (no stroke draw)
+          const tag = p.tagName.toLowerCase();
+          if (tag === 'circle' || tag === 'ellipse') {
+            p.style.opacity = '0';
+          } else if (p.getTotalLength) {
+            try {
+              const len = p.getTotalLength();
+              p.style.strokeDasharray = len;
+              p.style.strokeDashoffset = len;
+            } catch (e) { /* skip */ }
+          }
+        });
+        card.classList.remove('is-visible');
+      });
+
+      // Safety net — force visibility after 3s no matter what
+      const safetyTimer = setTimeout(() => {
+        cards.forEach((card) => {
+          card.classList.add('is-visible');
+          card.querySelectorAll('svg path, svg line, svg rect').forEach((p) => { p.style.strokeDashoffset = '0'; });
+          card.querySelectorAll('svg circle, svg ellipse').forEach((p) => { p.style.opacity = '1'; });
+        });
+      }, 3000);
+
+      ScrollTrigger.create({
+        trigger: grid,
+        start: 'top 80%',
+        once: true,
+        onEnter: () => {
+          clearTimeout(safetyTimer);
+          cards.forEach((card, idx) => {
+            const delay = idx * 0.12;
+            // Card itself: fade up
+            gsap.to(card, {
+              onStart: () => card.classList.add('is-visible'),
+              delay: delay,
+              duration: 0.01,
+            });
+            // SVG paths draw in
+            const paths = card.querySelectorAll('svg path, svg line, svg rect');
+            gsap.to(paths, {
+              strokeDashoffset: 0,
+              duration: 1.4,
+              ease: 'power2.inOut',
+              delay: delay + 0.2,
+            });
+            // Circles/ellipses fade in
+            const dots = card.querySelectorAll('svg circle, svg ellipse');
+            gsap.to(dots, {
+              opacity: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+              delay: delay + 1.0,
+            });
+          });
+        },
+      });
+    });
+  }
+
   function animateOrnaments() {
     if (reduced || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
       // Reduced motion / no GSAP: just make ornaments fully visible
@@ -111,9 +330,13 @@
 
   // Inject ornaments early so the hero corners exist before paint
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectOrnaments);
+    document.addEventListener('DOMContentLoaded', () => {
+      injectOrnaments();
+      injectServiceIcons();
+    });
   } else {
     injectOrnaments();
+    injectServiceIcons();
   }
 
   // -----------------------------------------------------
@@ -846,5 +1069,7 @@
     initCounters();
     injectOrnaments();   // safety re-inject in case any frames were missed
     animateOrnaments();  // wire GSAP draw-in for ornament corners
+    injectServiceIcons();
+    animateServiceIcons();
   });
 })();
