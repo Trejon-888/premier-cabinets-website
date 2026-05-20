@@ -135,7 +135,9 @@
     const SLIDE_DURATION = 6500;   // ms each slide stays before next swap
     const FADE_DURATION = 1.4;     // seconds for crossfade
     const KB_START = 1.0;          // Ken Burns starting scale
-    const KB_END = 1.08;           // Ken Burns ending scale
+    const KB_END = 1.04;           // Ken Burns ending scale — reduced from 1.08
+                                    // to minimize blur amplification on the
+                                    // source photos (now upscaled to 2400px).
 
     const hasGSAP = typeof gsap !== 'undefined';
     let activeIdx = 0;
