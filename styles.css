@@ -6407,3 +6407,44 @@ body.nav-open {
     gap: 1.75rem !important;
   }
 }
+
+/* =====================================================
+   ITERATION 25 — Reviews-strip with Google screenshots
+   GBP screenshots now live INSIDE the dark Recent Work
+   section. Standalone gbp-reviews section removed.
+   ===================================================== */
+
+.reviews-strip__grid--screenshots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: start;
+}
+
+.reviews-strip__screenshot {
+  display: block;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(242, 194, 46, 0.18);
+  border-radius: 6px;
+  padding: 0.5rem;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.4s ease;
+}
+
+.reviews-strip__screenshot:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+.reviews-strip__screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+@media (max-width: 960px) {
+  .reviews-strip__grid--screenshots {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

@@ -700,6 +700,11 @@
   // -----------------------------------------------------
   if (!reduced && 'IntersectionObserver' in window) {
     const revealEls = document.querySelectorAll('.reveal');
+    // Iter 25: PRE-PASS — synchronously reveal any element already in viewport.
+    // This kills the flicker where above-the-fold headlines (About hero, Contact
+    // headline) momentarily show, fade out via the .reveal opacity:0.001 rule,
+    // then fade back in via the IO. Now in-viewport elements get .is-visible
+    // before paint and the IO only handles elements that scroll INTO view.
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -711,7 +716,15 @@
       },
       { threshold: 0, rootMargin: '0px 0px -5% 0px' }
     );
-    revealEls.forEach((el) => io.observe(el));
+    revealEls.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      // Element already in viewport at DOMContentLoaded → reveal immediately, no animation
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('is-visible');
+      } else {
+        io.observe(el);
+      }
+    });
 
     const hairlineEls = document.querySelectorAll('.reveal-hairline');
     const hio = new IntersectionObserver(
