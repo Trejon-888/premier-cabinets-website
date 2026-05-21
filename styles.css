@@ -6448,3 +6448,159 @@ body.nav-open {
     gap: 1rem;
   }
 }
+
+/* =====================================================================
+   ITERATION 28 — MOBILE NAV REFINEMENT (v=28)
+   Client feedback: "the three-bar section on the top right looks kinda
+   ugly. The buttons need to be compressed." Refines hamburger into a
+   brand-aligned gold asymmetric icon and tightens drawer into a clear
+   main-nav-vs-utility-zone layout with a prominent full-width gold CTA.
+   ===================================================================== */
+
+/* ---------- Hamburger: gold, 1.5px stroke, asymmetric ---------- */
+.nav-toggle {
+  width: 44px;
+  height: 44px;
+  padding: 0.5rem;
+  display: none;
+  gap: 5px;
+  align-items: flex-end; /* right-align the asymmetric stack */
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0;
+  transition: background 0.2s ease;
+}
+@media (max-width: 880px) {
+  .nav-toggle {
+    display: flex;
+  }
+}
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  background: rgba(242, 194, 46, 0.08);
+  outline: none;
+}
+.nav-toggle span {
+  display: block;
+  height: 1.5px;
+  background: var(--gold);
+  border-radius: 1px;
+  transform-origin: right center;
+  transition: width 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+              opacity 0.2s ease,
+              background 0.25s ease;
+  width: 22px; /* default */
+}
+.nav-toggle span:nth-child(1) { width: 22px; }   /* top: 100% */
+.nav-toggle span:nth-child(2) { width: 15px; }   /* middle: ~70% */
+.nav-toggle span:nth-child(3) { width: 19px; }   /* bottom: ~85% */
+
+.nav-toggle:hover span:nth-child(1),
+.nav-toggle:focus-visible span:nth-child(1) {
+  background: var(--gold-deep);
+}
+
+/* Open → X transform (gold, equal-length bars rotated into X) */
+.nav-toggle.is-open span {
+  width: 22px;
+  transform-origin: center;
+  background: var(--gold);
+}
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Drawer: compressed, hairline separators, clear zones ---------- */
+@media (max-width: 880px) {
+  .nav {
+    /* Use justify-content: flex-start with a top offset so links sit
+       comfortably below the header instead of vertically-centered (which
+       made the items feel adrift). Force full-height drawer (some browsers
+       collapse a position:fixed + inset:0 container if children are flex). */
+    justify-content: flex-start !important;
+    padding: 4.5rem 1.5rem 2rem !important;
+    gap: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important; /* dynamic viewport height for iOS Safari */
+    max-height: 100vh !important;
+    max-height: 100dvh !important;
+    background: var(--paper) !important;
+  }
+
+  .nav__link {
+    /* Tighter padding (16px instead of 24px), full-width tap target with
+       hairline gold separator under each. */
+    display: block !important;
+    width: 100%;
+    padding: 0.95rem 0.25rem !important;
+    margin: 0;
+    text-align: left;
+    font-family: var(--font-sans, 'Montserrat', sans-serif) !important;
+    font-size: 1.05rem !important;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink) !important;
+    border-bottom: 1px solid rgba(242, 194, 46, 0.3);
+    position: relative;
+    min-height: 44px; /* tap target */
+  }
+  .nav__link:last-of-type {
+    /* keep the last link with a separator so utility zone is clearly
+       below it */
+  }
+  .nav__link::after {
+    /* Hide the legacy underline-on-hover bar — we have a permanent
+       hairline separator now */
+    display: none;
+  }
+
+  /* Utility zone — language toggle + gold CTA pushed to bottom with breathing space.
+     margin-top: auto pushes the lang toggle (and the CTA below it) to the
+     bottom of the drawer, creating a clear main-nav vs utility separation. */
+  .nav .lang-toggle {
+    margin: auto auto 1rem !important;
+    padding: 0.65rem 1.4rem !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.14em;
+    align-self: center;
+    order: 10; /* sit after main links */
+    border: 1px solid rgba(17, 17, 17, 0.25);
+  }
+
+  .nav .header-cta {
+    /* Full-width gold CTA at the bottom */
+    display: flex !important;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem !important;
+    padding: 1.1rem 1.5rem !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.16em;
+    background: var(--gold) !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--gold) !important;
+    box-shadow: 0 4px 14px rgba(242, 194, 46, 0.25);
+    order: 11; /* below lang toggle */
+    min-height: 52px;
+  }
+  .nav .header-cta:hover {
+    background: var(--gold-deep) !important;
+    border-color: var(--gold-deep) !important;
+  }
+}
+
+/* Smaller phones: scale the hamburger tap target slightly while
+   keeping the icon visually crisp. */
+@media (max-width: 480px) {
+  .nav-toggle {
+    width: 44px;
+    height: 44px;
+  }
+  .nav__link {
+    font-size: 1rem !important;
+    padding: 0.85rem 0.25rem !important;
+  }
+}

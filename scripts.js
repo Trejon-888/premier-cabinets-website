@@ -833,9 +833,9 @@
     }
 
     stickyCta.addEventListener('click', (e) => {
-      const onHome = /\/(index\.html)?$/.test(window.location.pathname) || window.location.pathname.endsWith('/');
+      const onHome = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname === '';
       const hasContact = document.querySelector('#contact');
-      if ((onHome || window.location.pathname.endsWith('contact.html')) && hasContact) {
+      if ((onHome || window.location.pathname.includes('/contact')) && hasContact) {
         e.preventDefault();
         smoothScrollTo(hasContact);
       }
@@ -1197,10 +1197,13 @@
     el.textContent = new Date().getFullYear();
   });
 
-  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const path = window.location.pathname.replace(/\/$/, '/') || '/';
   document.querySelectorAll('.nav__link').forEach((link) => {
     const href = link.getAttribute('href');
-    if (href === path || (path === '' && href === 'index.html')) link.classList.add('is-active');
+    if (!href) return;
+    // Normalize both to trailing-slash directory form for comparison.
+    const hrefNorm = href.endsWith('/') ? href : (href.includes('#') || href.includes('?') ? href : href + '/');
+    if (hrefNorm === path || (path === '/' && (href === '/' || href === '/index.html'))) link.classList.add('is-active');
   });
 
   // -----------------------------------------------------

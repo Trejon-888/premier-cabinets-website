@@ -2,32 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://premiercabinetsinnovations.com/</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://premiercabinetsinnovations.com/projects.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://premiercabinetsinnovations.com/projects/</loc>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://premiercabinetsinnovations.com/services.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://premiercabinetsinnovations.com/services/</loc>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://premiercabinetsinnovations.com/about.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://premiercabinetsinnovations.com/about/</loc>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://premiercabinetsinnovations.com/contact.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://premiercabinetsinnovations.com/contact/</loc>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/matte-black-walnut-kitchen/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/walnut-library-paneling/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/arched-glass-display-marble-island/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/regency-dual-vanity-fluted-columns/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/white-inset-fridge-wall/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/painted-shaker-waterfall-island/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/live-edge-walnut-shelves/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/cream-shaker-pantry/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/marble-chandelier-kitchen/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://premiercabinetsinnovations.com/projects/white-shaker-vanity-wood-tile/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
