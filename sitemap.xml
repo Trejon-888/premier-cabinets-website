@@ -192,4 +192,10 @@
   <!-- /brand-bible/, /business-cards/, /thank-you/ intentionally excluded -->
   <!-- They carry <meta name="robots" content="noindex, follow"> as of iter 31. -->
 
+  <url>
+    <loc>https://premiercabinetsinnovations.com/consultation/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
