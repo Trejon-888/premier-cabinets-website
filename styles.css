@@ -55,6 +55,12 @@
   --section-pad-y: clamp(5rem, 12vw, 10rem);
 }
 
+/* === Iteration 23 — Mobile-first breakpoint system === */
+/* xs:  <=480px  — phones (portrait) */
+/* sm:  <=640px  — phones (landscape) + small tablets */
+/* md:  <=880px  — tablets */
+/* lg:  <=1100px — small desktops */
+
 /* Iteration 3 — editorial line-break balance on all headlines */
 h1, h2, h3, .hero__headline, .page-hero__title, .contact-section__headline,
 .featured-project__title, .case-study__title, .about-block__title,
@@ -441,31 +447,9 @@ section {
 }
 
 @media (max-width: 880px) {
-  .nav {
-    position: fixed;
-    top: 72px;
-    left: 0;
-    right: 0;
-    background: var(--paper);
-    border-bottom: 1px solid var(--hairline);
-    flex-direction: column;
-    align-items: stretch;
-    padding: 2rem var(--gutter);
-    gap: 1.25rem;
-    transform: translateY(-110%);
-    transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
-  }
-  .nav.is-open {
-    transform: translateY(0);
-  }
-  .nav__link {
-    font-size: 1rem;
-    padding: 0.5rem 0;
-    color: var(--ink) !important;
-  }
-  .header-cta {
-    display: none;
-  }
+  /* Legacy slide-down (iter <23) — superseded by iter-23 full-screen drawer below.
+     Kept the breakpoint open so any new rules align, but old conflicting transforms
+     have been removed. The iter-23 block at end of file owns mobile nav now. */
   .nav-toggle {
     display: flex;
   }
@@ -5714,3 +5698,431 @@ html:not(.has-js) .numbered-list__item {
 }
 
 
+/* =====================================================================
+   ITERATION 23 — COMPREHENSIVE MOBILE OPTIMIZATION
+   Placed at end of file so these rules win cascade where needed.
+   ===================================================================== */
+
+/* ---------- Header / logo / nav-toggle ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: clamp(0.4rem, 0.9vw, 0.7rem) 0;
+  background: rgba(247, 244, 238, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 880px) {
+  .site-header {
+    padding: clamp(0.5rem, 2vw, 0.8rem) 0;
+  }
+}
+@media (max-width: 640px) {
+  .site-header {
+    padding: 0.5rem 0;
+  }
+}
+
+/* Logo scales nicely on mobile, no scroll-shrink (already small) */
+@media (max-width: 880px) {
+  .site-header__logo {
+    height: 64px;
+    max-width: 80px;
+  }
+  .site-header.is-scrolled .site-header__logo {
+    height: 56px;
+  }
+}
+@media (max-width: 480px) {
+  .site-header__logo {
+    height: 52px;
+    max-width: 64px;
+  }
+  .site-header.is-scrolled .site-header__logo {
+    height: 48px;
+  }
+}
+
+/* Hamburger — 48px tap target, 24px lines */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem;
+  width: 48px;
+  height: 48px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 101;
+  position: relative;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 880px) {
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+/* Full-screen slide-in nav drawer — replaces legacy slide-down */
+@media (max-width: 880px) {
+  .nav {
+    position: fixed;
+    inset: 0;
+    background: var(--paper);
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    padding: 5rem 2rem 3rem;
+    z-index: 99;
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s ease, visibility 0.3s ease;
+    overflow-y: auto;
+    pointer-events: none;
+    border-bottom: none;
+    flex-wrap: nowrap;
+    white-space: normal;
+    top: 0;
+  }
+  .nav.is-open {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .nav__link {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    font-family: var(--font-serif, 'Cinzel', Georgia, serif);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 0.75rem 0;
+    color: var(--ink) !important;
+    text-transform: none;
+  }
+  .nav__link::after {
+    height: 2px;
+  }
+  .header-cta {
+    display: inline-flex !important;
+    margin-top: 1rem;
+    padding: 1rem 2.25rem;
+    font-size: 0.9rem;
+    background: var(--gold);
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+  .lang-toggle {
+    margin: 0.5rem 0;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Lock body scroll when drawer is open */
+body.nav-open {
+  overflow: hidden;
+}
+
+/* Hide the legacy .mobile-drawer aside — iter 23 uses .nav as the drawer */
+.mobile-drawer,
+.mobile-drawer-backdrop {
+  display: none !important;
+}
+
+/* ---------- Hero stacking on mobile ---------- */
+@media (max-width: 960px) {
+  .hero--split__container {
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .hero--split__copy {
+    order: 0;
+    text-align: left;
+  }
+  .hero--split__media {
+    order: 1;
+    aspect-ratio: 4/3;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero--split {
+    padding: clamp(5rem, 14vw, 7rem) 0 clamp(2.5rem, 6vw, 4rem);
+  }
+  .hero--split__copy .hero__headline,
+  .hero__headline {
+    font-size: clamp(2.25rem, 9vw, 3.5rem);
+    line-height: 1.1;
+  }
+  .hero--split__copy .hero__sub,
+  .hero__sub {
+    font-size: clamp(1rem, 4vw, 1.15rem);
+  }
+  .hero__ctas {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .hero__ctas .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+  }
+  .hero__trust {
+    font-size: 0.7rem;
+  }
+}
+
+/* ---------- Service card grid stacking ---------- */
+@media (max-width: 720px) {
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem;
+  }
+  .service-card {
+    padding: 1.5rem;
+  }
+  .service-card__icon {
+    width: 64px !important;
+    height: 64px !important;
+  }
+  .service-card__num {
+    font-size: 2.25rem !important;
+  }
+  .service-card__name {
+    font-size: 1.4rem !important;
+  }
+  .service-card__desc {
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- Recent Work + Projects + Editorial grids ---------- */
+@media (max-width: 880px) {
+  .recent-work__grid,
+  .projects-grid,
+  [data-editorial-grid] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+  .editorial-card__photo {
+    aspect-ratio: 4/3;
+  }
+  .editorial-card__title {
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
+  }
+}
+
+/* ---------- Reviews + GBP reviews ---------- */
+@media (max-width: 720px) {
+  .reviews-strip__grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+  .review-card__quote {
+    font-size: 1.05rem;
+  }
+  .gbp-reviews__grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+  .gbp-review-card .ornament-frame__inner {
+    padding: 0.75rem;
+  }
+}
+
+/* ---------- Process strip ---------- */
+@media (max-width: 720px) {
+  .process-strip__grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem;
+  }
+  .process-strip__step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .process-strip__num {
+    font-size: 2rem !important;
+    flex-shrink: 0;
+  }
+}
+
+/* ---------- Contact section + form ---------- */
+@media (max-width: 880px) {
+  .contact-section__inner {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem;
+  }
+  .contact-section__headline {
+    font-size: clamp(2rem, 8vw, 3.5rem) !important;
+  }
+  .contact-section__meta {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem;
+  }
+}
+@media (max-width: 640px) {
+  .enquiry-form {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .enquiry-form input,
+  .enquiry-form select,
+  .enquiry-form textarea,
+  .enquiry-form__field input,
+  .enquiry-form__field select,
+  .enquiry-form__field textarea {
+    font-size: 16px !important; /* iOS won't zoom on focus if >=16px */
+    padding: 0.85rem 0.5rem !important;
+    min-height: 48px;
+  }
+  .enquiry-form textarea,
+  .enquiry-form__field textarea {
+    min-height: 120px;
+  }
+  .enquiry-form button[type="submit"],
+  .enquiry-form__submit {
+    width: 100%;
+    min-height: 52px;
+    font-size: 1rem;
+  }
+}
+
+/* ---------- Project detail page ---------- */
+@media (max-width: 880px) {
+  .project-detail__body-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+  .project-detail__sidebar {
+    position: static !important;
+    top: auto !important;
+  }
+  .project-detail__title {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+    max-width: 100%;
+  }
+  .project-nav__grid {
+    grid-template-columns: 1fr !important;
+  }
+  .project-nav__link--next {
+    text-align: left !important;
+  }
+}
+
+/* ---------- Footer ---------- */
+@media (max-width: 880px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem;
+  }
+  .site-footer__logo {
+    height: 100px !important;
+  }
+  .site-footer__brand p {
+    font-size: 1.1rem !important;
+  }
+}
+@media (max-width: 640px) {
+  .site-footer {
+    padding: 3rem 0 1.5rem;
+  }
+  .site-footer__brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+  .site-footer__socials {
+    flex-wrap: wrap;
+  }
+  .site-footer__bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}
+
+/* ---------- Sticky CTA (mobile positioning) ---------- */
+@media (max-width: 640px) {
+  .sticky-cta {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.75rem 1.1rem;
+    font-size: 0.8rem;
+  }
+  .sticky-cta__label {
+    display: none; /* hide hover label on mobile */
+  }
+}
+
+/* ---------- Touch targets (Apple HIG 44px min) ---------- */
+@media (pointer: coarse) {
+  .nav__link,
+  .header-cta,
+  .lang-toggle,
+  .btn,
+  .editorial-card,
+  .gbp-review-card,
+  .gbp-reviews__more a,
+  .reviews-strip__more a,
+  .sticky-cta__pill,
+  .sticky-cta,
+  .project-nav__link,
+  .footer-nav a,
+  .nav-toggle {
+    min-height: 44px;
+  }
+  .enquiry-form a,
+  .contact-section a {
+    padding-block: 0.25rem;
+  }
+}
+
+/* ---------- Typography mobile scaling ---------- */
+@media (max-width: 640px) {
+  :root {
+    --type-display: clamp(2.25rem, 9vw, 3.5rem);
+    --type-h1: clamp(2rem, 8vw, 3rem);
+    --type-h2: clamp(1.75rem, 6.5vw, 2.5rem);
+    --type-h3: clamp(1.25rem, 4.5vw, 1.6rem);
+    --type-body: clamp(1rem, 4vw, 1.0625rem);
+  }
+  body {
+    font-size: 16px;
+  }
+}
+
+/* ---------- Portfolio illustration mobile ---------- */
+@media (max-width: 720px) {
+  .page-hero--with-art .page-hero__inner {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .page-hero__art {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+}

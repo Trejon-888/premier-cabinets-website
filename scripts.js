@@ -475,6 +475,11 @@
   function initLenis() {
     if (reduced) return; // honor user preference
     if (typeof window.Lenis === 'undefined') return;
+
+    // Iteration 23: skip Lenis on touch devices for native iOS momentum scroll
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) return;
+
     lenis = new window.Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -507,61 +512,52 @@
   }
 
   // -----------------------------------------------------
-  // MOBILE DRAWER
+  // MOBILE NAV DRAWER (iteration 23)
+  // The .nav element doubles as the full-screen drawer on <=880px.
+  // Legacy [data-drawer] aside has been hidden via CSS and is no longer used.
   // -----------------------------------------------------
-  const drawer = document.querySelector('[data-drawer]');
-  const drawerBackdrop = document.querySelector('[data-drawer-backdrop]');
+  const nav = document.querySelector('.nav');
   const navToggle = document.querySelector('.nav-toggle');
 
-  function openDrawer() {
-    if (!drawer) return;
-    drawer.classList.add('is-open');
-    drawer.setAttribute('aria-hidden', 'false');
-    if (drawerBackdrop) drawerBackdrop.classList.add('is-open');
-    if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
-    if (navToggle) navToggle.classList.add('is-open');
+  function openNav() {
+    if (!nav) return;
+    nav.classList.add('is-open');
+    if (navToggle) {
+      navToggle.classList.add('is-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+    }
+    document.body.classList.add('nav-open');
     if (lenis) lenis.stop();
   }
-  function closeDrawer() {
-    if (!drawer) return;
-    drawer.classList.remove('is-open');
-    drawer.setAttribute('aria-hidden', 'true');
-    if (drawerBackdrop) drawerBackdrop.classList.remove('is-open');
-    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-    if (navToggle) navToggle.classList.remove('is-open');
+  function closeNav() {
+    if (!nav) return;
+    nav.classList.remove('is-open');
+    if (navToggle) {
+      navToggle.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+    document.body.classList.remove('nav-open');
     if (lenis) lenis.start();
   }
 
-  if (navToggle && drawer) {
+  if (navToggle && nav) {
     navToggle.addEventListener('click', () => {
-      if (drawer.classList.contains('is-open')) closeDrawer();
-      else openDrawer();
+      if (nav.classList.contains('is-open')) closeNav();
+      else openNav();
     });
-  }
-  if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
-  if (drawer) {
-    drawer.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', closeDrawer);
-    });
-  }
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer && drawer.classList.contains('is-open')) closeDrawer();
-  });
-
-  // Legacy: also support the old inline .nav slide-down if present (when drawer markup is missing)
-  const legacyNav = document.querySelector('.nav');
-  if (legacyNav && navToggle && !drawer) {
-    navToggle.addEventListener('click', () => {
-      const open = legacyNav.classList.toggle('is-open');
-      navToggle.classList.toggle('is-open', open);
-      navToggle.setAttribute('aria-expanded', String(open));
-    });
-    legacyNav.querySelectorAll('a').forEach((a) => {
+    // Close when clicking any nav link (small delay so user sees the click feedback)
+    nav.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => {
-        legacyNav.classList.remove('is-open');
-        navToggle.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
+        setTimeout(closeNav, 60);
       });
+    });
+    // Close on Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+    });
+    // Close when resizing back to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 880 && nav.classList.contains('is-open')) closeNav();
     });
   }
 
@@ -673,6 +669,23 @@
         start();
       });
     });
+
+    // Iteration 23 — touch swipe support for hero carousel
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const SWIPE_THRESHOLD = 50; // px
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const dx = touchEndX - touchStartX;
+      if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+      if (dx < 0) go(activeIdx + 1); // swipe left -> next
+      else go(activeIdx - 1);         // swipe right -> prev
+      start(); // reset cadence
+    }, { passive: true });
+
     carousel.addEventListener('mouseenter', pause);
     carousel.addEventListener('mouseleave', resume);
     document.addEventListener('visibilitychange', () => {
