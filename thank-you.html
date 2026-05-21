@@ -21,7 +21,7 @@
 <header class="site-header site-header--solid">
   <div class="container site-header__inner">
     <a class="site-header__brand" href="index.html" aria-label="Premier Cabinets Innovations — home">
-      <img class="site-header__logo" src="images/brand/pc-header-light.png" alt="Premier Cabinets Innovations" width="600" height="200" />
+      <img class="site-header__logo" src="images/brand/pc-vertical-header-light.png" alt="Premier Cabinets Innovations" width="600" height="400" />
     </a>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -46,11 +46,11 @@
   <div class="container">
     <div class="thank-you__inner">
       <span class="thank-you__eyebrow">Message Received</span>
-      <h1 class="thank-you__title">Thank <span class="gold-word">you</span>.</h1>
-      <p class="thank-you__body">Your message is in the workshop. We will respond within one business day. If your timeline is shorter than that, give Felix a call at <a href="tel:+19165502228" style="border-bottom: 1px solid currentColor; padding-bottom: 1px;">(916) 550-2228</a>.</p>
+      <h1 class="thank-you__title" data-i18n="ty.h1">Thank you.</h1>
+      <p class="thank-you__body" data-i18n="ty.body">Your message is in the workshop. We will respond within one business day.</p>
       <div class="thank-you__hairline" aria-hidden="true"></div>
       <div class="thank-you__links">
-        <a class="link-arrow" href="index.html">Back to home <span aria-hidden="true">→</span></a>
+        <a class="link-arrow" href="index.html" data-i18n="ty.back" data-i18n-html>Back to home <span aria-hidden="true">→</span></a>
         <a class="link-arrow" href="projects.html">See more projects <span aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -65,7 +65,7 @@
       <div class="site-footer__brand">
         <img class="site-footer__logo" src="images/brand/pc-horizontal-dark.png" alt="Premier Cabinets Innovations" width="1200" height="500" />
         <p data-i18n="footer.tagline">Custom Cabinetry + Millwork. Since 1985.</p>
-        <span class="site-footer__care">Built in our Citrus Heights workshop.</span>
+        <span class="site-footer__care" data-i18n="footer.care">Built in our Citrus Heights workshop.</span>
         <div class="site-footer__socials">
           <a href="#" aria-label="Instagram">Instagram</a>
           <a href="#" aria-label="Facebook">Facebook</a>
@@ -92,11 +92,11 @@
       </div>
     </div>
     <div class="site-footer__bottom site-footer__bottom-row-hairline">
-      <span>© <span data-year>2026</span> Premier Cabinets Innovations LLC</span>
+      <span><span data-i18n="footer.copyPrefix">© </span><span data-year>2026</span><span data-i18n="footer.copySuffix"> Premier Cabinets Innovations LLC</span></span>
       <span class="site-footer__bottom-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <button type="button" class="site-footer__top" data-back-to-top>Back to top <span aria-hidden="true">↑</span></button>
+        <a href="#" data-i18n="footer.privacy">Privacy</a>
+        <a href="#" data-i18n="footer.terms">Terms</a>
+        <button type="button" class="site-footer__top" data-back-to-top><span data-i18n="footer.backtotop">Back to top</span> <span aria-hidden="true">↑</span></button>
       </span>
     </div>
   </div>
@@ -104,7 +104,7 @@
 
 <div class="mobile-drawer-backdrop" data-drawer-backdrop aria-hidden="true"></div>
 <aside class="mobile-drawer" data-drawer aria-hidden="true">
-  <a href="index.html">Home</a>
+  <a href="index.html" data-i18n="nav.home">Home</a>
   <a href="services.html" data-i18n="nav.services">What We Build</a>
   <a href="projects.html" data-i18n="nav.work">Projects</a>
   <a href="about.html" data-i18n="nav.about">About</a>

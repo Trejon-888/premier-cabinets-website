@@ -64,7 +64,7 @@
 <header class="site-header site-header--solid">
   <div class="container site-header__inner">
     <a class="site-header__brand" href="index.html" aria-label="Premier Cabinets Innovations — home">
-      <img class="site-header__logo" src="images/brand/pc-header-light.png" alt="Premier Cabinets Innovations" width="600" height="200" />
+      <img class="site-header__logo" src="images/brand/pc-vertical-header-light.png" alt="Premier Cabinets Innovations" width="600" height="400" />
     </a>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -91,8 +91,8 @@
     <div class="contact-section__inner">
 
       <div class="contact-section__left reveal">
-        <span class="contact-section__eyebrow">Contact</span>
-        <h1 class="contact-section__headline">Ready to start your next <span class="gold-word">project</span>?</h1>
+        <span class="contact-section__eyebrow" data-i18n="nav.contact">Contact</span>
+        <h1 class="contact-section__headline" data-i18n="contact.headline" data-i18n-html>Ready to start your next <span class="gold-word">project</span>?</h1>
         <p class="contact-section__body" data-i18n="contact.body">We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California. We'd love to help build yours.</p>
 
         <div class="contact-section__meta">
@@ -106,11 +106,11 @@
           </div>
           <div class="contact-section__meta-block">
             <h4 data-i18n="contact.workshop">Workshop</h4>
-            <span class="value" style="border: 0; padding: 0;">5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621</span>
+            <span class="value" style="border: 0; padding: 0;" data-i18n="contact.workshop.value" data-i18n-html>5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621</span>
           </div>
           <div class="contact-section__meta-block">
             <h4 data-i18n="contact.hours">Hours</h4>
-            <span class="value" style="border: 0; padding: 0;">Mon–Fri, 8a–5p<br />Saturday by appointment</span>
+            <span class="value" style="border: 0; padding: 0;" data-i18n="contact.hours.value" data-i18n-html>Mon–Fri, 8a–5p<br />Saturday by appointment</span>
           </div>
           <div class="contact-section__meta-block">
             <h4>Service area</h4>
@@ -140,64 +140,64 @@
 
           <div class="enquiry-form__row">
             <div class="enquiry-form__field">
-              <label for="cf-first">First Name</label>
+              <label for="cf-first" data-i18n="form.firstName">First Name</label>
               <input type="text" id="cf-first" name="First Name" required autocomplete="given-name" />
             </div>
             <div class="enquiry-form__field">
-              <label for="cf-last">Last Name</label>
+              <label for="cf-last" data-i18n="form.lastName">Last Name</label>
               <input type="text" id="cf-last" name="Last Name" required autocomplete="family-name" />
             </div>
           </div>
 
           <div class="enquiry-form__row">
             <div class="enquiry-form__field">
-              <label for="cf-phone">Phone Number <span style="text-transform: none; letter-spacing: 0; opacity: 0.6;">(optional)</span></label>
+              <label for="cf-phone"><span data-i18n="form.phone">Phone Number</span> <span style="text-transform: none; letter-spacing: 0; opacity: 0.6;" data-i18n="form.phoneOpt">(optional)</span></label>
               <input type="tel" id="cf-phone" name="Phone" autocomplete="tel" />
             </div>
             <div class="enquiry-form__field">
-              <label for="cf-email">Email</label>
+              <label for="cf-email" data-i18n="form.email">Email</label>
               <input type="email" id="cf-email" name="Email" required autocomplete="email" />
             </div>
           </div>
 
           <div class="enquiry-form__field">
-            <label for="cf-type">Enquiry Type</label>
+            <label for="cf-type" data-i18n="form.enquiryType">Enquiry Type</label>
             <select id="cf-type" name="Enquiry Type" required>
-              <option value="" disabled selected>Please select</option>
-              <option value="Custom Kitchen">Custom Kitchen</option>
-              <option value="Bathroom Cabinetry">Bathroom Cabinetry</option>
-              <option value="Paneled Rooms + Millwork">Paneled Rooms + Millwork</option>
-              <option value="Built-ins + Specialty Work">Built-ins + Specialty Work</option>
-              <option value="Restoration">Restoration</option>
-              <option value="General Enquiry">General Enquiry</option>
+              <option value="" disabled selected data-i18n="form.enquirySelect">Please select</option>
+              <option value="Custom Kitchen" data-i18n="form.opt.kitchen">Custom Kitchen</option>
+              <option value="Bathroom Cabinetry" data-i18n="form.opt.bath">Bathroom Cabinetry</option>
+              <option value="Paneled Rooms + Millwork" data-i18n="form.opt.paneled">Paneled Rooms + Millwork</option>
+              <option value="Built-ins + Specialty Work" data-i18n="form.opt.builtins">Built-ins + Specialty Work</option>
+              <option value="Restoration" data-i18n="form.opt.restoration">Restoration</option>
+              <option value="General Enquiry" data-i18n="form.opt.general">General Enquiry</option>
             </select>
           </div>
 
           <div class="enquiry-form__field">
-            <label for="cf-location">Project Address / City <span style="text-transform: none; letter-spacing: 0; opacity: 0.6;">(optional)</span></label>
+            <label for="cf-location"><span data-i18n="form.location">Project Address / City</span> <span style="text-transform: none; letter-spacing: 0; opacity: 0.6;" data-i18n="form.phoneOpt">(optional)</span></label>
             <input type="text" id="cf-location" name="Project Location" placeholder="Sacramento, Bay Area, other" />
           </div>
 
           <div class="enquiry-form__field">
-            <label for="cf-message">Message</label>
+            <label for="cf-message" data-i18n="form.message">Message</label>
             <textarea id="cf-message" name="Message" rows="5" required placeholder="What you have in mind, rough timeline, and the address or city if you can share it."></textarea>
           </div>
 
           <label class="enquiry-form__check">
             <input type="checkbox" name="Subscribe" value="Yes" />
-            <span>Subscribe for occasional updates on the workshop and new projects.</span>
+            <span data-i18n="form.subscribe">Subscribe for occasional updates on the workshop and new projects.</span>
           </label>
 
-          <p class="enquiry-form__privacy">We use your message only to respond to your enquiry. Your details are not shared.</p>
+          <p class="enquiry-form__privacy" data-i18n="form.privacy">We use your message only to respond to your enquiry. Your details are not shared.</p>
 
           <div class="enquiry-form__submit-row">
             <button type="submit" class="enquiry-form__submit">
-              <span>Send Message</span>
+              <span data-i18n="form.send">Send Message</span>
               <span class="btn__arrow" aria-hidden="true">→</span>
             </button>
-            <span class="enquiry-form__submit-note">We respond within one business day.</span>
+            <span class="enquiry-form__submit-note" data-i18n="form.submitNote">We respond within one business day.</span>
           </div>
-          <p class="felix-note">Felix typically replies within one business day.</p>
+          <p class="felix-note" data-i18n="form.felixReply">Felix typically replies within one business day.</p>
         </form>
       </div>
 
@@ -222,7 +222,7 @@
       <div class="site-footer__brand">
         <img class="site-footer__logo" src="images/brand/pc-horizontal-dark.png" alt="Premier Cabinets Innovations" width="1200" height="500" />
         <p data-i18n="footer.tagline">Custom Cabinetry + Millwork. Since 1985.</p>
-        <span class="site-footer__care">Built in our Citrus Heights workshop.</span>
+        <span class="site-footer__care" data-i18n="footer.care">Built in our Citrus Heights workshop.</span>
         <div class="site-footer__socials">
           <a href="#" aria-label="Instagram">Instagram</a>
           <a href="#" aria-label="Facebook">Facebook</a>
@@ -249,11 +249,11 @@
       </div>
     </div>
     <div class="site-footer__bottom site-footer__bottom-row-hairline">
-      <span>© <span data-year>2026</span> Premier Cabinets Innovations LLC</span>
+      <span><span data-i18n="footer.copyPrefix">© </span><span data-year>2026</span><span data-i18n="footer.copySuffix"> Premier Cabinets Innovations LLC</span></span>
       <span class="site-footer__bottom-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <button type="button" class="site-footer__top" data-back-to-top>Back to top <span aria-hidden="true">↑</span></button>
+        <a href="#" data-i18n="footer.privacy">Privacy</a>
+        <a href="#" data-i18n="footer.terms">Terms</a>
+        <button type="button" class="site-footer__top" data-back-to-top><span data-i18n="footer.backtotop">Back to top</span> <span aria-hidden="true">↑</span></button>
       </span>
     </div>
   </div>
@@ -261,7 +261,7 @@
 
 <div class="mobile-drawer-backdrop" data-drawer-backdrop aria-hidden="true"></div>
 <aside class="mobile-drawer" data-drawer aria-hidden="true">
-  <a href="index.html">Home</a>
+  <a href="index.html" data-i18n="nav.home">Home</a>
   <a href="services.html" data-i18n="nav.services">What We Build</a>
   <a href="projects.html" data-i18n="nav.work">Projects</a>
   <a href="about.html" data-i18n="nav.about">About</a>

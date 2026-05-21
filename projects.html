@@ -55,7 +55,7 @@
 <header class="site-header site-header--solid">
   <div class="container site-header__inner">
     <a class="site-header__brand" href="index.html" aria-label="Premier Cabinets Innovations — home">
-      <img class="site-header__logo" src="images/brand/pc-header-light.png" alt="Premier Cabinets Innovations" width="600" height="200" />
+      <img class="site-header__logo" src="images/brand/pc-vertical-header-light.png" alt="Premier Cabinets Innovations" width="600" height="400" />
     </a>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -81,11 +81,11 @@
     <div class="page-hero__inner">
       <div class="page-hero__label">
         <span class="page-hero__num">Portfolio</span>
-        <p class="eyebrow">Projects</p>
+        <p class="eyebrow" data-i18n="nav.work">Projects</p>
       </div>
       <div>
-        <h1 class="page-hero__title">Built in Citrus Heights. Made for fine homes across Northern <span class="gold-word">California</span>.</h1>
-        <p class="lede page-hero__sub">Custom cabinetry and millwork projects from 1985 to today.</p>
+        <h1 class="page-hero__title" data-i18n="pj.hero.h1">Built in Citrus Heights. Made for fine homes across Northern California.</h1>
+        <p class="lede page-hero__sub" data-i18n="pj.hero.lede">Custom cabinetry and millwork projects from 1985 to today.</p>
       </div>
     </div>
   </div>
@@ -99,8 +99,8 @@
         <img src="images/projects/kitchen-matte-black-walnut.jpg" alt="Matte-black slab kitchen with walnut wall and honed stone counter" loading="eager" width="1600" height="1200" />
       </a>
       <div class="featured-project__copy reveal">
-        <span class="featured-project__eyebrow">Featured · Kitchen</span>
-        <h2 class="featured-project__title"><a href="project-matte-black-walnut-kitchen.html" style="color: inherit; text-decoration: none;">Matte-black slab and walnut kitchen for Bay Area <span class="gold-word">residence</span>.</a></h2>
+        <span class="featured-project__eyebrow" data-i18n="pj.featured.eyebrow">Featured · Kitchen</span>
+        <h2 class="featured-project__title"><a href="project-matte-black-walnut-kitchen.html" style="color: inherit; text-decoration: none;" data-i18n="pj.featured.title">Matte-black slab and walnut kitchen for Bay Area residence.</a></h2>
         <ul class="editorial-card__meta" style="margin: 0 0 1.5rem;">
           <li>Private client</li>
           <li>San Francisco Bay Area</li>
@@ -357,7 +357,7 @@
       <div class="site-footer__brand">
         <img class="site-footer__logo" src="images/brand/pc-horizontal-dark.png" alt="Premier Cabinets Innovations" width="1200" height="500" />
         <p data-i18n="footer.tagline">Custom Cabinetry + Millwork. Since 1985.</p>
-        <span class="site-footer__care">Built in our Citrus Heights workshop.</span>
+        <span class="site-footer__care" data-i18n="footer.care">Built in our Citrus Heights workshop.</span>
         <div class="site-footer__socials">
           <a href="#" aria-label="Instagram">Instagram</a>
           <a href="#" aria-label="Facebook">Facebook</a>
@@ -384,11 +384,11 @@
       </div>
     </div>
     <div class="site-footer__bottom site-footer__bottom-row-hairline">
-      <span>© <span data-year>2026</span> Premier Cabinets Innovations LLC</span>
+      <span><span data-i18n="footer.copyPrefix">© </span><span data-year>2026</span><span data-i18n="footer.copySuffix"> Premier Cabinets Innovations LLC</span></span>
       <span class="site-footer__bottom-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <button type="button" class="site-footer__top" data-back-to-top>Back to top <span aria-hidden="true">↑</span></button>
+        <a href="#" data-i18n="footer.privacy">Privacy</a>
+        <a href="#" data-i18n="footer.terms">Terms</a>
+        <button type="button" class="site-footer__top" data-back-to-top><span data-i18n="footer.backtotop">Back to top</span> <span aria-hidden="true">↑</span></button>
       </span>
     </div>
   </div>
@@ -396,7 +396,7 @@
 
 <div class="mobile-drawer-backdrop" data-drawer-backdrop aria-hidden="true"></div>
 <aside class="mobile-drawer" data-drawer aria-hidden="true">
-  <a href="index.html">Home</a>
+  <a href="index.html" data-i18n="nav.home">Home</a>
   <a href="services.html" data-i18n="nav.services">What We Build</a>
   <a href="projects.html" data-i18n="nav.work">Projects</a>
   <a href="about.html" data-i18n="nav.about">About</a>
@@ -407,9 +407,9 @@
 </aside>
 
 <a class="sticky-cta" data-sticky-cta href="#contact" aria-label="Start your project">
-  <span class="sticky-cta__label">Talk to us</span>
+  <span class="sticky-cta__label" data-i18n="sticky.label">Talk to us</span>
   <span class="sticky-cta__full" data-i18n="sticky.cta">Start Your Project</span>
-  <span class="sticky-cta__short">Start</span>
+  <span class="sticky-cta__short" data-i18n="sticky.short">Start</span>
   <span class="sticky-cta__arrow" aria-hidden="true">→</span>
 </a>
 

@@ -863,8 +863,11 @@
       });
     });
 
-    // Section headline reveals — every h2 inside a section that isn't already wrapped in split-text
-    document.querySelectorAll('section h2:not([data-split-text])').forEach((h) => {
+    // Section headline reveals — every h2 inside a section that isn't already
+    // wrapped in split-text AND isn't using the .reveal IntersectionObserver
+    // path (iter 17: prevents double-animation conflict on .contact-section__headline
+    // which was causing the visible "fade in, fade out, fade in" flicker).
+    document.querySelectorAll('section h2:not([data-split-text]):not(.reveal):not(.contact-section__headline)').forEach((h) => {
       gsap.fromTo(h,
         { opacity: 0, y: 30 },
         {
@@ -1192,6 +1195,11 @@
   // -----------------------------------------------------
   window.addEventListener('load', () => {
     initLenis();
+    // Iteration 17: run initExtendedMotion BEFORE initGsap so the `.reveal`
+    // class is applied to section h2 elements before the GSAP `section h2`
+    // ScrollTrigger sweep would have grabbed them, preventing the double-
+    // animation conflict that produced the contact-section flicker.
+    initExtendedMotion();  // iteration 15 — extended scroll motion (must run first)
     initGsap();
     initSplitText();
     initCounters();
@@ -1199,16 +1207,29 @@
     animateOrnaments();  // wire GSAP draw-in for ornament corners
     injectServiceIcons();
     animateServiceIcons();
-    initExtendedMotion();  // iteration 15 — extended scroll motion
   });
 
-  // FINAL SAFETY: 2 seconds after window load, force any element still at
-  // opacity < 0.5 to fully visible. Catches any GSAP/IO escape paths.
+  // FINAL SAFETY: 2 seconds after window load, force any element STILL stuck
+  // below opacity 0.5 to fully visible. Smarter than before (iter 17):
+  //  - Skips anything already animated in normally (the previous version
+  //    forced opacity:1 + transform:none !important on EVERY element in the
+  //    selector list, which could overwrite an in-flight reveal transform
+  //    and cause the visible "fade out, fade back in" flicker on the
+  //    contact section's headline).
+  //  - For `.reveal` elements that ARE stuck, also add `.is-visible` so the
+  //    reveal CSS path is consistent (no inline style stomping the class).
   window.addEventListener('load', () => {
     setTimeout(() => {
-      document.querySelectorAll('.contact-section__headline, .contact-section__body, .contact-section__meta, .enquiry-form, .reviews-strip, .review-card, .process-strip__step, .editorial-card, .service-card, section h2, .built-and-work__title, .built-and-work__sub-title, .reveal').forEach((el) => {
+      const selectors = '.contact-section__headline, .contact-section__body, .contact-section__meta, .enquiry-form, .reviews-strip, .review-card, .process-strip__step, .editorial-card, .service-card, .built-and-work__title, .built-and-work__sub-title, .reveal';
+      document.querySelectorAll(selectors).forEach((el) => {
         const op = parseFloat(getComputedStyle(el).opacity);
-        if (op < 0.5) {
+        // Skip elements that are already visible — don't re-poke them
+        if (op > 0.5) return;
+        // For .reveal elements, prefer the CSS class path
+        if (el.classList.contains('reveal')) {
+          el.classList.add('is-visible');
+        } else {
+          // Force visible without GSAP (avoid retriggering tweens)
           el.style.setProperty('opacity', '1', 'important');
           el.style.setProperty('transform', 'none', 'important');
         }
@@ -1222,94 +1243,415 @@
   // ============================================================
   const I18N = {
     en: {
+      // ===== NAV / HEADER =====
       'nav.work': 'Our Work',
       'nav.about': 'About',
       'nav.contact': 'Contact',
       'nav.cta': 'Start Your Project',
       'nav.services': 'What We Build',
+      'nav.home': 'Home',
+
+      // ===== HERO =====
       'hero.eyebrow': 'Custom Cabinetry + Millwork · Since 1985',
       'hero.headline': 'Built for the places you\'re <span class="gold-word">proud</span> of.',
       'hero.sub': 'Custom cabinetry and millwork for residential and commercial spaces across Sacramento, the Bay Area, and Northern California.',
       'hero.cta.primary': 'Start Your Project',
       'hero.cta.secondary': 'See Our Work',
       'hero.trust': 'Citrus Heights · Sacramento · Bay Area · Northern California',
+
+      // ===== WORKSHOP / BUILT & WORK (home) =====
       'workshop.eyebrow': '01 — What we build',
-      'workshop.title': 'Custom cabinetry and millwork, <span class="gold-word">made in our workshop</span>.',
+      'workshop.title': 'Custom cabinetry and millwork, from <span class="gold-word">our workshop</span>.',
       'workshop.lede': 'We measure, draw, build, and install every piece from our Citrus Heights workshop. Here is what we build, and a sample of how it lives in our clients\' homes.',
+      'workshop.caveat': 'Plus custom millwork tailored to your home.',
+
+      // ===== SERVICE CARDS (home — 7 cards) =====
+      'sc.01.name': 'Custom Kitchens',
+      'sc.01.desc': 'The whole room measured, drawn, built. Eight to ten weeks in shop, one to two weeks on site.',
+      'sc.02.name': 'Bathroom Vanities',
+      'sc.02.desc': 'Floating, footed, or integrated. Built around your bathroom\'s exact layout.',
+      'sc.03.name': 'Wall Paneling',
+      'sc.03.desc': 'Floor-to-ceiling panels for living rooms, libraries, dining rooms, and entryways.',
+      'sc.04.name': 'Custom Moldings & Frames',
+      'sc.04.desc': 'Crown, base, casing, and frames cut to match historical or modern profiles.',
+      'sc.05.name': 'Built-In Bookshelves',
+      'sc.05.desc': 'Library-grade shelving for studies, home offices, and great rooms.',
+      'sc.06.name': 'Mantels & Fireplace Surrounds',
+      'sc.06.desc': 'Custom-shaped mantels in oak, walnut, or painted hardwood.',
+      'sc.07.name': 'Restoration & Refinishing',
+      'sc.07.desc': 'Period restoration, cabinet refacing, and full refinishing of existing millwork.',
+
+      // ===== RECENT WORK (home) =====
       'recentwork.eyebrow': '02 — See it in action',
-      'recentwork.title': 'What we built. <span class="gold-word">Recently</span>.',
+      'recentwork.title': 'Recently in our clients\' homes.',
       'recentwork.lede': 'Examples of the work above, drawn and built in our Citrus Heights workshop.',
+      'recentwork.seeAll': 'See all projects →',
+      'rw.card.1.cat': '01 · Custom Kitchens',
+      'rw.card.1.title': 'Matte-black slab and walnut kitchen for Bay Area residence',
+      'rw.card.1.client': 'Private client',
+      'rw.card.1.loc': 'San Francisco Bay Area',
+      'rw.card.2.cat': '03 · Wall Paneling',
+      'rw.card.2.title': 'Walnut library and study paneling',
+      'rw.card.2.client': 'Private residence',
+      'rw.card.2.loc': 'Sacramento, CA',
+      'rw.card.3.cat': '01 · Custom Kitchens',
+      'rw.card.3.title': 'Arched glass display cabinets and slab marble island',
+      'rw.card.3.client': 'Private residence',
+      'rw.card.3.loc': 'Citrus Heights, CA',
+      'rw.card.4.cat': '02 · Bathroom Vanities',
+      'rw.card.4.title': 'Hollywood Regency dual vanity with fluted columns',
+      'rw.card.4.client': 'Private residence',
+      'rw.card.4.loc': 'Bay Area, CA',
+
+      // ===== REVIEWS STRIP (home) =====
+      'rs.label': 'In their words',
+      'rs.r1.quote': 'We\'ve never been happier with how everything turned out. The kitchen feels like it was always supposed to be there.',
+      'rs.r1.name': 'Lauren Schmidt',
+      'rs.r1.role': 'Kitchen · Sacramento',
+      'rs.r2.quote': 'Felix and his team handled a project that spanned two kitchens, a media room, and three bathrooms. Every space feels like it belongs to the same home now.',
+      'rs.r2.name': 'Malahat Tavassoli',
+      'rs.r2.role': 'Multi-room residence',
+      'rs.r3.quote': 'Delivered on time and on budget. The cabinets are exactly what we asked for.',
+      'rs.r3.name': 'Dustin Moore',
+      'rs.r3.role': 'Kitchen renovation',
+      'rs.more': 'More reviews on Google Business Profile →',
+
+      // ===== GOOGLE BUSINESS PROFILE =====
       'gbp.eyebrow': '03 — Trusted on Google',
       'gbp.title': 'From our <span class="gold-word">Google Business Profile</span>.',
       'gbp.lede': 'Real reviews from clients across Sacramento and the Bay Area.',
       'gbp.more': 'See all reviews on Google →',
+
+      // ===== PROCESS STRIP =====
+      'ps.label': '03 — Our Process',
+      'ps.title': 'From first meeting to final <span class="gold-word">install</span>.',
+      'ps.lede': 'Four steps. Same shop end to end.',
+      'ps.s1.name': 'Consultation',
+      'ps.s1.desc': 'We meet at your home or our Citrus Heights showroom.',
+      'ps.s2.name': 'Design',
+      'ps.s2.desc': 'Measured drawings, material samples, written proposal.',
+      'ps.s3.name': 'Build',
+      'ps.s3.desc': 'Six to ten weeks in the workshop, with weekly photos.',
+      'ps.s4.name': 'Install',
+      'ps.s4.desc': 'One to two weeks on site. Punch list cleared at end.',
+
+      // ===== CONTACT SECTION (shared across pages) =====
       'contact.eyebrow': '04 — Start Your Project',
       'contact.eyebrow.project': 'Start Your Project',
       'contact.headline': 'Ready to start your next <span class="gold-word">project</span>?',
       'contact.headline.project': 'Build something like this <span class="gold-word">together</span>?',
-      'contact.body': 'We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California. We\'d love to help build yours.',
+      'contact.body': 'We build cabinetry and millwork for fine homes across Sacramento, the Bay Area, and Northern California.',
       'contact.call': 'Give us a call',
       'contact.email': 'Send us an email',
       'contact.workshop': 'Workshop',
       'contact.hours': 'Hours',
+      'contact.hours.value': 'Mon–Fri, 8a–5p<br />Saturday by appointment',
+      'contact.workshop.value': '5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621',
+
+      // ===== ENQUIRY FORM =====
+      'form.firstName': 'First Name',
+      'form.lastName': 'Last Name',
+      'form.phone': 'Phone Number',
+      'form.phoneOpt': '(optional)',
+      'form.email': 'Email',
+      'form.enquiryType': 'Enquiry Type',
+      'form.enquirySelect': 'Please select',
+      'form.opt.kitchen': 'Custom Kitchen',
+      'form.opt.bath': 'Bathroom Cabinetry',
+      'form.opt.paneled': 'Paneled Rooms + Millwork',
+      'form.opt.builtins': 'Built-ins + Specialty Work',
+      'form.opt.restoration': 'Restoration',
+      'form.opt.general': 'General Enquiry',
+      'form.location': 'Project Address / City',
+      'form.locationPlaceholder': 'Sacramento, Bay Area, other',
+      'form.message': 'Message',
+      'form.messagePlaceholder': 'What you have in mind, rough timeline, and the address or city if you can share it.',
+      'form.subscribe': 'Subscribe for occasional updates on the workshop and new projects.',
+      'form.privacy': 'We use your message only to respond to your enquiry. Your details are not shared.',
+      'form.send': 'Send Message',
+      'form.submitNote': 'We respond within one business day.',
+      'form.felixReply': 'Felix typically replies within one business day.',
+
+      // ===== FOOTER =====
       'footer.nav.work': 'Our Work',
       'footer.nav.about': 'About',
       'footer.nav.contact': 'Contact',
       'footer.nav.services': 'What We Build',
       'footer.tagline': 'Custom Cabinetry + Millwork. Since 1985.',
       'footer.copy': 'Built with care in California.',
+      'footer.care': 'Built in our Citrus Heights workshop.',
       'footer.navHeading': 'Navigation',
       'footer.workshopHeading': 'Workshop',
+      'footer.copyYear': '© 2026 Premier Cabinets Innovations LLC',
+      'footer.privacy': 'Privacy',
+      'footer.terms': 'Terms',
+      'footer.backtotop': 'Back to top',
+      'footer.copyPrefix': '© ',
+      'footer.copySuffix': ' Premier Cabinets Innovations LLC',
+
+      // ===== SEE MORE (shared) =====
       'see-more.title': 'See <span class="gold-word">more of our work</span>.',
       'see-more.lede': 'From Sacramento kitchens to Bay Area paneled rooms. Browse the full portfolio.',
       'see-more.btn': 'Browse All Projects',
       'project.back': '← Back to Our Work',
+      'project.materials': 'Materials & details',
+      'project.featured': 'Featured · Kitchen',
+
+      // ===== STICKY CTA =====
       'sticky.cta': 'Start Your Project',
+      'sticky.label': 'Talk to us',
+      'sticky.short': 'Start',
+
+      // ===== ABOUT PAGE =====
+      'about.eyebrow': 'About the workshop',
+      'about.h1': 'Meet Felix. Forty-one years of cabinet craft.',
+      'about.lede': 'When you call Premier Cabinets Innovations, you talk to Felix. He\'s been drawing, building, and installing cabinets from the same Citrus Heights workshop since 1985.',
+      'about.story.title': 'A workshop, not a showroom.',
+      'about.story.p1': 'Felix opened the shop in 1985. The phone has been at the same address ever since. Forty-one years on, the work passes through fewer hands than at any other cabinet shop in the region.',
+      'about.story.p2': 'Every project is measured, drawn, cut, joined, finished, and installed by the same small team. Felix is on every consultation, every drawing review, and every final walkthrough.',
+      'about.story.p3': 'We work with homeowners directly and with the architects and interior designers they trust. Most of our work comes from referrals — people who had Felix do their kitchen telling their friends he\'ll do theirs too.',
+      'about.story.sidebar.title': 'Felix',
+      'about.story.sidebar.p': 'Founded the workshop in 1985. Still on every project, from first measure to final install.',
+      'about.stats.41.label': 'Years of cabinet craft',
+      'about.stats.1.label': 'Workshop in Citrus Heights',
+      'about.stats.0.label': 'Projects Felix hasn\'t personally seen',
+      'about.area.eyebrow': 'Service area',
+      'about.area.title': 'Where we work.',
+      'about.area.lede': 'Sacramento Metro is home. The Bay Area is a regular drive. Destination work follows a careful schedule.',
+      'about.area.sac': 'Sacramento Metro',
+      'about.area.sac.list': 'Citrus Heights · Roseville · Folsom · El Dorado Hills · Granite Bay · Auburn · Elk Grove',
+      'about.area.bay': 'Bay Area',
+      'about.area.bay.list': 'San Francisco · Oakland · Berkeley · Marin · Walnut Creek · San Jose · Palo Alto · Atherton',
+      'about.area.dest': 'Destination',
+      'about.area.dest.list': 'Tahoe Basin · Wine Country · Carmel / Monterey',
+
+      // ===== PROJECTS PAGE =====
+      'pj.hero.h1': 'Built in Citrus Heights. Made for fine homes across Northern California.',
+      'pj.hero.lede': 'Custom cabinetry and millwork projects from 1985 to today.',
+      'pj.featured.eyebrow': 'Featured · Kitchen',
+      'pj.featured.title': 'Matte-black slab and walnut kitchen for Bay Area residence.',
+      'pj.materials.h': 'Materials & details',
+
+      // ===== SERVICES PAGE =====
+      'sv.hero.eyebrow': 'What we build',
+      'sv.hero.h1': 'Custom cabinetry and millwork for the rooms that matter.',
+      'sv.hero.lede': 'Every project measured, drawn, built, and installed by the same small team in our Citrus Heights workshop.',
+
+      // ===== CONTACT PAGE =====
+      'cn.hero.eyebrow': 'Start a Project',
+      'cn.hero.h1': 'Tell us about the room.',
+      'cn.hero.lede': 'A short note about what you have in mind is enough to get the conversation started. Felix replies within one business day.',
+
+      // ===== THANK YOU =====
+      'ty.h1': 'Thank you.',
+      'ty.body': 'Your message is in the workshop. We\'ll respond within one business day.',
+      'ty.back': '← Back to home',
     },
+
     es: {
+      // ===== NAV / HEADER =====
       'nav.work': 'Nuestro Trabajo',
       'nav.about': 'Nosotros',
       'nav.contact': 'Contacto',
       'nav.cta': 'Iniciar Proyecto',
       'nav.services': 'Lo Que Construimos',
-      'hero.eyebrow': 'Gabinetería Personalizada + Carpintería · Desde 1985',
-      'hero.headline': 'Construido para los lugares de los que te sientes <span class="gold-word">orgulloso</span>.',
+      'nav.home': 'Inicio',
+
+      // ===== HERO =====
+      'hero.eyebrow': 'Gabinetería Personalizada + Carpintería Fina · Desde 1985',
+      'hero.headline': 'Construido para los lugares que lo hacen sentir <span class="gold-word">orgulloso</span>.',
       'hero.sub': 'Gabinetería personalizada y carpintería fina para espacios residenciales y comerciales en Sacramento, el Área de la Bahía y el norte de California.',
       'hero.cta.primary': 'Iniciar Proyecto',
       'hero.cta.secondary': 'Ver Nuestro Trabajo',
       'hero.trust': 'Citrus Heights · Sacramento · Área de la Bahía · Norte de California',
+
+      // ===== WORKSHOP / BUILT & WORK =====
       'workshop.eyebrow': '01 — Lo que construimos',
-      'workshop.title': 'Gabinetería personalizada y carpintería, <span class="gold-word">hecha en nuestro taller</span>.',
-      'workshop.lede': 'Medimos, diseñamos, construimos e instalamos cada pieza desde nuestro taller en Citrus Heights. Esto es lo que construimos, y una muestra de cómo vive en los hogares de nuestros clientes.',
+      'workshop.title': 'Gabinetería personalizada y carpintería fina, desde <span class="gold-word">nuestro taller</span>.',
+      'workshop.lede': 'Medimos, dibujamos, construimos e instalamos cada pieza desde nuestro taller en Citrus Heights. Esto es lo que construimos, y una muestra de cómo vive en los hogares de nuestros clientes.',
+      'workshop.caveat': 'Más carpintería fina personalizada a la medida de su hogar.',
+
+      // ===== SERVICE CARDS =====
+      'sc.01.name': 'Cocinas Personalizadas',
+      'sc.01.desc': 'La habitación completa medida, dibujada y construida. De ocho a diez semanas en el taller, una a dos semanas en obra.',
+      'sc.02.name': 'Tocadores de Baño',
+      'sc.02.desc': 'Flotantes, con base o integrados. Construidos a la medida exacta de su baño.',
+      'sc.03.name': 'Paneles de Pared',
+      'sc.03.desc': 'Paneles de piso a techo para salas, bibliotecas, comedores y vestíbulos.',
+      'sc.04.name': 'Molduras y Marcos Personalizados',
+      'sc.04.desc': 'Cornisas, zócalos, marcos de puerta y marcos cortados para igualar perfiles históricos o modernos.',
+      'sc.05.name': 'Estanterías Empotradas',
+      'sc.05.desc': 'Estanterías de calidad de biblioteca para estudios, oficinas en casa y salones principales.',
+      'sc.06.name': 'Repisas y Marcos de Chimenea',
+      'sc.06.desc': 'Repisas de chimenea personalizadas en roble, nogal o madera dura pintada.',
+      'sc.07.name': 'Restauración y Reacabado',
+      'sc.07.desc': 'Restauración de época, recubrimiento de gabinetes y reacabado completo de carpintería existente.',
+
+      // ===== RECENT WORK =====
       'recentwork.eyebrow': '02 — Véalo en acción',
-      'recentwork.title': 'Lo que construimos. <span class="gold-word">Recientemente</span>.',
-      'recentwork.lede': 'Ejemplos del trabajo de arriba, diseñado y construido en nuestro taller en Citrus Heights.',
+      'recentwork.title': 'Recientemente, en los hogares de nuestros clientes.',
+      'recentwork.lede': 'Ejemplos del trabajo de arriba, dibujado y construido en nuestro taller en Citrus Heights.',
+      'recentwork.seeAll': 'Ver todos los proyectos →',
+      'rw.card.1.cat': '01 · Cocinas Personalizadas',
+      'rw.card.1.title': 'Cocina de placas negras mate y nogal para residencia en el Área de la Bahía',
+      'rw.card.1.client': 'Cliente privado',
+      'rw.card.1.loc': 'Área de la Bahía de San Francisco',
+      'rw.card.2.cat': '03 · Paneles de Pared',
+      'rw.card.2.title': 'Biblioteca y estudio con paneles de nogal',
+      'rw.card.2.client': 'Residencia privada',
+      'rw.card.2.loc': 'Sacramento, CA',
+      'rw.card.3.cat': '01 · Cocinas Personalizadas',
+      'rw.card.3.title': 'Vitrinas con arco de cristal e isla de placa de mármol',
+      'rw.card.3.client': 'Residencia privada',
+      'rw.card.3.loc': 'Citrus Heights, CA',
+      'rw.card.4.cat': '02 · Tocadores de Baño',
+      'rw.card.4.title': 'Tocador doble estilo Hollywood Regency con columnas estriadas',
+      'rw.card.4.client': 'Residencia privada',
+      'rw.card.4.loc': 'Área de la Bahía, CA',
+
+      // ===== REVIEWS STRIP =====
+      'rs.label': 'En sus palabras',
+      'rs.r1.quote': 'Nunca habíamos estado más contentos con cómo quedó todo. La cocina se siente como si siempre hubiera estado ahí.',
+      'rs.r1.name': 'Lauren Schmidt',
+      'rs.r1.role': 'Cocina · Sacramento',
+      'rs.r2.quote': 'Felix y su equipo manejaron un proyecto que abarcó dos cocinas, una sala multimedia y tres baños. Cada espacio se siente parte del mismo hogar ahora.',
+      'rs.r2.name': 'Malahat Tavassoli',
+      'rs.r2.role': 'Residencia multi-habitación',
+      'rs.r3.quote': 'Entregado a tiempo y dentro del presupuesto. Los gabinetes son exactamente lo que pedimos.',
+      'rs.r3.name': 'Dustin Moore',
+      'rs.r3.role': 'Renovación de cocina',
+      'rs.more': 'Más reseñas en el Perfil de Empresa de Google →',
+
+      // ===== GOOGLE BUSINESS PROFILE =====
       'gbp.eyebrow': '03 — Verificado en Google',
       'gbp.title': 'De nuestro <span class="gold-word">Perfil de Empresa en Google</span>.',
       'gbp.lede': 'Reseñas reales de clientes en Sacramento y el Área de la Bahía.',
       'gbp.more': 'Ver todas las reseñas en Google →',
+
+      // ===== PROCESS STRIP =====
+      'ps.label': '03 — Nuestro Proceso',
+      'ps.title': 'Desde la primera reunión hasta la <span class="gold-word">instalación</span> final.',
+      'ps.lede': 'Cuatro pasos. El mismo taller de principio a fin.',
+      'ps.s1.name': 'Consulta',
+      'ps.s1.desc': 'Nos reunimos en su hogar o en nuestra sala de exhibición en Citrus Heights.',
+      'ps.s2.name': 'Diseño',
+      'ps.s2.desc': 'Dibujos a medida, muestras de materiales, propuesta por escrito.',
+      'ps.s3.name': 'Construcción',
+      'ps.s3.desc': 'De seis a diez semanas en el taller, con fotos semanales.',
+      'ps.s4.name': 'Instalación',
+      'ps.s4.desc': 'Una a dos semanas en obra. Lista de pendientes resuelta al final.',
+
+      // ===== CONTACT SECTION =====
       'contact.eyebrow': '04 — Iniciar Proyecto',
       'contact.eyebrow.project': 'Iniciar Proyecto',
-      'contact.headline': '¿Listo para comenzar tu próximo <span class="gold-word">proyecto</span>?',
+      'contact.headline': '¿Listo para comenzar su próximo <span class="gold-word">proyecto</span>?',
       'contact.headline.project': '¿Construimos algo así <span class="gold-word">juntos</span>?',
-      'contact.body': 'Construimos gabinetería y carpintería fina para hogares en Sacramento, el Área de la Bahía y el norte de California. Nos encantaría ayudarte a construir el tuyo.',
-      'contact.call': 'Llámanos',
-      'contact.email': 'Envíanos un correo',
+      'contact.body': 'Construimos gabinetería y carpintería fina para hogares en Sacramento, el Área de la Bahía y el norte de California.',
+      'contact.call': 'Llámenos',
+      'contact.email': 'Envíenos un correo',
       'contact.workshop': 'Taller',
       'contact.hours': 'Horario',
+      'contact.hours.value': 'Lun–Vie, 8a–5p<br />Sábado con cita previa',
+      'contact.workshop.value': '5910 Auburn Blvd Suite 21<br />Citrus Heights, CA 95621',
+
+      // ===== ENQUIRY FORM =====
+      'form.firstName': 'Nombre',
+      'form.lastName': 'Apellido',
+      'form.phone': 'Número de Teléfono',
+      'form.phoneOpt': '(opcional)',
+      'form.email': 'Correo Electrónico',
+      'form.enquiryType': 'Tipo de Consulta',
+      'form.enquirySelect': 'Seleccione',
+      'form.opt.kitchen': 'Cocina Personalizada',
+      'form.opt.bath': 'Gabinetería de Baño',
+      'form.opt.paneled': 'Habitaciones con Paneles + Carpintería',
+      'form.opt.builtins': 'Empotrados + Trabajo Especial',
+      'form.opt.restoration': 'Restauración',
+      'form.opt.general': 'Consulta General',
+      'form.location': 'Dirección / Ciudad del Proyecto',
+      'form.locationPlaceholder': 'Sacramento, Área de la Bahía, otra',
+      'form.message': 'Mensaje',
+      'form.messagePlaceholder': 'Lo que tiene en mente, el plazo aproximado, y la dirección o ciudad si puede compartirla.',
+      'form.subscribe': 'Suscríbase para actualizaciones ocasionales del taller y proyectos nuevos.',
+      'form.privacy': 'Usamos su mensaje solamente para responder a su consulta. Sus datos no se comparten.',
+      'form.send': 'Enviar Mensaje',
+      'form.submitNote': 'Respondemos dentro de un día hábil.',
+      'form.felixReply': 'Felix normalmente responde dentro de un día hábil.',
+
+      // ===== FOOTER =====
       'footer.nav.work': 'Nuestro Trabajo',
       'footer.nav.about': 'Nosotros',
       'footer.nav.contact': 'Contacto',
       'footer.nav.services': 'Lo Que Construimos',
-      'footer.tagline': 'Gabinetería Personalizada + Carpintería. Desde 1985.',
+      'footer.tagline': 'Gabinetería Personalizada + Carpintería Fina. Desde 1985.',
       'footer.copy': 'Construido con cuidado en California.',
+      'footer.care': 'Construido en nuestro taller de Citrus Heights.',
       'footer.navHeading': 'Navegación',
       'footer.workshopHeading': 'Taller',
-      'see-more.title': 'Ver <span class="gold-word">más de nuestro trabajo</span>.',
-      'see-more.lede': 'De cocinas en Sacramento a salones con paneles en el Área de la Bahía. Explora todo el portafolio.',
+      'footer.copyYear': '© 2026 Premier Cabinets Innovations LLC',
+      'footer.privacy': 'Privacidad',
+      'footer.terms': 'Términos',
+      'footer.backtotop': 'Volver arriba',
+      'footer.copyPrefix': '© ',
+      'footer.copySuffix': ' Premier Cabinets Innovations LLC',
+
+      // ===== SEE MORE (shared) =====
+      'see-more.title': 'Vea <span class="gold-word">más de nuestro trabajo</span>.',
+      'see-more.lede': 'De cocinas en Sacramento a salones con paneles en el Área de la Bahía. Explore todo el portafolio.',
       'see-more.btn': 'Ver Todos los Proyectos',
       'project.back': '← Volver a Nuestro Trabajo',
+      'project.materials': 'Materiales y detalles',
+      'project.featured': 'Destacado · Cocina',
+
+      // ===== STICKY CTA =====
       'sticky.cta': 'Iniciar Proyecto',
+      'sticky.label': 'Hablemos',
+      'sticky.short': 'Iniciar',
+
+      // ===== ABOUT PAGE =====
+      'about.eyebrow': 'Sobre el taller',
+      'about.h1': 'Conozca a Felix. Cuarenta y un años de arte en gabinetería.',
+      'about.lede': 'Cuando llama a Premier Cabinets Innovations, habla con Felix. Lleva diseñando, construyendo e instalando gabinetes desde el mismo taller de Citrus Heights desde 1985.',
+      'about.story.title': 'Un taller, no una sala de exhibición.',
+      'about.story.p1': 'Felix abrió el taller en 1985. El teléfono ha estado en la misma dirección desde entonces. Cuarenta y un años después, el trabajo pasa por menos manos que en cualquier otro taller de gabinetería de la región.',
+      'about.story.p2': 'Cada proyecto se mide, se dibuja, se corta, se ensambla, se acaba y se instala por el mismo equipo pequeño. Felix está en cada consulta, en cada revisión de diseño y en cada recorrido final.',
+      'about.story.p3': 'Trabajamos directamente con los propietarios y con los arquitectos y diseñadores de interiores en los que confían. La mayoría de nuestro trabajo viene por referencias — personas a las que Felix les hizo su cocina contándoles a sus amigos que también les hará la suya.',
+      'about.story.sidebar.title': 'Felix',
+      'about.story.sidebar.p': 'Fundó el taller en 1985. Sigue en cada proyecto, desde la primera medición hasta la instalación final.',
+      'about.stats.41.label': 'Años de arte en gabinetería',
+      'about.stats.1.label': 'Taller en Citrus Heights',
+      'about.stats.0.label': 'Proyectos que Felix no ha visto personalmente',
+      'about.area.eyebrow': 'Área de servicio',
+      'about.area.title': 'Dónde trabajamos.',
+      'about.area.lede': 'Sacramento Metro es nuestra casa. El Área de la Bahía es un viaje regular. El trabajo en destinos sigue un calendario cuidadoso.',
+      'about.area.sac': 'Sacramento Metro',
+      'about.area.sac.list': 'Citrus Heights · Roseville · Folsom · El Dorado Hills · Granite Bay · Auburn · Elk Grove',
+      'about.area.bay': 'Área de la Bahía',
+      'about.area.bay.list': 'San Francisco · Oakland · Berkeley · Marin · Walnut Creek · San Jose · Palo Alto · Atherton',
+      'about.area.dest': 'Destino',
+      'about.area.dest.list': 'Cuenca de Tahoe · Wine Country · Carmel / Monterey',
+
+      // ===== PROJECTS PAGE =====
+      'pj.hero.h1': 'Construido en Citrus Heights. Hecho para hogares finos en todo el norte de California.',
+      'pj.hero.lede': 'Proyectos de gabinetería personalizada y carpintería fina desde 1985 hasta hoy.',
+      'pj.featured.eyebrow': 'Destacado · Cocina',
+      'pj.featured.title': 'Cocina de placas negras mate y nogal para residencia en el Área de la Bahía.',
+      'pj.materials.h': 'Materiales y detalles',
+
+      // ===== SERVICES PAGE =====
+      'sv.hero.eyebrow': 'Lo que construimos',
+      'sv.hero.h1': 'Gabinetería personalizada y carpintería fina para las habitaciones que importan.',
+      'sv.hero.lede': 'Cada proyecto medido, dibujado, construido e instalado por el mismo equipo pequeño en nuestro taller en Citrus Heights.',
+
+      // ===== CONTACT PAGE =====
+      'cn.hero.eyebrow': 'Iniciar Proyecto',
+      'cn.hero.h1': 'Cuéntenos sobre la habitación.',
+      'cn.hero.lede': 'Una nota breve sobre lo que tiene en mente es suficiente para iniciar la conversación. Felix responde dentro de un día hábil.',
+
+      // ===== THANK YOU =====
+      'ty.h1': 'Gracias.',
+      'ty.body': 'Su mensaje está en el taller. Responderemos dentro de un día hábil.',
+      'ty.back': '← Volver al inicio',
     }
   };
 
