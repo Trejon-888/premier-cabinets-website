@@ -277,12 +277,13 @@
   function animatePortfolioIcon() {
     const els = document.querySelectorAll('[data-portfolio-icon]');
     if (els.length === 0) return;
-    if (reduced || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    if (reduced || typeof gsap === 'undefined') {
       els.forEach((el) => el.classList.add('is-visible'));
       return;
     }
     els.forEach((el) => {
       const paths = el.querySelectorAll('svg path, svg line, svg rect');
+      const dots = el.querySelectorAll('svg circle, svg ellipse');
       paths.forEach((p) => {
         if (p.getTotalLength) {
           try {
@@ -292,35 +293,34 @@
           } catch (e) { /* skip */ }
         }
       });
-      el.querySelectorAll('svg circle, svg ellipse').forEach((c) => { c.style.opacity = '0'; });
+      dots.forEach((c) => { c.style.opacity = '0'; });
 
-      // Safety: force visible after 3.5s no matter what
-      const safetyTimer = setTimeout(() => {
+      // Iteration 21: detect if element is in viewport on load (e.g. hero placement).
+      // If yes, animate IMMEDIATELY — don't wait for ScrollTrigger which can stall
+      // when the trigger is already past its start position at page load.
+      const rect = el.getBoundingClientRect();
+      const alreadyInView = rect.top < window.innerHeight && rect.bottom > 0;
+
+      const runDrawIn = () => {
         el.classList.add('is-visible');
-        el.querySelectorAll('svg path, svg line, svg rect').forEach((p) => { p.style.strokeDashoffset = '0'; });
-        el.querySelectorAll('svg circle, svg ellipse').forEach((c) => { c.style.opacity = '1'; });
-      }, 3500);
+        gsap.to(paths, { strokeDashoffset: 0, duration: 2.4, ease: 'power2.inOut' });
+        gsap.to(dots, { opacity: 1, duration: 0.6, ease: 'power2.out', delay: 1.8 });
+      };
 
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 85%',
-        once: true,
-        onEnter: () => {
-          clearTimeout(safetyTimer);
-          el.classList.add('is-visible');
-          gsap.to(paths, {
-            strokeDashoffset: 0,
-            duration: 2.4,
-            ease: 'power2.inOut',
-          });
-          gsap.to(el.querySelectorAll('svg circle, svg ellipse'), {
-            opacity: 1,
-            duration: 0.6,
-            ease: 'power2.out',
-            delay: 1.8,
-          });
-        },
-      });
+      if (alreadyInView) {
+        // Small delay to let layout settle, then draw in
+        setTimeout(runDrawIn, 250);
+      } else if (typeof ScrollTrigger !== 'undefined') {
+        const safetyTimer = setTimeout(runDrawIn, 3000);
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 90%',
+          once: true,
+          onEnter: () => { clearTimeout(safetyTimer); runDrawIn(); },
+        });
+      } else {
+        runDrawIn();
+      }
     });
   }
 

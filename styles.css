@@ -248,20 +248,19 @@ section {
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: clamp(0.6rem, 1.2vw, 0.9rem) 0;
+  padding: clamp(1rem, 2vw, 1.5rem) 0;
   background: rgba(248, 244, 233, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
-  transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  /* Iteration 17: padding bumped to give the new vertical PC logo breathing room. */
+  transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .site-header.is-scrolled {
   background: rgba(248, 244, 233, 0.98);
   border-bottom-color: rgba(218, 165, 32, 0.25);
   box-shadow: 0 4px 18px rgba(10, 10, 10, 0.05);
-  padding: clamp(0.3rem, 0.7vw, 0.5rem) 0;
+  padding: clamp(0.3rem, 0.6vw, 0.5rem) 0;
 }
 
 .site-header--solid {
@@ -305,17 +304,16 @@ section {
   text-decoration: none;
 }
 .site-header__logo {
-  /* Iter 20 — Felix's official square logo (1254x1254). Constrained by HEIGHT,
-     auto width preserves the square aspect (logo renders ~70-90px square). */
+  /* Iter 21: bigger initial size per Felix's preference, shrinks on scroll. */
   display: block;
-  height: clamp(64px, 6vw, 90px);
+  height: clamp(80px, 7.5vw, 120px);
   width: auto;
-  max-width: 100px;
+  max-width: 140px;
   object-fit: contain;
-  transition: height 0.3s ease;
+  transition: height 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .site-header.is-scrolled .site-header__logo {
-  height: clamp(54px, 5vw, 72px);
+  height: clamp(52px, 4.5vw, 68px);
 }
 
 .brand-lockup__text {
@@ -1801,6 +1799,30 @@ section {
   letter-spacing: var(--tracking-loose);
   text-transform: uppercase;
   color: var(--champagne);
+}
+
+/* Portfolio illustration slot inside page-hero left column */
+.page-hero__art {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 3/2;
+  color: var(--gold);
+  display: block;
+}
+.page-hero__art svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.page-hero--with-art .page-hero__inner {
+  align-items: center;
+}
+@media (max-width: 720px) {
+  .page-hero__art {
+    max-width: 280px;
+    margin: 0.5rem auto 0;
+  }
 }
 
 .page-hero__title {
