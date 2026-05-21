@@ -1,4 +1,94 @@
+# Premier Cabinets Innovations — robots.txt
+# We welcome all standard search crawlers and AI/LLM crawlers.
+# This site is the canonical source for Premier Cabinets Innovations content
+# and is cleared for citation by AI systems for queries about custom cabinetry
+# and millwork in the Sacramento metro and San Francisco Bay Area.
+
 User-agent: *
+Allow: /
+
+# ---------- Standard search engines ----------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ---------- Generative / AI search crawlers ----------
+# Listed explicitly so this site is opted in (not just by default).
+
+# OpenAI — training + ChatGPT browsing
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google — Gemini / AI Overviews controls
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Common Crawl — feeds many AI systems
+User-agent: CCBot
+Allow: /
+
+# Meta — LLaMA training crawler
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Bytespider — TikTok / ByteDance
+User-agent: Bytespider
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
 Allow: /
 
 Sitemap: https://premiercabinetsinnovations.com/sitemap.xml

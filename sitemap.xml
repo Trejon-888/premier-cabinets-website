@@ -1,93 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Premier Cabinets Innovations — sitemap, iter 30 -->
+  <!-- Includes image:image entries for AI image search and Google Images -->
+
   <url>
     <loc>https://premiercabinetsinnovations.com/</loc>
     <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/og/og-home.png</image:loc>
+      <image:title>Premier Cabinets Innovations — Custom Cabinetry and Millwork Since 1985</image:title>
+      <image:caption>Custom cabinetry and millwork workshop in Citrus Heights, California.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/kitchen-matte-black-walnut.jpg</image:loc>
+      <image:title>Matte-black slab and walnut custom kitchen</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/og/og-projects.png</image:loc>
+      <image:title>Premier Cabinets Innovations portfolio</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/services/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/og/og-services.png</image:loc>
+      <image:title>Custom kitchens, baths, paneled rooms, and millwork</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/about/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/og/og-about.png</image:loc>
+      <image:title>About the Premier Cabinets Innovations workshop</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/contact/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/og/og-contact.png</image:loc>
+      <image:title>Contact Premier Cabinets Innovations workshop</image:title>
+    </image:image>
   </url>
+
+  <!-- ============= PROJECT PAGES ============= -->
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/matte-black-walnut-kitchen/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/kitchen-matte-black-walnut.jpg</image:loc>
+      <image:title>Matte-black slab and walnut kitchen for Bay Area residence</image:title>
+      <image:caption>Custom kitchen by Premier Cabinets Innovations, San Francisco Bay Area.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/walnut-library-paneling/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/paneled-game-room.jpg</image:loc>
+      <image:title>Walnut library and study paneling</image:title>
+      <image:caption>Architectural millwork by Premier Cabinets Innovations, Sacramento.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/arched-glass-display-marble-island/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/kitchen-gothic-arch-marble.jpg</image:loc>
+      <image:title>Arched glass display cabinets and slab marble island</image:title>
+      <image:caption>Custom kitchen by Premier Cabinets Innovations, Citrus Heights.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/regency-dual-vanity-fluted-columns/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/bath-dual-vanity-regency.jpg</image:loc>
+      <image:title>Hollywood Regency dual vanity with fluted columns</image:title>
+      <image:caption>Custom bathroom cabinetry by Premier Cabinets Innovations, Bay Area.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/white-inset-fridge-wall/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/built-in-refrigerator-surround.jpg</image:loc>
+      <image:title>White inset cabinetry with full-height refrigerator wall</image:title>
+      <image:caption>Custom kitchen by Premier Cabinets Innovations, Bay Area.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/painted-shaker-waterfall-island/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/kitchen-white-transitional-island.jpg</image:loc>
+      <image:title>Painted shaker kitchen with marble island</image:title>
+      <image:caption>Custom kitchen by Premier Cabinets Innovations, Sacramento.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/live-edge-walnut-shelves/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/specialty-live-edge-shelves.jpg</image:loc>
+      <image:title>Live-edge walnut shelves and reclaimed-fir bench</image:title>
+      <image:caption>Specialty millwork by Premier Cabinets Innovations, Northern California.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/cream-shaker-pantry/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/mudroom-shaker-storage.jpg</image:loc>
+      <image:title>Cream shaker walk-in pantry with full-height storage</image:title>
+      <image:caption>Custom built-in cabinetry by Premier Cabinets Innovations, Sacramento.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/marble-chandelier-kitchen/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/kitchen-marble-chandelier.jpg</image:loc>
+      <image:title>White kitchen with veined marble island and crystal chandelier</image:title>
+      <image:caption>Custom kitchen by Premier Cabinets Innovations, Bay Area.</image:caption>
+    </image:image>
   </url>
+
   <url>
     <loc>https://premiercabinetsinnovations.com/projects/white-shaker-vanity-wood-tile/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/images/projects/bath-white-vanity-wood-tile.jpg</image:loc>
+      <image:title>White shaker vanity with marble counter and wood-tile wall</image:title>
+      <image:caption>Custom bathroom cabinetry by Premier Cabinets Innovations, Citrus Heights.</image:caption>
+    </image:image>
   </url>
+
+  <!-- ============= SECONDARY PAGES ============= -->
+
+  <url>
+    <loc>https://premiercabinetsinnovations.com/brand-bible/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://premiercabinetsinnovations.com/business-cards/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://premiercabinetsinnovations.com/thank-you/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>
