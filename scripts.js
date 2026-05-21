@@ -1880,9 +1880,17 @@
 
   function initLangToggle() {
     let lang = 'en';
+    // Iteration 31: URL ?lang=es takes precedence over saved preference
+    // so the hreflang alternate URLs actually serve Spanish content.
     try {
-      const saved = localStorage.getItem('pci-lang');
-      if (saved && I18N[saved]) lang = saved;
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      if (urlLang && I18N[urlLang]) {
+        lang = urlLang;
+      } else {
+        const saved = localStorage.getItem('pci-lang');
+        if (saved && I18N[saved]) lang = saved;
+      }
     } catch (e) {}
     applyLanguage(lang);
     document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {

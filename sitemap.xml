@@ -2,8 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Premier Cabinets Innovations — sitemap, iter 30 -->
+  <!-- Premier Cabinets Innovations — sitemap, iter 31 -->
   <!-- Includes image:image entries for AI image search and Google Images -->
+  <!-- iter 31: /business-cards/, /brand-bible/, /thank-you/ removed (noindex, follow) -->
 
   <url>
     <loc>https://premiercabinetsinnovations.com/</loc>
@@ -188,26 +189,7 @@
   </url>
 
   <!-- ============= SECONDARY PAGES ============= -->
-
-  <url>
-    <loc>https://premiercabinetsinnovations.com/brand-bible/</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://premiercabinetsinnovations.com/business-cards/</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://premiercabinetsinnovations.com/thank-you/</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
+  <!-- /brand-bible/, /business-cards/, /thank-you/ intentionally excluded -->
+  <!-- They carry <meta name="robots" content="noindex, follow"> as of iter 31. -->
 
 </urlset>

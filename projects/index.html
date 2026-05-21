@@ -6,14 +6,21 @@
   <title>Projects — Premier Cabinets Innovations · Sacramento, Bay Area, Northern California</title>
   <meta name="description" content="Custom cabinetry and millwork portfolio from Premier Cabinets Innovations. Kitchens, baths, libraries, paneled rooms, and built-ins from 1985 to today across Sacramento and the Bay Area." />
   <link rel="canonical" href="https://premiercabinetsinnovations.com/projects/" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="64x64" href="/images/brand/favicon-64.png" />
-  <link rel="apple-touch-icon" href="/images/brand/favicon-256.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png?v=31" />
+  <link rel="icon" type="image/png" sizes="64x64" href="/images/brand/favicon-64.png?v=31" />
+  <link rel="icon" type="image/png" sizes="128x128" href="/images/brand/favicon-128.png?v=31" />
+  <link rel="icon" type="image/png" sizes="256x256" href="/images/brand/favicon-256.png?v=31" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/images/brand/favicon-512.png?v=31" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/brand/favicon-512.png?v=31" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/brand/favicon.ico?v=31" />
+  <link rel="alternate" hreflang="en" href="https://premiercabinetsinnovations.com/projects/" />
+  <link rel="alternate" hreflang="es" href="https://premiercabinetsinnovations.com/projects/?lang=es" />
+  <link rel="alternate" hreflang="x-default" href="https://premiercabinetsinnovations.com/projects/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Our Work · Premier Cabinets Innovations" />
   <meta property="og:description" content="Custom cabinetry and millwork projects from 1985 to today. Sacramento, the Bay Area, and Northern California." />
-  <meta property="og:image" content="https://premiercabinetsinnovations.com/images/og/og-projects.png?v=30" />
+  <meta property="og:image" content="https://premiercabinetsinnovations.com/images/og/og-projects.png?v=31" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
@@ -22,12 +29,12 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Projects — Premier Cabinets Innovations" />
   <meta name="twitter:description" content="Custom cabinetry and millwork projects from 1985 to today." />
-  <meta name="twitter:image" content="https://premiercabinetsinnovations.com/images/og/og-projects.png?v=30" />
+  <meta name="twitter:image" content="https://premiercabinetsinnovations.com/images/og/og-projects.png?v=31" />
 
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=30" />
+  <link rel="stylesheet" href="/styles.css?v=31" />
 
   <script type="application/ld+json">
   {
@@ -80,7 +87,7 @@
 <header class="site-header site-header--solid">
   <div class="container site-header__inner">
     <a class="site-header__brand" href="/" aria-label="Premier Cabinets Innovations — home">
-      <img class="site-header__logo" src="/images/brand/pci-official-transparent.png?v=30" alt="Premier Cabinets Innovations" width="1024" height="1024" />
+      <img class="site-header__logo" src="/images/brand/pci-official-transparent.png?v=31" alt="Premier Cabinets Innovations" width="1024" height="1024" />
     </a>
     <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
       <span></span><span></span><span></span>
@@ -381,7 +388,7 @@
   <div class="container">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
-        <img class="site-footer__logo" src="/images/brand/pci-official-dark-transparent.png?v=30" alt="Premier Cabinets Innovations" width="1254" height="1254" />
+        <img class="site-footer__logo" src="/images/brand/pci-official-dark-transparent.png?v=31" alt="Premier Cabinets Innovations" width="1254" height="1254" />
         <p data-i18n="footer.tagline">Custom Cabinetry + Millwork. Since 1985.</p>
         <span class="site-footer__care" data-i18n="footer.care">Built in our Citrus Heights workshop.</span>
         <div class="site-footer__socials">
@@ -451,7 +458,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="/scripts.js?v=30" defer></script>
+<script src="/scripts.js?v=31" defer></script>
 
 <!-- Iteration 16 — reorder grid based on ?from=slug -->
 <script>
@@ -462,7 +469,7 @@
   function run() {
     const grid = document.querySelector('[data-editorial-grid]') || document.querySelector('.projects-grid-section .recent-work__grid') || document.querySelector('.projects-grid-section .projects-grid');
     if (!grid) return;
-    const target = grid.querySelector(`a[href*="project-${from}.html"]`);
+    const target = grid.querySelector(`a[href*="/projects/${from}/"]`);
     if (target && target.parentElement === grid) {
       grid.insertBefore(target, grid.firstChild);
       target.classList.add('is-from-referrer');
