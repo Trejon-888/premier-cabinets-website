@@ -5,31 +5,34 @@
    ================================================================= */
 
 :root {
-  --ink: #0A0A0A;
+  /* Iteration 20 — Felix's OFFICIAL brand standards (from his Drive folder) */
+  /* Palette: Gold #F2C22E · Black #111111 · Ivory #F7F4EE · Warm Gray #A49A8C */
+  --ink: #111111;
   --ink-deep: #050505;
-  --paper: #F8F4E9;
+  --paper: #F7F4EE;
   --paper-warm: #EFEAD7;
   --paper-warm-deep: #E5DFC8;
-  /* Iteration 4 — cool ivory section variant for alternating bands */
   --paper-gilt: #EFEAD7;
+  --warm-gray: #A49A8C;       /* iter 20 — official brand neutral */
   --walnut: #6B4F2A;
   --walnut-deep: #4A361C;
-  /* Iteration 8 gilt palette — brighter, more saturated gold (CSS Goldenrod) */
-  --gold: #DAA520;
-  --gold-deep: #B8860B;
-  --gold-soft: #F5C842;
-  --gold-warm: #F5C842;
-  /* Legacy aliases — all point to the new bright-gold tokens */
-  --champagne: #DAA520;
-  --champagne-deep: #B8860B;
-  --champagne-soft: #F5C842;
-  --stone: #9C9A95;
-  --hairline: rgba(10, 10, 10, 0.12);
-  --hairline-strong: rgba(10, 10, 10, 0.22);
-  --hairline-gold: rgba(218, 165, 32, 0.55);
+  --gold: #F2C22E;            /* iter 20 — official brand gold, brighter + more saturated */
+  --gold-deep: #C9A11E;
+  --gold-soft: #F8D766;
+  --gold-warm: #F8D766;
+  /* Legacy aliases — all point to the official brand gold */
+  --champagne: #F2C22E;
+  --champagne-deep: #C9A11E;
+  --champagne-soft: #F8D766;
+  --stone: #A49A8C;
+  --hairline: rgba(17, 17, 17, 0.12);
+  --hairline-strong: rgba(17, 17, 17, 0.22);
+  --hairline-gold: rgba(242, 194, 46, 0.55);
 
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  /* Iteration 20 — Felix's OFFICIAL typefaces (Cinzel for Roman caps, Montserrat for body) */
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Cinzel', 'Trajan Pro', Georgia, 'Times New Roman', serif;
+  --font-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
 
   --tracking-wide: 0.18em;
   --tracking-loose: 0.32em;
@@ -302,15 +305,17 @@ section {
   text-decoration: none;
 }
 .site-header__logo {
+  /* Iter 20 — Felix's official square logo (1254x1254). Constrained by HEIGHT,
+     auto width preserves the square aspect (logo renders ~70-90px square). */
   display: block;
-  height: clamp(56px, 5.5vw, 80px);
+  height: clamp(64px, 6vw, 90px);
   width: auto;
-  max-width: 220px;
+  max-width: 100px;
   object-fit: contain;
   transition: height 0.3s ease;
 }
 .site-header.is-scrolled .site-header__logo {
-  height: clamp(48px, 4.5vw, 64px);
+  height: clamp(54px, 5vw, 72px);
 }
 
 .brand-lockup__text {
