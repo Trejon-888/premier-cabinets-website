@@ -2897,6 +2897,65 @@ section {
   }
 }
 
+/* ===== Portfolio illustration (iter 19) ===== */
+
+.portfolio-illustration {
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(2rem, 4vw, 3rem);
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+}
+.portfolio-illustration__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+.portfolio-illustration__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono, 'Courier New', monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gold);
+}
+.portfolio-illustration__art {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 3/2;
+  color: var(--gold);
+  display: block;
+  margin: 0.5rem auto;
+}
+.portfolio-illustration__art svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.portfolio-illustration__caption {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--ink);
+  opacity: 0.78;
+  max-width: 58ch;
+  margin: 0 auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-illustration__art svg path,
+  .portfolio-illustration__art svg line,
+  .portfolio-illustration__art svg rect {
+    stroke-dashoffset: 0 !important;
+  }
+  .portfolio-illustration__art svg circle,
+  .portfolio-illustration__art svg ellipse {
+    opacity: 1 !important;
+  }
+}
+
 /* ===== Projects grid (3-col scannable) ===== */
 
 .projects-grid-section {

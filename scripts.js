@@ -197,6 +197,133 @@
     });
   }
 
+  // ============================================================
+  // PORTFOLIO ILLUSTRATION — large line-art for projects.html
+  // Open book / drafting portfolio: cabinet elevation on left
+  // page, floor plan on right, diagonal pencil. Draws in via
+  // GSAP stroke-dashoffset like the service icons.
+  // ============================================================
+  const PORTFOLIO_ICON = `<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Book spine -->
+      <line x1="300" y1="80" x2="300" y2="335" stroke-width="1.4"/>
+      <!-- Left page outline -->
+      <path d="M 300 80 Q 200 75 80 95 L 80 320 Q 200 305 300 335" stroke-width="1.8"/>
+      <path d="M 300 92 Q 210 88 95 105" stroke-width="0.6" opacity="0.5"/>
+      <!-- Right page outline -->
+      <path d="M 300 80 Q 400 75 520 95 L 520 320 Q 400 305 300 335" stroke-width="1.8"/>
+      <path d="M 300 92 Q 390 88 505 105" stroke-width="0.6" opacity="0.5"/>
+
+      <!-- LEFT PAGE — cabinet elevation -->
+      <rect x="120" y="125" width="150" height="105" stroke-width="1.3"/>
+      <line x1="120" y1="170" x2="270" y2="170" stroke-width="1"/>
+      <line x1="170" y1="125" x2="170" y2="170" stroke-width="0.7"/>
+      <line x1="220" y1="125" x2="220" y2="170" stroke-width="0.7"/>
+      <line x1="170" y1="170" x2="170" y2="230" stroke-width="0.7"/>
+      <line x1="220" y1="170" x2="220" y2="230" stroke-width="0.7"/>
+      <circle cx="160" cy="148" r="1.3" fill="currentColor"/>
+      <circle cx="180" cy="148" r="1.3" fill="currentColor"/>
+      <circle cx="210" cy="148" r="1.3" fill="currentColor"/>
+      <circle cx="230" cy="148" r="1.3" fill="currentColor"/>
+      <circle cx="160" cy="200" r="1.3" fill="currentColor"/>
+      <circle cx="180" cy="200" r="1.3" fill="currentColor"/>
+      <circle cx="210" cy="200" r="1.3" fill="currentColor"/>
+      <circle cx="230" cy="200" r="1.3" fill="currentColor"/>
+      <!-- Dimension line -->
+      <line x1="120" y1="115" x2="270" y2="115" stroke-width="0.5"/>
+      <line x1="120" y1="111" x2="120" y2="119" stroke-width="0.5"/>
+      <line x1="270" y1="111" x2="270" y2="119" stroke-width="0.5"/>
+      <!-- Caption lines -->
+      <line x1="120" y1="252" x2="270" y2="252" stroke-width="0.5" opacity="0.55"/>
+      <line x1="120" y1="265" x2="240" y2="265" stroke-width="0.5" opacity="0.55"/>
+      <line x1="120" y1="278" x2="258" y2="278" stroke-width="0.5" opacity="0.55"/>
+
+      <!-- RIGHT PAGE — floor plan -->
+      <rect x="330" y="125" width="150" height="105" stroke-width="1.3"/>
+      <line x1="370" y1="125" x2="370" y2="170" stroke-width="0.9"/>
+      <line x1="370" y1="170" x2="440" y2="170" stroke-width="0.9"/>
+      <line x1="440" y1="170" x2="440" y2="230" stroke-width="0.9"/>
+      <rect x="385" y="180" width="55" height="28" stroke-width="0.7"/>
+      <rect x="335" y="178" width="8" height="48" stroke-width="0.6"/>
+      <rect x="335" y="130" width="8" height="35" stroke-width="0.6"/>
+      <rect x="447" y="178" width="8" height="48" stroke-width="0.6"/>
+      <path d="M 462 132 A 11 11 0 0 1 473 143" stroke-width="0.6"/>
+      <circle cx="462" cy="132" r="1.3" fill="currentColor"/>
+      <!-- Caption lines -->
+      <line x1="330" y1="252" x2="480" y2="252" stroke-width="0.5" opacity="0.55"/>
+      <line x1="330" y1="265" x2="455" y2="265" stroke-width="0.5" opacity="0.55"/>
+      <line x1="330" y1="278" x2="465" y2="278" stroke-width="0.5" opacity="0.55"/>
+
+      <!-- Pencil diagonal across right page -->
+      <g transform="rotate(35, 460, 295)">
+        <rect x="402" y="290" width="78" height="9" stroke-width="1.2"/>
+        <path d="M 480 290 L 494 294.5 L 480 299 Z" stroke-width="1.2"/>
+        <rect x="395" y="288" width="7" height="13" stroke-width="0.9"/>
+        <line x1="412" y1="290" x2="412" y2="299" stroke-width="0.5" opacity="0.55"/>
+        <line x1="425" y1="290" x2="425" y2="299" stroke-width="0.5" opacity="0.55"/>
+        <line x1="438" y1="290" x2="438" y2="299" stroke-width="0.5" opacity="0.55"/>
+        <line x1="451" y1="290" x2="451" y2="299" stroke-width="0.5" opacity="0.55"/>
+        <line x1="464" y1="290" x2="464" y2="299" stroke-width="0.5" opacity="0.55"/>
+      </g>
+    </g>
+  </svg>`;
+
+  function injectPortfolioIcon() {
+    document.querySelectorAll('[data-portfolio-icon]').forEach((el) => {
+      if (!el.querySelector('svg')) el.innerHTML = PORTFOLIO_ICON;
+    });
+  }
+
+  function animatePortfolioIcon() {
+    const els = document.querySelectorAll('[data-portfolio-icon]');
+    if (els.length === 0) return;
+    if (reduced || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      els.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+    els.forEach((el) => {
+      const paths = el.querySelectorAll('svg path, svg line, svg rect');
+      paths.forEach((p) => {
+        if (p.getTotalLength) {
+          try {
+            const len = p.getTotalLength();
+            p.style.strokeDasharray = len;
+            p.style.strokeDashoffset = len;
+          } catch (e) { /* skip */ }
+        }
+      });
+      el.querySelectorAll('svg circle, svg ellipse').forEach((c) => { c.style.opacity = '0'; });
+
+      // Safety: force visible after 3.5s no matter what
+      const safetyTimer = setTimeout(() => {
+        el.classList.add('is-visible');
+        el.querySelectorAll('svg path, svg line, svg rect').forEach((p) => { p.style.strokeDashoffset = '0'; });
+        el.querySelectorAll('svg circle, svg ellipse').forEach((c) => { c.style.opacity = '1'; });
+      }, 3500);
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          clearTimeout(safetyTimer);
+          el.classList.add('is-visible');
+          gsap.to(paths, {
+            strokeDashoffset: 0,
+            duration: 2.4,
+            ease: 'power2.inOut',
+          });
+          gsap.to(el.querySelectorAll('svg circle, svg ellipse'), {
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            delay: 1.8,
+          });
+        },
+      });
+    });
+  }
+
   function animateServiceIcons() {
     if (reduced || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
       // Reduced motion or no GSAP — just ensure visibility
@@ -333,10 +460,12 @@
     document.addEventListener('DOMContentLoaded', () => {
       injectOrnaments();
       injectServiceIcons();
+      injectPortfolioIcon();
     });
   } else {
     injectOrnaments();
     injectServiceIcons();
+    injectPortfolioIcon();
   }
 
   // -----------------------------------------------------
@@ -1207,6 +1336,8 @@
     animateOrnaments();  // wire GSAP draw-in for ornament corners
     injectServiceIcons();
     animateServiceIcons();
+    injectPortfolioIcon();
+    animatePortfolioIcon();
   });
 
   // FINAL SAFETY: 2 seconds after window load, force any element STILL stuck
@@ -1438,6 +1569,8 @@
       'pj.grid.eyebrow2': 'More Projects',
       'pj.grid.title': 'A scannable <span class="gold-word">selection</span>.',
       'pj.grid.lede': 'Nine more projects — full kitchens to single built-ins. Each carries the workshop\'s measured, finished standard.',
+      'pj.portfolio.eyebrow': 'Portfolio · Our Work',
+      'pj.portfolio.caption': 'Every project starts on paper. Measured drawings, elevations, and floor plans drafted in our Citrus Heights workshop.',
       'pj.materials.h': 'Materials & details',
       'project.materials': 'Materials & details',
       'project.back': '<span aria-hidden="true">←</span> Back to Our Work',
@@ -1656,6 +1789,8 @@
       'pj.grid.eyebrow2': 'Más proyectos',
       'pj.grid.title': 'Una <span class="gold-word">selección</span> escaneable.',
       'pj.grid.lede': 'Nueve proyectos más — desde cocinas completas hasta piezas empotradas individuales. Cada uno lleva el estándar medido y acabado del taller.',
+      'pj.portfolio.eyebrow': 'Portafolio · Nuestro Trabajo',
+      'pj.portfolio.caption': 'Cada proyecto comienza en papel. Planos a medida, alzados y plantas de planta dibujadas en nuestro taller en Citrus Heights.',
       'pj.materials.h': 'Materiales y detalles',
       'project.materials': 'Materiales y detalles',
       'project.back': '<span aria-hidden="true">←</span> Volver a Nuestro Trabajo',
