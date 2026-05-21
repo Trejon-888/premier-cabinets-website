@@ -6126,3 +6126,284 @@ body.nav-open {
     margin: 0 auto;
   }
 }
+
+/* =====================================================
+   ITERATION 24 — MOBILE REFINEMENT PASS
+   Per Enrique feedback: drawer items too big, sections
+   bleed together, service grid wasting scroll, contact
+   form not clearly a form on phones.
+   ===================================================== */
+
+/* ---------- Mobile drawer: smaller, denser nav items ---------- */
+@media (max-width: 880px) {
+  .nav {
+    gap: 0.25rem;
+    padding: 4.5rem 1.5rem 2rem;
+  }
+  .nav__link {
+    font-family: var(--font-sans, 'Montserrat', sans-serif) !important;
+    font-size: 1.15rem !important;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.7rem 0;
+    color: var(--ink) !important;
+  }
+  .header-cta {
+    margin-top: 1rem;
+    padding: 0.85rem 1.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    background: var(--gold) !important;
+    color: var(--ink) !important;
+    border-color: var(--gold) !important;
+  }
+  .lang-toggle {
+    margin: 0.25rem 0 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* ---------- Section separators + tighter padding on phone ---------- */
+@media (max-width: 880px) {
+  section {
+    padding-top: clamp(2.25rem, 7vw, 3.5rem);
+    padding-bottom: clamp(2.25rem, 7vw, 3.5rem);
+  }
+  /* Visible hairline between sections so users feel the section change */
+  section + section:not(.hero):not(.section--dark) {
+    border-top: 1px solid rgba(242, 194, 46, 0.18);
+  }
+  /* Dark sections get gold hairline above for clear hand-off */
+  section.section--dark {
+    border-top: 1px solid rgba(242, 194, 46, 0.35);
+  }
+}
+
+/* ---------- Service grid: 3-col compact on phone ---------- */
+@media (max-width: 640px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  .service-card {
+    padding: 0.85rem 0.5rem !important;
+    text-align: center;
+    border-width: 1px;
+  }
+  .service-card__icon {
+    width: 38px !important;
+    height: 38px !important;
+    margin: 0 auto 0.5rem !important;
+  }
+  .service-card__num {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.15rem;
+  }
+  .service-card__name {
+    font-size: 0.72rem !important;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+  .service-card__desc {
+    display: none !important; /* hide on phone, keep cards tappable + scannable */
+  }
+}
+
+/* ---------- Recent Work: more prominence on phone ---------- */
+@media (max-width: 880px) {
+  .recent-work__head {
+    margin-bottom: 1.75rem;
+  }
+  .recent-work__title {
+    font-size: clamp(2rem, 8vw, 2.75rem) !important;
+    line-height: 1.05 !important;
+  }
+  .editorial-card {
+    margin-bottom: 0.5rem;
+  }
+  .editorial-card__photo {
+    aspect-ratio: 4/3;
+    margin-bottom: 0.9rem;
+  }
+  .editorial-card__category {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.3rem;
+  }
+  .editorial-card__title {
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    line-height: 1.3;
+  }
+  .editorial-card__meta {
+    font-size: 0.75rem;
+  }
+}
+
+/* ---------- Contact meta blocks: 2-col side-by-side on phone ---------- */
+@media (max-width: 880px) {
+  .contact-section__meta {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+    margin-bottom: 2rem;
+  }
+  .contact-section__meta-block {
+    padding: 0.9rem 0.85rem;
+    background: rgba(242, 194, 46, 0.05);
+    border: 1px solid rgba(242, 194, 46, 0.18);
+    border-radius: 6px;
+  }
+  .contact-section__meta-block h4 {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.25rem !important;
+    color: var(--gold);
+  }
+  .contact-section__meta-block a,
+  .contact-section__meta-block .value {
+    font-size: 0.85rem !important;
+    line-height: 1.35;
+    color: var(--ink);
+    word-break: break-word;
+  }
+}
+
+/* ---------- Contact form: card treatment, clear form vibe on phone ---------- */
+@media (max-width: 880px) {
+  /* Wrap the form to look like a card with clear borders */
+  .enquiry-form {
+    background: var(--paper);
+    border: 1px solid rgba(242, 194, 46, 0.35);
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(17, 17, 17, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  /* Form headline above the inputs */
+  .enquiry-form::before {
+    content: "Tell us about your project";
+    display: block;
+    font-family: var(--font-serif, 'Cinzel', Georgia, serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  /* Each field gets clear vertical room */
+  .enquiry-form__row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+  .enquiry-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  /* Field labels: small caps gold, very visible */
+  .enquiry-form label {
+    display: block;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: var(--gold) !important;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+  }
+  /* Inputs: clear borders + white bg, distinctly clickable */
+  .enquiry-form input,
+  .enquiry-form select,
+  .enquiry-form textarea {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(17, 17, 17, 0.22) !important;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.22) !important;
+    border-radius: 6px !important;
+    padding: 0.85rem 0.85rem !important;
+    font-size: 16px !important;
+    min-height: 48px;
+    color: var(--ink);
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .enquiry-form input:focus,
+  .enquiry-form select:focus,
+  .enquiry-form textarea:focus {
+    outline: none;
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 0 3px rgba(242, 194, 46, 0.18);
+  }
+  .enquiry-form textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+  /* Send Message button: bold gold pill, full-width, very clearly the CTA */
+  .enquiry-form button[type="submit"],
+  .enquiry-form .btn--gold {
+    background: var(--gold) !important;
+    color: var(--ink) !important;
+    border: none !important;
+    width: 100% !important;
+    padding: 1.15rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 6px !important;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 14px rgba(242, 194, 46, 0.4);
+    cursor: pointer;
+    min-height: 56px;
+    text-align: center;
+  }
+  .enquiry-form button[type="submit"]:hover,
+  .enquiry-form button[type="submit"]:active {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(242, 194, 46, 0.5);
+  }
+  /* Privacy + subscribe line */
+  .enquiry-form__privacy,
+  .enquiry-form__subscribe {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+}
+
+/* ---------- Contact section spacing on phone ---------- */
+@media (max-width: 880px) {
+  .contact-section {
+    padding: clamp(2.5rem, 8vw, 4rem) 0 !important;
+  }
+  .contact-section__inner {
+    gap: 1.75rem !important;
+  }
+  .contact-section__headline {
+    font-size: clamp(1.85rem, 8vw, 2.75rem) !important;
+    line-height: 1.05 !important;
+    margin-bottom: 1rem !important;
+  }
+  .contact-section__body {
+    font-size: 0.95rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+  .contact-section__eyebrow {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ---------- Footer breathing room on phone ---------- */
+@media (max-width: 880px) {
+  .site-footer {
+    padding: 2.5rem 0 1.5rem;
+  }
+  .site-footer__grid {
+    gap: 1.75rem !important;
+  }
+}
