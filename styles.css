@@ -1662,12 +1662,14 @@ section {
   filter: brightness(1.4);
 }
 
-/* Iteration 11 — horizontal PC logo in footer (dark-variant artwork on ink bg) */
+/* Iter 22: Felix's official dark-bg logo (square) in footer.
+   Constrained square sits cleanly on the ink-black footer bg. */
 .site-footer__logo {
   display: block;
-  height: clamp(56px, 6vw, 76px);
+  height: clamp(96px, 9vw, 140px);
   width: auto;
-  margin-bottom: 1.25rem;
+  max-width: 160px;
+  margin-bottom: 1.5rem;
 }
 
 .site-footer__brand-wordmark {
@@ -1684,11 +1686,14 @@ section {
 }
 
 .site-footer__brand p {
-  color: rgba(248, 244, 233, 0.65);
-  font-size: 0.9375rem;
+  /* Iter 22: bigger + more noticeable tagline per Felix preference */
+  color: var(--gold);
+  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
   max-width: 36ch;
   margin-bottom: 1.25rem;
-  line-height: 1.65;
+  line-height: 1.45;
 }
 
 .site-footer__list {
@@ -5558,7 +5563,10 @@ html:not(.has-js) .numbered-list__item {
 }
 @media (min-width: 1100px) {
   .gbp-reviews__grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 .gbp-review-card {
@@ -5570,15 +5578,17 @@ html:not(.has-js) .numbered-list__item {
   transform: translateY(-4px);
 }
 .gbp-review-card .ornament-frame__inner {
-  aspect-ratio: 3/2;
+  /* Iter 22: removed forced aspect-ratio + object-fit cover. Reviews are
+     Google screenshots with varying aspect — let them render natural to
+     preserve full reviewer name + star rating + body text. */
   position: relative;
   overflow: hidden;
   background: var(--paper-gilt);
+  padding: clamp(0.75rem, 1.5vw, 1rem);
 }
 .gbp-review-card img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 .gbp-reviews__more {
