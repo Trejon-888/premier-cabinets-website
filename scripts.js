@@ -1430,7 +1430,19 @@
       'pj.hero.lede': 'Custom cabinetry and millwork projects from 1985 to today.',
       'pj.featured.eyebrow': 'Featured · Kitchen',
       'pj.featured.title': 'Matte-black slab and walnut kitchen for Bay Area residence.',
+      'pj.featured.type': 'Type',
+      'pj.featured.loc': 'Location',
+      'pj.featured.year': 'Year',
+      'pj.featured.materials': 'Materials',
+      'pj.grid.eyebrow1': 'Selected · Recent work',
+      'pj.grid.eyebrow2': 'More Projects',
+      'pj.grid.title': 'A scannable <span class="gold-word">selection</span>.',
+      'pj.grid.lede': 'Nine more projects — full kitchens to single built-ins. Each carries the workshop\'s measured, finished standard.',
       'pj.materials.h': 'Materials & details',
+      'project.materials': 'Materials & details',
+      'project.back': '<span aria-hidden="true">←</span> Back to Our Work',
+      'project.prev': '← Previous project',
+      'project.next': 'Next project →',
 
       // ===== SERVICES PAGE =====
       'sv.hero.eyebrow': 'What we build',
@@ -1636,7 +1648,19 @@
       'pj.hero.lede': 'Proyectos de gabinetería personalizada y carpintería fina desde 1985 hasta hoy.',
       'pj.featured.eyebrow': 'Destacado · Cocina',
       'pj.featured.title': 'Cocina de placas negras mate y nogal para residencia en el Área de la Bahía.',
+      'pj.featured.type': 'Tipo',
+      'pj.featured.loc': 'Ubicación',
+      'pj.featured.year': 'Año',
+      'pj.featured.materials': 'Materiales',
+      'pj.grid.eyebrow1': 'Selección · Trabajo reciente',
+      'pj.grid.eyebrow2': 'Más proyectos',
+      'pj.grid.title': 'Una <span class="gold-word">selección</span> escaneable.',
+      'pj.grid.lede': 'Nueve proyectos más — desde cocinas completas hasta piezas empotradas individuales. Cada uno lleva el estándar medido y acabado del taller.',
       'pj.materials.h': 'Materiales y detalles',
+      'project.materials': 'Materiales y detalles',
+      'project.back': '<span aria-hidden="true">←</span> Volver a Nuestro Trabajo',
+      'project.prev': '← Proyecto anterior',
+      'project.next': 'Siguiente proyecto →',
 
       // ===== SERVICES PAGE =====
       'sv.hero.eyebrow': 'Lo que construimos',
@@ -1658,6 +1682,7 @@
   function applyLanguage(lang) {
     if (!I18N[lang]) lang = 'en';
     const dict = I18N[lang];
+    // Dict-based translation (shared UI chrome)
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.dataset.i18n;
       if (!dict[key]) return;
@@ -1665,6 +1690,18 @@
         el.innerHTML = dict[key];
       } else {
         el.textContent = dict[key];
+      }
+    });
+    // Iteration 18: inline per-element translation (project-specific content)
+    document.querySelectorAll('[data-i18n-es]').forEach((el) => {
+      const enValue = el.dataset.i18nEn;
+      const esValue = el.dataset.i18nEs;
+      const target = lang === 'es' ? esValue : enValue;
+      if (typeof target !== 'string') return;
+      if (el.hasAttribute('data-i18n-html')) {
+        el.innerHTML = target;
+      } else {
+        el.textContent = target;
       }
     });
     document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
