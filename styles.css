@@ -5734,6 +5734,13 @@ html:not(.has-js) .numbered-list__item {
 @media (max-width: 880px) {
   .site-header {
     padding: clamp(0.5rem, 2vw, 0.8rem) 0;
+    /* Iter 34: drop backdrop-filter on mobile. backdrop-filter makes the header
+       a containing block for its position:fixed descendants, which pinned the
+       .nav drawer to the header (page-top) instead of the viewport — so opening
+       the menu after scrolling required scrolling back up. Solid bg compensates. */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--paper) !important;
   }
 }
 @media (max-width: 640px) {
@@ -5743,23 +5750,23 @@ html:not(.has-js) .numbered-list__item {
 }
 
 /* Logo scales nicely on mobile, no scroll-shrink (already small) */
-/* Iter 33: bigger logo on mobile per Felix's request — raised height + max-width caps. */
+/* Iter 34: bigger logo on mobile per Felix — larger again than iter 33. */
 @media (max-width: 880px) {
   .site-header__logo {
-    height: 88px;
-    max-width: 110px;
+    height: 108px;
+    max-width: 136px;
   }
   .site-header.is-scrolled .site-header__logo {
-    height: 72px;
+    height: 84px;
   }
 }
 @media (max-width: 480px) {
   .site-header__logo {
-    height: 76px;
-    max-width: 92px;
+    height: 92px;
+    max-width: 116px;
   }
   .site-header.is-scrolled .site-header__logo {
-    height: 64px;
+    height: 74px;
   }
 }
 
