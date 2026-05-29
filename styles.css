@@ -5749,24 +5749,31 @@ html:not(.has-js) .numbered-list__item {
   }
 }
 
-/* Logo scales nicely on mobile, no scroll-shrink (already small) */
-/* Iter 34: bigger logo on mobile per Felix — larger again than iter 33. */
+/* Logo: centered + bigger in the mobile header. */
+/* Iter 35: center the logo (menu button absolute-positioned right) + size up again. */
 @media (max-width: 880px) {
+  .site-header__inner { justify-content: center; position: relative; }
+  .nav-toggle {
+    position: absolute;
+    right: clamp(1rem, 4vw, 1.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+  }
   .site-header__logo {
-    height: 108px;
-    max-width: 136px;
+    height: 128px;
+    max-width: 162px;
   }
   .site-header.is-scrolled .site-header__logo {
-    height: 84px;
+    height: 96px;
   }
 }
 @media (max-width: 480px) {
   .site-header__logo {
-    height: 92px;
-    max-width: 116px;
+    height: 110px;
+    max-width: 140px;
   }
   .site-header.is-scrolled .site-header__logo {
-    height: 74px;
+    height: 84px;
   }
 }
 
