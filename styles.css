@@ -5743,22 +5743,23 @@ html:not(.has-js) .numbered-list__item {
 }
 
 /* Logo scales nicely on mobile, no scroll-shrink (already small) */
+/* Iter 33: bigger logo on mobile per Felix's request — raised height + max-width caps. */
 @media (max-width: 880px) {
   .site-header__logo {
-    height: 64px;
-    max-width: 80px;
+    height: 88px;
+    max-width: 110px;
   }
   .site-header.is-scrolled .site-header__logo {
-    height: 56px;
+    height: 72px;
   }
 }
 @media (max-width: 480px) {
   .site-header__logo {
-    height: 52px;
-    max-width: 64px;
+    height: 76px;
+    max-width: 92px;
   }
   .site-header.is-scrolled .site-header__logo {
-    height: 48px;
+    height: 64px;
   }
 }
 
