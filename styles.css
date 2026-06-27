@@ -6633,4 +6633,21 @@ body.nav-open {
     font-size: 1rem !important;
     padding: 0.85rem 0.25rem !important;
   }
-}
+}
+
+/* Narrow-mobile overflow guard (<=420px) — eyebrow/trust/footer tagline clip
+   the right edge at 390px. Force wrap + tighter tracking. Added 2026-06-26. */
+@media (max-width: 420px) {
+  .eyebrow.hero__eyebrow.hero-eyebrow {
+    display: block !important;
+    white-space: normal !important;
+    letter-spacing: 0.1em !important;
+    font-size: 0.62rem !important;
+  }
+  .hero__eyebrow::before { display: none !important; }
+  .hero__trust,
+  .site-footer__brand p {
+    white-space: normal !important;
+    letter-spacing: 0.1em !important;
+  }
+}
