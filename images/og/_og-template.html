@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--
+  Premier Cabinets Innovations — parameterized OG / social-share template (1200x630).
+  Reproduces the established premium OG layout with the 2026 PCI logo.
+  Params are injected via URL query string (render script fills them):
+    ?photo=...&eyebrow=...&head=...&accent=...&subline=...
+  Brand: ink #111, gold #F2C22E, cream #F7F4EE. Fonts: Cinzel + Montserrat.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111;
+    --gold:#F2C22E;
+    --cream:#F7F4EE;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1200px;height:630px;overflow:hidden;background:var(--ink);}
+  .canvas{
+    position:relative;width:1200px;height:630px;overflow:hidden;
+    font-family:'Montserrat',sans-serif;background:var(--ink);
+  }
+  /* full-bleed project photo */
+  .photo{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center;
+  }
+  /* dark gradient overlay — heavier bottom-left for legibility */
+  .grad-base{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(17,17,17,0.30) 0%, rgba(17,17,17,0.15) 38%, rgba(17,17,17,0.70) 100%);
+  }
+  .grad-corner{
+    position:absolute;inset:0;
+    background:radial-gradient(120% 110% at 0% 100%, rgba(10,10,10,0.92) 0%, rgba(12,12,12,0.55) 38%, rgba(12,12,12,0.0) 70%);
+  }
+  .grad-top{
+    position:absolute;inset:0;
+    background:linear-gradient(135deg, rgba(10,10,10,0.0) 55%, rgba(10,10,10,0.55) 100%);
+  }
+  /* thin gold frame inset */
+  .frame{
+    position:absolute;inset:22px;border:1.5px solid rgba(242,194,46,0.42);
+    pointer-events:none;
+  }
+  /* logo top-right */
+  .logo{
+    position:absolute;top:46px;right:54px;width:218px;height:auto;
+    filter:drop-shadow(0 4px 18px rgba(0,0,0,0.55));
+  }
+  /* bottom-left text stack */
+  .stack{
+    position:absolute;left:62px;bottom:62px;right:62px;max-width:880px;
+  }
+  .eyebrow{
+    font-family:'Montserrat',sans-serif;font-weight:700;
+    font-size:18px;letter-spacing:0.30em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:18px;
+    text-shadow:0 2px 10px rgba(0,0,0,0.6);
+  }
+  .headline{
+    font-family:'Cinzel',serif;font-weight:700;
+    color:var(--cream);line-height:1.06;
+    font-size:64px;letter-spacing:0.005em;
+    text-shadow:0 3px 22px rgba(0,0,0,0.72);
+    text-wrap:balance;
+  }
+  .headline .accent{color:var(--gold);}
+  .subline{
+    margin-top:20px;
+    font-family:'Montserrat',sans-serif;font-weight:600;
+    font-size:15px;letter-spacing:0.24em;text-transform:uppercase;
+    color:var(--gold);opacity:0.95;
+    text-shadow:0 2px 8px rgba(0,0,0,0.6);
+  }
+  /* domain bottom-right */
+  .domain{
+    position:absolute;right:58px;bottom:40px;
+    font-family:'Montserrat',sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:0.20em;text-transform:uppercase;
+    color:rgba(247,244,238,0.78);
+    text-shadow:0 2px 8px rgba(0,0,0,0.7);
+  }
+  /* subtle gold corner ornament top-left */
+  .ornament{
+    position:absolute;top:22px;left:22px;width:120px;height:120px;
+    pointer-events:none;
+  }
+  .ornament::before,.ornament::after{
+    content:"";position:absolute;background:var(--gold);opacity:0.85;
+  }
+  .ornament::before{top:0;left:0;width:64px;height:2px;}
+  .ornament::after{top:0;left:0;width:2px;height:64px;}
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <img class="photo" id="photo" src="" alt="">
+    <div class="grad-base"></div>
+    <div class="grad-top"></div>
+    <div class="grad-corner"></div>
+    <div class="frame"></div>
+    <div class="ornament"></div>
+    <img class="logo" id="logo" src="../brand/pci-logo-reverse.png" alt="Premier Cabinets Innovations">
+    <div class="stack">
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 class="headline" id="headline"></h1>
+      <div class="subline" id="subline"></div>
+    </div>
+    <div class="domain">PremierCabinetsInnovations.com</div>
+  </div>
+<script>
+  function qp(name){
+    const v = new URLSearchParams(location.search).get(name);
+    return v == null ? '' : decodeURIComponent(v);
+  }
+  const photo   = qp('photo');
+  const eyebrow = qp('eyebrow');
+  const head    = qp('head');
+  const accent  = qp('accent');     // accent word(s) rendered in gold, appended after head
+  const subline = qp('subline');
+  const logosrc = qp('logo');       // optional logo override
+  const hsize   = qp('hsize');      // optional headline font-size override (px)
+
+  if (photo)   document.getElementById('photo').src = photo;
+  if (logosrc) document.getElementById('logo').src = logosrc;
+  document.getElementById('eyebrow').textContent = eyebrow;
+  document.getElementById('subline').textContent = subline;
+
+  const h = document.getElementById('headline');
+  // Build headline: plain head text + optional gold accent span.
+  h.textContent = '';
+  if (head){ h.appendChild(document.createTextNode(head)); }
+  if (accent){
+    if (head) h.appendChild(document.createTextNode(' '));
+    const s = document.createElement('span');
+    s.className = 'accent';
+    s.textContent = accent;
+    h.appendChild(s);
+  }
+  if (hsize) h.style.fontSize = hsize + 'px';
+</script>
+</body>
+</html>
