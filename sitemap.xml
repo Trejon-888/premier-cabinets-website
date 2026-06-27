@@ -59,6 +59,25 @@
     </image:image>
   </url>
 
+  <!-- ============= JOURNAL / BLOG ============= -->
+
+  <url>
+    <loc>https://premiercabinetsinnovations.com/blog/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://premiercabinetsinnovations.com/blog/custom-kitchen-cabinets-complete-guide/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/blog/custom-kitchen-cabinets-complete-guide/hero.png</image:loc>
+    </image:image>
+  </url>
+
   <!-- ============= PROJECT PAGES ============= -->
 
   <url>
