@@ -42,71 +42,113 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://premiercabinetsinnovations.com/#business",
-    "name": "Premier Cabinets Innovations",
-    "alternateName": "Premier Cabinets Innovation LLC",
-    "description": "Custom cabinetry and architectural millwork shop serving Sacramento, the Bay Area, and Northern California since 1985. Custom kitchens, bathroom cabinetry, paneled rooms, built-ins, and specialty woodwork.",
-    "url": "https://premiercabinetsinnovations.com/",
-    "telephone": "+1-916-550-2228",
-    "email": "felix@premiercabinetsinnovations.com",
-    "image": "https://premiercabinetsinnovations.com/images/projects/kitchen-matte-black-walnut.jpg",
-    "logo": "https://premiercabinetsinnovations.com/images/brand/pci-official-light.png",
-    "foundingDate": "1985",
-    "founder": { "@type": "Person", "name": "Felix" },
-    "priceRange": "$$$",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "5910 Auburn Blvd Suite 21",
-      "addressLocality": "Citrus Heights",
-      "addressRegion": "CA",
-      "postalCode": "95621",
-      "addressCountry": "US"
-    },
-    "geo": { "@type": "GeoCoordinates", "latitude": 38.7071, "longitude": -121.2811 },
-    "areaServed": [
-      { "@type": "City", "name": "Sacramento" },
-      { "@type": "City", "name": "Citrus Heights" },
-      { "@type": "City", "name": "Roseville" },
-      { "@type": "City", "name": "Folsom" },
-      { "@type": "City", "name": "San Francisco" },
-      { "@type": "City", "name": "Oakland" },
-      { "@type": "City", "name": "Berkeley" },
-      { "@type": "AdministrativeArea", "name": "Sacramento Metro" },
-      { "@type": "AdministrativeArea", "name": "San Francisco Bay Area" }
-    ],
-    "openingHoursSpecification": [{
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-      "opens": "08:00",
-      "closes": "17:00"
-    }],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Custom Cabinetry + Millwork",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Kitchens" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bathroom Cabinetry" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paneled Rooms and Architectural Millwork" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Built-Ins and Specialty Woodwork" } }
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://premiercabinetsinnovations.com/#organization",
+        "name": "Premier Cabinets Innovations",
+        "legalName": "Premier Cabinets Innovation LLC",
+        "url": "https://premiercabinetsinnovations.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://premiercabinetsinnovations.com/images/brand/pci-official-light.png"
+        },
+        "email": "felix@premiercabinetsinnovations.com",
+        "telephone": "+1-916-550-2228",
+        "foundingDate": "1985",
+        "founder": { "@id": "https://premiercabinetsinnovations.com/#felix" },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "5910 Auburn Blvd Suite 21",
+          "addressLocality": "Citrus Heights",
+          "addressRegion": "CA",
+          "postalCode": "95621",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.instagram.com/premiercabinetsinnovations/",
+          "https://www.facebook.com/profile.php?id=61590332545468",
+          "https://www.tiktok.com/@premiercabinetsinnov",
+          "https://www.youtube.com/channel/UC9G3ap6g89hrVC16oR3c7Ng"
+        ]
+      },
+      {
+        "@type": "HomeAndConstructionBusiness",
+        "@id": "https://premiercabinetsinnovations.com/#business",
+        "name": "Premier Cabinets Innovations",
+        "alternateName": "Premier Cabinets Innovation LLC",
+        "description": "Custom cabinetry and architectural millwork shop serving Sacramento, the Bay Area, and Northern California since 1985. Custom kitchens, bathroom cabinetry, paneled rooms, built-ins, and specialty woodwork.",
+        "url": "https://premiercabinetsinnovations.com/",
+        "telephone": "+1-916-550-2228",
+        "email": "felix@premiercabinetsinnovations.com",
+        "image": "https://premiercabinetsinnovations.com/images/projects/kitchen-matte-black-walnut.jpg",
+        "logo": "https://premiercabinetsinnovations.com/images/brand/pci-official-light.png",
+        "foundingDate": "1985",
+        "founder": { "@id": "https://premiercabinetsinnovations.com/#felix" },
+        "parentOrganization": { "@id": "https://premiercabinetsinnovations.com/#organization" },
+        "priceRange": "$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "5910 Auburn Blvd Suite 21",
+          "addressLocality": "Citrus Heights",
+          "addressRegion": "CA",
+          "postalCode": "95621",
+          "addressCountry": "US"
+        },
+        "geo": { "@type": "GeoCoordinates", "latitude": 38.7071, "longitude": -121.2811 },
+        "areaServed": [
+          { "@type": "City", "name": "Sacramento" },
+          { "@type": "City", "name": "Citrus Heights" },
+          { "@type": "City", "name": "Roseville" },
+          { "@type": "City", "name": "Folsom" },
+          { "@type": "City", "name": "San Francisco" },
+          { "@type": "City", "name": "Oakland" },
+          { "@type": "City", "name": "Berkeley" },
+          { "@type": "AdministrativeArea", "name": "Sacramento Metro" },
+          { "@type": "AdministrativeArea", "name": "San Francisco Bay Area" }
+        ],
+        "openingHoursSpecification": [{
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        }],
+        "knowsAbout": ["custom cabinetry","architectural millwork","kitchen cabinets","bathroom vanities","built-in furniture","wainscoting","coffered ceilings"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Custom Cabinetry + Millwork",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Kitchens" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bathroom Cabinetry" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paneled Rooms and Architectural Millwork" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Built-Ins and Specialty Woodwork" } }
+          ]
+        },
+        "sameAs": [
+          "https://www.instagram.com/premiercabinetsinnovations/",
+          "https://www.facebook.com/profile.php?id=61590332545468",
+          "https://www.tiktok.com/@premiercabinetsinnov",
+          "https://www.youtube.com/channel/UC9G3ap6g89hrVC16oR3c7Ng"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://premiercabinetsinnovations.com/#felix",
+        "name": "Felix",
+        "jobTitle": "Founder and Master Cabinetmaker",
+        "url": "https://premiercabinetsinnovations.com/about/",
+        "worksFor": { "@id": "https://premiercabinetsinnovations.com/#organization" },
+        "description": "Founder of Premier Cabinets Innovations. Forty-one years building custom cabinetry and architectural millwork from the same Citrus Heights workshop."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://premiercabinetsinnovations.com/#website",
+        "url": "https://premiercabinetsinnovations.com/",
+        "name": "Premier Cabinets Innovations",
+        "publisher": { "@id": "https://premiercabinetsinnovations.com/#organization" }
+      }
+    ]
   }
-  </script>
-
-  <script type="application/ld+json">
-  {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://premiercabinetsinnovations.com/"
-    }
-  ]
-}
   </script>
 </head>
 <body>
