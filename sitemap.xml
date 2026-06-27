@@ -63,7 +63,7 @@
 
   <url>
     <loc>https://premiercabinetsinnovations.com/blog/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -75,6 +75,16 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://premiercabinetsinnovations.com/blog/custom-kitchen-cabinets-complete-guide/hero.png</image:loc>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://premiercabinetsinnovations.com/blog/how-much-do-custom-kitchen-cabinets-cost-sacramento/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/blog/how-much-do-custom-kitchen-cabinets-cost-sacramento/hero.jpg</image:loc>
     </image:image>
   </url>
 
