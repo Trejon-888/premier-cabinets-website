@@ -330,5 +330,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="/scripts.js?v=37" defer></script>
+<script>
+  // Card-QR call tracking (2026-07-12, per Enrique): visitors arriving from a printed
+  // business-card QR (?c= param) see and dial the tracked line (916) 792-0742.
+  // Default page + JSON-LD schema keep the primary NAP number (916) 550-2228.
+  (function () {
+    var c = new URLSearchParams(window.location.search).get("c");
+    if (!c) return;
+    var TRACKED_TEL = "tel:+19167920742";
+    var TRACKED_TXT = "(916) 792-0742";
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+      a.setAttribute("href", TRACKED_TEL);
+      if (/\(916\)\s*550-2228/.test(a.textContent)) a.textContent = TRACKED_TXT;
+    });
+  })();
+</script>
 </body>
 </html>
