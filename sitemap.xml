@@ -70,9 +70,19 @@
 
   <url>
     <loc>https://premiercabinetsinnovations.com/blog/</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://premiercabinetsinnovations.com/blog/cabinet-door-styles-shaker-slab-inset/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://premiercabinetsinnovations.com/blog/cabinet-door-styles-shaker-slab-inset/hero.jpg</image:loc>
+    </image:image>
   </url>
 
   <url>
