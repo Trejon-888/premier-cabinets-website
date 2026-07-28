@@ -6815,3 +6815,115 @@ body {
     text-wrap: balance;
   }
 }
+
+
+/* =======================================================================
+   /cabinets/ — the cabinets-only gallery  (2026-07-28)
+   Built for designers who ask to see cabinetry rather than rooms. Two
+   columns on desktop, one on phone, captions that name door style and
+   species. Portrait and landscape tiles share a row without cropping,
+   because a display cabinet and an island are not the same shape and
+   forcing them into one is what makes a portfolio look generic.
+   ======================================================================= */
+
+.cab-gallery {
+  padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
+}
+
+.cab-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.cab-tile { margin: 0; }
+
+.cab-tile__photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(10, 10, 10, 0.04);
+  border: 1px solid rgba(242, 194, 46, 0.22);
+}
+
+.cab-tile__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.cab-tile:hover .cab-tile__photo img { transform: scale(1.02); }
+
+.cab-tile__cap { padding: 1.1rem 0.15rem 0; }
+
+.cab-tile__cap h3 {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.cab-tile__cap p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  color: rgba(10, 10, 10, 0.68);
+  max-width: 46ch;
+}
+
+/* ---------- closing block ---------- */
+.cab-close {
+  padding: clamp(2.75rem, 7vw, 5rem) 0;
+  border-top: 1px solid rgba(242, 194, 46, 0.28);
+  text-align: center;
+}
+
+.cab-close__headline {
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0 auto 1rem;
+  max-width: 26ch;
+}
+
+.cab-close__body {
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0 auto 2rem;
+  max-width: 56ch;
+  color: rgba(10, 10, 10, 0.72);
+}
+
+.cab-close__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+}
+
+.cab-close__note { margin: 1.75rem 0 0; font-size: 0.9rem; }
+
+.cab-close__note a {
+  color: rgba(10, 10, 10, 0.6);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 194, 46, 0.5);
+  padding-bottom: 2px;
+}
+
+.cab-close__note a:hover { color: var(--ink); }
+
+/* ---------- phone ---------- */
+@media (max-width: 880px) {
+  .cab-gallery__grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+  .cab-tile__cap { padding-top: 0.9rem; }
+  .cab-tile__cap p { font-size: 0.9rem; max-width: none; }
+  .cab-close__actions { flex-direction: column; align-items: stretch; }
+  .cab-close__actions .btn { width: 100%; justify-content: center; }
+}
