@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/styles.css?v=43">
+  <link rel="stylesheet" href="/styles.css?v=44">
 
   <script type="application/ld+json">
   {
@@ -191,26 +191,20 @@
             </div>
 
             <div class="enquiry-form__field">
-              <label for="ef-type" data-i18n="form.enquiryType">Enquiry Type</label>
-              <select id="ef-type" name="Enquiry Type" required>
-                <option value="" disabled selected data-i18n="form.enquirySelect">Please select</option>
-                <option value="Custom Kitchen" data-i18n="form.opt.kitchen">Custom Kitchen</option>
-                <option value="Bathroom Cabinetry" data-i18n="form.opt.bath">Bathroom Cabinetry</option>
-                <option value="Paneled Rooms + Millwork" data-i18n="form.opt.paneled">Paneled Rooms + Millwork</option>
-                <option value="Built-ins + Specialty Work" data-i18n="form.opt.builtins">Built-ins + Specialty Work</option>
-                <option value="Restoration" data-i18n="form.opt.restoration">Restoration</option>
-                <option value="General Enquiry" data-i18n="form.opt.general">General Enquiry</option>
-              </select>
+              <label for="ef-type" data-i18n="form.enquiryType">What do you want built?</label>
+            <input type="text" id="ef-type" name="What You Want Built" required
+              data-i18n-placeholder="form.enquiryPlaceholder"
+              placeholder="A kitchen, two bathrooms, an office wall" />
             </div>
 
             <div class="enquiry-form__field">
               <label for="ef-location">Project Address / City <span style="text-transform: none; letter-spacing: 0; opacity: 0.6;">(optional)</span></label>
-              <input type="text" id="ef-location" name="Project Location" placeholder="Sacramento, Bay Area, other" />
+              <input type="text" id="ef-location" name="Project Location" data-i18n-placeholder="form.locationPlaceholder" placeholder="Sacramento, Bay Area, other" />
             </div>
 
             <div class="enquiry-form__field">
               <label for="ef-message" data-i18n="form.message">Message</label>
-              <textarea id="ef-message" name="Message" rows="5" required placeholder="What you have in mind, rough timeline, and the address or city if you can share it."></textarea>
+              <textarea id="ef-message" name="Message" rows="5" required data-i18n-placeholder="form.messagePlaceholder" placeholder="What you have in mind, rough timeline, and the address or city if you can share it."></textarea>
             </div>
 
             <label class="enquiry-form__check">
@@ -319,7 +313,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="/scripts.js?v=37" defer></script>
+<script src="/scripts.js?v=43" defer></script>
 
 </body>
 </html>

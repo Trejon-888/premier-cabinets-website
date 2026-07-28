@@ -6927,3 +6927,13 @@ body {
   .cab-close__actions { flex-direction: column; align-items: stretch; }
   .cab-close__actions .btn { width: 100%; justify-content: center; }
 }
+
+
+/* The mobile form headline is injected with content:, so the language toggle
+   cannot reach it and it stayed English on a Spanish page. applyLanguage()
+   stamps lang on <html>, so a second rule can. */
+@media (max-width: 880px) {
+  html[lang='es'] .enquiry-form::before {
+    content: "Cuéntenos de su proyecto";
+  }
+}

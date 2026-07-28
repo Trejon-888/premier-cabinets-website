@@ -1514,14 +1514,8 @@
       'form.phone': 'Phone Number',
       'form.phoneOpt': '(optional)',
       'form.email': 'Email',
-      'form.enquiryType': 'Enquiry Type',
-      'form.enquirySelect': 'Please select',
-      'form.opt.kitchen': 'Custom Kitchen',
-      'form.opt.bath': 'Bathroom Cabinetry',
-      'form.opt.paneled': 'Paneled Rooms + Millwork',
-      'form.opt.builtins': 'Built-ins + Specialty Work',
-      'form.opt.restoration': 'Restoration',
-      'form.opt.general': 'General Enquiry',
+      'form.enquiryType': 'What do you want built?',
+      'form.enquiryPlaceholder': 'A kitchen, two bathrooms, an office wall',
       'form.location': 'Project Address / City',
       'form.locationPlaceholder': 'Sacramento, Bay Area, other',
       'form.message': 'Message',
@@ -1734,14 +1728,8 @@
       'form.phone': 'Número de Teléfono',
       'form.phoneOpt': '(opcional)',
       'form.email': 'Correo Electrónico',
-      'form.enquiryType': 'Tipo de Consulta',
-      'form.enquirySelect': 'Seleccione',
-      'form.opt.kitchen': 'Cocina Personalizada',
-      'form.opt.bath': 'Gabinetería de Baño',
-      'form.opt.paneled': 'Habitaciones con Paneles + Carpintería',
-      'form.opt.builtins': 'Empotrados + Trabajo Especial',
-      'form.opt.restoration': 'Restauración',
-      'form.opt.general': 'Consulta General',
+      'form.enquiryType': '¿Qué quiere que le construyamos?',
+      'form.enquiryPlaceholder': 'Una cocina, dos baños, una pared de oficina',
       'form.location': 'Dirección / Ciudad del Proyecto',
       'form.locationPlaceholder': 'Sacramento, Área de la Bahía, otra',
       'form.message': 'Mensaje',
@@ -1855,6 +1843,13 @@
       } else {
         el.textContent = dict[key];
       }
+    });
+    // Placeholders. applyLanguage only ever walked text nodes, so every
+    // placeholder on the enquiry form stayed English in Spanish mode even
+    // though the dict already carried the translations.
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const key = el.dataset.i18nPlaceholder;
+      if (dict[key]) el.setAttribute('placeholder', dict[key]);
     });
     // Iteration 18: inline per-element translation (project-specific content)
     document.querySelectorAll('[data-i18n-es]').forEach((el) => {

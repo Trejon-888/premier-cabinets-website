@@ -32,7 +32,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=43" />
+  <link rel="stylesheet" href="/styles.css?v=44" />
 
   <script type="application/ld+json">
   {
@@ -517,21 +517,15 @@
           </div>
 
           <div class="enquiry-form__field">
-            <label for="sf-type">Enquiry Type</label>
-            <select id="sf-type" name="Enquiry Type" required>
-              <option value="" disabled selected>Please select</option>
-              <option value="Custom Kitchen">Custom Kitchen</option>
-              <option value="Bathroom Cabinetry">Bathroom Cabinetry</option>
-              <option value="Paneled Rooms + Millwork">Paneled Rooms + Millwork</option>
-              <option value="Built-ins + Specialty Work">Built-ins + Specialty Work</option>
-              <option value="Restoration">Restoration</option>
-              <option value="General Enquiry">General Enquiry</option>
-            </select>
+            <label for="sf-type" data-i18n="form.enquiryType">What do you want built?</label>
+            <input type="text" id="sf-type" name="What You Want Built" required
+              data-i18n-placeholder="form.enquiryPlaceholder"
+              placeholder="A kitchen, two bathrooms, an office wall" />
           </div>
 
           <div class="enquiry-form__field">
             <label for="sf-message">Message</label>
-            <textarea id="sf-message" name="Message" rows="5" required placeholder="What you have in mind, rough timeline, and the address or city if you can share it."></textarea>
+            <textarea id="sf-message" name="Message" rows="5" required data-i18n-placeholder="form.messagePlaceholder" placeholder="What you have in mind, rough timeline, and the address or city if you can share it."></textarea>
           </div>
 
           <div class="enquiry-form__submit-row">
@@ -630,6 +624,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="/scripts.js?v=37" defer></script>
+<script src="/scripts.js?v=43" defer></script>
 </body>
 </html>
