@@ -6633,4 +6633,185 @@ body.nav-open {
     font-size: 1rem !important;
     padding: 0.85rem 0.25rem !important;
   }
-}
+}
+
+
+/* ===================================================================
+   MOBILE FIXES — contact form + long email  (Enrique, 2026-07-28)
+   The enquiry form's rows were locked at two columns with no phone
+   breakpoint, so First/Last and Phone/Email ran off the right edge and
+   the email address was clipped mid-word. iOS also zooms any input whose
+   font-size is under 16px, which shoves the whole layout sideways.
+   =================================================================== */
+
+@media (max-width: 768px) {
+  /* One field per line. An email typed into a half-width box scrolls out of
+     sight, which is exactly what the director reported. Forced, because an
+     earlier 640px rule was not winning in practice. */
+  .enquiry-form .enquiry-form__row,
+  .enquiry-form__row {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem;
+  }
+
+  /* 16px minimum stops iOS zooming (and shifting) on focus */
+  .enquiry-form__field input,
+  .enquiry-form__field select,
+  .enquiry-form__field textarea {
+    font-size: 16px;
+  }
+
+  /* the send button reads as a full-width tap target */
+  .enquiry-form .btn,
+  .enquiry-form button[type='submit'] {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* checkbox row: box beside its label, not underneath it */
+  .enquiry-form__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .enquiry-form__check label {
+    flex: 1;
+    line-height: 1.5;
+  }
+}
+
+/* The email address is one long unbreakable token. Let it wrap wherever
+   it must, at every width, so it is never cut off. */
+.contact-section__meta-block a[href^='mailto:'] {
+  display: inline;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+/* Nothing on the site may cause a sideways scroll on a phone. */
+html,
+body {
+  overflow-x: hidden;
+}
+
+
+/* --- Contact meta cards: give the email its own full-width row -----------
+   The compact 2-up card grid above is deliberate, but the email address is
+   far longer than any other value and was breaking into three clipped lines
+   inside a half-width card. It gets the full row; everything else stays 2-up. */
+@media (max-width: 880px) {
+  .contact-section__meta-block:has(a[href^='mailto:']) {
+    grid-column: 1 / -1 !important;
+  }
+  .contact-section__meta-block a[href^='mailto:'] {
+    font-size: 0.9rem !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+/* --- Subscribe checkbox: keep the box small and beside its text ---------- */
+.enquiry-form__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+.enquiry-form__check input[type='checkbox'] {
+  width: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+  padding: 0 !important;
+  margin: 0.15rem 0 0 0 !important;
+  box-sizing: border-box;
+  border-radius: 2px !important;
+  background: transparent;
+}
+.enquiry-form__check span {
+  flex: 1 1 auto !important;
+  line-height: 1.5 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  color: rgba(10, 10, 10, 0.7) !important;
+}
+
+
+/* =======================================================================
+   "Ready to start your next project" — phone pass  (2026-07-28)
+   The section is the site's only conversion point and it was built
+   desktop-first. Four fixes, all phone-only, none touching desktop.
+   ======================================================================= */
+
+/* 1. The call card gets the full row and a real tap target. On a phone the
+      telephone IS the conversion, so it leads and it is thumb-sized. */
+@media (max-width: 880px) {
+  .contact-section__meta-block:has(a[href^='tel:']) {
+    grid-column: 1 / -1 !important;
+    background: rgba(242, 194, 46, 0.12);
+    border-color: rgba(242, 194, 46, 0.45);
+  }
+  .contact-section__meta-block a[href^='tel:'] {
+    display: block;
+    font-size: 1.5rem !important;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.2 !important;
+    padding: 0.15rem 0 0.2rem;
+  }
+}
+
+/* 2. Subscribe checkbox. The mobile block sets `.enquiry-form label
+      { display: block }` and `min-height: 48px` on every input, which turned
+      an 18px box into a 48px-tall rectangle with the text wrapping under it.
+      Both need beating explicitly — `height` alone loses to `min-height`. */
+.enquiry-form__check {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.7rem !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  margin-bottom: 0.25rem;
+}
+.enquiry-form__check input[type='checkbox'] {
+  min-height: 18px !important;
+  height: 18px !important;
+  width: 18px !important;
+  min-width: 18px !important;
+  border-radius: 3px !important;
+  border: 1px solid rgba(17, 17, 17, 0.35) !important;
+  background: #FFFFFF !important;
+}
+
+/* 3. The submit note and the Felix note said the same sentence twice, one
+      under the other. Keep the one in the button row on phone. */
+@media (max-width: 880px) {
+  .enquiry-form .felix-note { display: none !important; }
+  .enquiry-form__submit-note {
+    display: block;
+    text-align: center;
+    margin-top: 0.6rem;
+    line-height: 1.4;
+  }
+}
+
+/* 4. Tighten the run-in from the meta cards to the form, and let the form
+      card breathe at the edges instead of hugging the screen. */
+@media (max-width: 880px) {
+  .contact-section__meta { margin-bottom: 1.5rem !important; }
+  .enquiry-form { padding: 1.5rem 1.15rem !important; }
+  .enquiry-form__field { margin-bottom: 1rem; }
+}
+
+/* The submit note is centred; balance it so it never orphans a word. */
+@media (max-width: 880px) {
+  .enquiry-form__submit-note {
+    max-width: 30ch;
+    margin-left: auto;
+    margin-right: auto;
+    text-wrap: balance;
+  }
+}
